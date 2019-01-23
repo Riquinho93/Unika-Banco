@@ -24,6 +24,13 @@
 			<param-value>com.mybank.WicketApplication</param-value>
 		</init-param>
 	</filter>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener		
+		</listener-class>
+	</listener>
+	
 
 	<filter-mapping>
 		<filter-name>wicket.UnikaBanco</filter-name>

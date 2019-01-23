@@ -1,68 +1,50 @@
-body, p, li, a { font-family: georgia, times, serif;font-size:13pt;}
-h1, h2, h3 { font-family: 'Yanone Kaffeesatz', arial, serif; }
-body { margin:0;padding:0;}
-#hd {
-	width : 100%;
-	height : 87px;
-	background-color : #092E67;
-	margin-top : 0;
-	padding-top : 10px;
-	border-bottom : 1px solid #888;
-	z-index : 0;
+/* TOPO */
+.container{
+    margin: 10px 5px 2px 20 px;
+    padding: 4px;
 }
-#ft {
-	position : absolute;
-	bottom : 0;
-	width : 100%;
-	height : 99px;
-	background-color : #6493D2;
-	border-top : 1px solid #888;
-	z-index : 0;
+.topo {
+    margin: 5px 5px;
+    padding: 30px;
 }
-#logo,#bd {
-	width : 650px;
-	margin: 0 auto;
-	padding: 25px 50px 0 50px;
+    .logo{
+        width: 300px;
+    }
+
+
+/* MENU HORIZONTAL */
+.menu-horizontal{
+    padding: 5px 0px;
+    background-color: #3D3D3D;
+    border-radius: 10px;
+    margin: 0px 5px 8px 5px;
 }
-#logo h1 {
-	color : white;
-	font-size:36pt;
-	display: inline;
+.menu-horizontal a {
+    text-transform: uppercase;
+    color: #FFFFFF;
 }
-#logo img { 
-	display:inline;
-	vertical-align: bottom;
-	margin-left : 50px;
-	margin-right : 5px;
+
+/* MEIO */
+.meio{
+    margin: 10px 0 ;
 }
-body { margin-top : 0; padding-top : 0;}
-#logo, #logo h1 { margin-top : 0; padding-top : 0;}
-#bd {
-	position : absolute;
-	top : 75px;
-	bottom : 75px;
-	left : 50%;
-	margin-left : -325px;
-	z-index : 1;
-	overflow: auto;
-	background-color : #fff;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-moz-box-shadow: 0px 0px 10px #888;
-	-webkit-box-shadow: 0px 0px 10px #888;
-	box-shadow: 0px 0px 10px #888;
+
+
+/* MENU VERTICAL */
+.menu-vertical{
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
 }
-a, a:visited, a:hover, a:active {
-	color : #6493D2;
+.menu-vertical a {
+    text-transform: uppercase;
 }
-h2 {
-	padding : 0; margin:0;
-	font-size:36pt;
-	color:#FF5500;
+.menu-vertical .item-info{
+    font-weight: bold;
 }
-h3 {
-	padding : 0; margin:0;
-	font-size:24pt;
-	color:#092E67;
+
+
+/*RODAPE*/
+.rodape p {
+    text-align: center;
 }

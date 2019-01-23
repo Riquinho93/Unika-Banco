@@ -27,8 +27,8 @@ public class Endereco implements Serializable {
 	private String cidade;
 	private String estado;
 
-	@OneToOne(mappedBy = "endereco", targetEntity = Funcionario.class, fetch = FetchType.LAZY)
-	private Funcionario funcionario;
+	@OneToOne(mappedBy = "endereco", targetEntity = Usuario.class, fetch = FetchType.LAZY)
+	private Usuario funcionario;
 
 	public Integer getId() {
 		return id;
@@ -86,11 +86,11 @@ public class Endereco implements Serializable {
 		this.estado = estado;
 	}
 
-	public Funcionario getFuncionario() {
+	public Usuario getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Usuario funcionario) {
 		this.funcionario = funcionario;
 	}
 

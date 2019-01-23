@@ -2,62 +2,60 @@ package com.mybank.view;
 
 import java.util.List;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
-import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
+import com.mybank.model.Endereco;
 import com.mybank.model.Usuario;
 import com.mybank.service.AlertFeedback;
+import com.mybank.service.EnderecoService;
 import com.mybank.service.UsuarioService;
 
 public class Login extends WebPage {
 
 	private static final long serialVersionUID = -2850628051987758424L;
 
-	private Form<Usuario> formularioLogin;
-	private Usuario filtrarUsuario;
-	@SpringBean(name = "usuarioService")
-	private UsuarioService usuarioService;
+	private Form<Endereco> formularioLogin;
+	private Endereco filtrarUsuario;
+	@SpringBean(name = "enderecoService")
+	private EnderecoService enderecoService;
 
 	public Login() {
 		
 		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
 		
-		filtrarUsuario = new Usuario();
-		final TextField<String> login = new TextField<String>("login");
-		final PasswordTextField senha = new PasswordTextField("senha");
-		login.setRequired(true);
-		senha.setRequired(true);
-		login.setOutputMarkupId(true);
-		senha.setOutputMarkupId(true);
+		filtrarUsuario = new Endereco();
+		final TextField<String> estado = new TextField<String>("estado");
+		final PasswordTextField numero = new PasswordTextField("numero");
+		estado.setRequired(true);
+		numero.setRequired(true);
+		estado.setOutputMarkupId(true);
+		numero.setOutputMarkupId(true);
 		
 		final Label errorLogin = new Label("errorLogin",
 		 Model.of("Login Incorreto!!"));
 		 errorLogin.setOutputMarkupId(true).setVisible(false);
 		 
 
-		 formularioLogin = new Form<Usuario>("formularioLogin",new  CompoundPropertyModel<>(filtrarUsuario)) {
+		 formularioLogin = new Form<Endereco>("formularioLogin",new  CompoundPropertyModel<>(filtrarUsuario)) {
 
 			private static final long serialVersionUID = -5095534494215850537L;
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-				Search search = new Search(Usuario.class);
+				Search search = new Search(Endereco.class);
 
-				search.addFilterEqual("login", login.getModelObject());
-				search.addFilterEqual("senha", senha.getModelObject());
+				search.addFilterEqual("estado", estado.getModelObject());
+				search.addFilterEqual("numero", numero.getModelObject());
 
-				List<Usuario> lista = usuarioService.search(search);
+				List<Endereco> lista = enderecoService.search(search);
 
 				if (lista != null && !lista.isEmpty()) {
 
@@ -75,6 +73,6 @@ public class Login extends WebPage {
 
 		};
 		add(alertFeedback, formularioLogin);
-		formularioLogin.add(login, senha).setOutputMarkupId(true);
+		formularioLogin.add(estado, numero).setOutputMarkupId(true);
 	}
 }

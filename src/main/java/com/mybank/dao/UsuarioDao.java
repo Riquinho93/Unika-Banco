@@ -19,4 +19,15 @@ public class UsuarioDao extends GenericDao<Usuario, Serializable> {
 		List<Usuario> userList = query.list();
 		return userList;
 	}
+	
+//	@Transactional(readOnly = true)
+	public Usuario alterar(Integer id) {
+		String hql = "select f from Usuario f left join fetch f.endereco e "
+				+ "where f.id = :id";
+		
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		Usuario user = (Usuario) query.uniqueResult();
+		return user;
+	}
 }

@@ -35,9 +35,9 @@
 		<property name="annotatedClasses">
 			<!-- passando a bean anotado -->
 			<list>
-				<value>com.mybank.model.Funcionario</value>
 				<value>com.mybank.model.Endereco</value>
 				<value>com.mybank.model.Usuario</value>
+				<value>com.mybank.model.Banco</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -51,15 +51,6 @@
 		</property>
 	</bean>
 
-
-	<bean id="funcionarioDao" class="com.mybank.dao.FuncionarioDao">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-
-	<bean id="funcionarioService"
-		class="com.mybank.service.FuncionarioService">
-		<property name="funcionarioDao" ref="funcionarioDao"></property>
-	</bean>
 
 	<bean id="enderecoDao" class="com.mybank.dao.EnderecoDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -80,6 +71,13 @@
 		<property name="usuarioDao" ref="usuarioDao"></property>
 	</bean>
 
+	<bean id="bancoDao" class="com.mybank.dao.BancoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="bancoService" class="com.mybank.service.BancoService">
+		<property name="bancoDao" ref="bancoDao"></property>
+	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">

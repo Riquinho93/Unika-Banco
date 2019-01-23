@@ -48,4 +48,8 @@ public class UsuarioService implements IUsuarioService{
 		return usuarioDao.searchDao(search);
 	}
 
+	public Usuario alterar(Integer id) {
+		return usuarioDao.alterar(id);
+	}
+
 }

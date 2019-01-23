@@ -2,6 +2,7 @@ package com.mybank;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+import com.mybank.model.Endereco;
 import com.mybank.model.Usuario;
 import com.mybank.view.Login;
 import com.mybank.view.TelaPrincipal;
@@ -14,7 +15,7 @@ public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
 
 	public HomePage() {
-		Usuario userName = (Usuario) getSession().getAttribute("userName");
+		Endereco userName = (Endereco) getSession().getAttribute("userName");
 		if (userName == null) {
 			 setResponsePage(Login.class);
 			 return;

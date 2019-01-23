@@ -3,7 +3,9 @@ package com.mybank.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.genericdao.search.Search;
 import com.mybank.dao.EnderecoDao;
 import com.mybank.model.Endereco;
 
@@ -35,6 +37,12 @@ public class EnderecoService implements IEnderecoService{
 	@Override
 	public List<Endereco> listar() {
 		return enderecoDao.listar();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Endereco> search(Search search) {
+		return enderecoDao.searchDao(search);
 	}
 	
 }

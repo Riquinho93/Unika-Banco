@@ -1,18 +1,23 @@
 package com.mybank.model;
 
-import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario extends Conta {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,14 +25,50 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+	private String sexo;
+
 	@Column(unique = true)
-	private String login;
-	private String senha;
-	private String confirmarSenha;
+	private int identidade;
+	@Column(unique = true)
+	private int cpf;
+	private double Renda;
+	private String telefone;
+	private String email;
+	private Agencia agencia;
 	private Perfil perfil;
+	
+	private Banco banco;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco")
+	private Endereco endereco;
 
 	@Transient
 	private boolean answer;
+
+	// Metodos
+
+	@Override
+	public void atualizarSaldo() {
+
+	}
+
+	public void sacar(int conta) {
+
+	}
+
+	public void tranferir(int conta) {
+
+	}
+
+	public void depositar(int conta) {
+
+	}
+
+	// Getters e Setters
 
 	public Integer getId() {
 		return id;
@@ -45,28 +86,68 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
-	public String getConfirmarSenha() {
-		return confirmarSenha;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public int getIdentidade() {
+		return identidade;
+	}
+
+	public void setIdentidade(int identidade) {
+		this.identidade = identidade;
+	}
+
+	public int getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
+	}
+
+	public double getRenda() {
+		return Renda;
+	}
+
+	public void setRenda(double renda) {
+		Renda = renda;
+	}
+
+	public Agencia getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 
 	public Perfil getPerfil() {
@@ -75,6 +156,14 @@ public class Usuario implements Serializable {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean isAnswer() {

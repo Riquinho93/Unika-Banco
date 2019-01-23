@@ -22,37 +22,37 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Endereco;
-import com.mybank.model.Funcionario;
+import com.mybank.model.Usuario;
 import com.mybank.service.EnderecoService;
-import com.mybank.service.FuncionarioService;
+import com.mybank.service.UsuarioService;
 
-public class FuncionarioForm extends HomePage {
+public class CriarConta extends HomePage {
 
 	private static final long serialVersionUID = 2474313326427632580L;
 
-	private Form<Funcionario> formFunc = new Form<>("formFunc");
+	private Form<Usuario> formFunc = new Form<>("formFunc");
 //	private Form<Endereco> formEnd;
-	private Form<Funcionario> form2;
+	private Form<Usuario> form2;
 	private Endereco endereco;
-	private List<Funcionario> funcionariosList = new ArrayList<>();
-	private PageableListView<Funcionario> listView;
-	private LoadableDetachableModel<List<Funcionario>> atualizarLista;
+	private List<Usuario> funcionariosList = new ArrayList<>();
+	private PageableListView<Usuario> listView;
+	private LoadableDetachableModel<List<Usuario>> atualizarLista;
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
-	@SpringBean(name = "funcionarioService")
-	private FuncionarioService funcionarioService;
+	@SpringBean(name = "usuarioService")
+	private UsuarioService usuarioService;
 	@SpringBean(name = "enderecoService")
 	private EnderecoService enderecoService;
-	private Funcionario filtrar;
+	private Usuario filtrar;
 
-	public FuncionarioForm() {
+	public CriarConta() {
 
 		endereco = new Endereco();
 		// formEnd = new Form<>("formEnd", new
 		// CompoundPropertyModel<Endereco>(endereco));
 
-		funcionariosList = funcionarioService.listar();
+		funcionariosList = usuarioService.listar();
 		
 		add(filtrar());
 
@@ -83,13 +83,13 @@ public class FuncionarioForm extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId()) {
+				CriarContaPanel funcionarioPanel = new CriarContaPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
 //						funcionario.setEndereco(endereco);
-						funcionarioService.SalvarOuAlterar(funcionario);
+						usuarioService.SalvarOuAlterar(funcionario);
 //						endereco.setFuncionario(funcionario);
 //						enderecoService.SalvarOuAlterar(endereco);
 						funcionariosList.add(funcionario);
@@ -113,29 +113,26 @@ public class FuncionarioForm extends HomePage {
 		listContainer = new WebMarkupContainer("theContainer");
 		listContainer.setOutputMarkupId(true);
 
-		atualizarLista = new LoadableDetachableModel<List<Funcionario>>() {
+		atualizarLista = new LoadableDetachableModel<List<Usuario>>() {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected List<Funcionario> load() {
+			protected List<Usuario> load() {
 				return funcionariosList;
 			}
 		};
 
-		listView = new PageableListView<Funcionario>("listView", atualizarLista, 5) {
+		listView = new PageableListView<Usuario>("listView", atualizarLista, 5) {
 
 			private static final long serialVersionUID = -8503564664744203394L;
 
 			@Override
-			protected void populateItem(ListItem<Funcionario> item) {
-				Funcionario user = item.getModelObject();
+			protected void populateItem(ListItem<Usuario> item) {
+				Usuario user = item.getModelObject();
 				item.add(new Label("id", user.getId()));
 				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("funcao", user.getFuncao()));
 				item.add(new Label("telefone", user.getTelefone()));
-				item.add(new Label("email", user.getEmail()));
-				/* item.add(new Label("endereco", user.getEndereco().getId())); */
 				item.add(editando(user));
 				item.add(remover(user.getId()));
 			}
@@ -149,9 +146,9 @@ public class FuncionarioForm extends HomePage {
 
 	}
 
-	public Form<Funcionario> filtrar() {
-		filtrar = new Funcionario();
-		form2 = new Form<Funcionario>("form2", new CompoundPropertyModel<Funcionario>(filtrar));
+	public Form<Usuario> filtrar() {
+		filtrar = new Usuario();
+		form2 = new Form<Usuario>("form2", new CompoundPropertyModel<Usuario>(filtrar));
 		TextField<String> nome = new TextField<String>("nome");
 		nome.setOutputMarkupId(true);
 		form2.add(nome);
@@ -161,13 +158,13 @@ public class FuncionarioForm extends HomePage {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				Search search = new Search(Funcionario.class);
+				Search search = new Search(Usuario.class);
 
 				if (filtrar.getNome() != null && !filtrar.getNome().equals("")) {
 					search.addFilterLike("nome", "%" + filtrar.getNome() + "%");
 				}
 
-				funcionariosList = funcionarioService.search(search);
+				funcionariosList = usuarioService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}
@@ -180,27 +177,27 @@ public class FuncionarioForm extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Funcionario> editando(Funcionario funcionario) {
-		AjaxLink<Funcionario> editar = new AjaxLink<Funcionario>("alterar") {
+	AjaxLink<Usuario> editando(Usuario funcionario) {
+		AjaxLink<Usuario> editar = new AjaxLink<Usuario>("alterar") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				Funcionario user = funcionarioService.alterar(funcionario.getId());
-				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId(), user,
+				Usuario user = usuarioService.alterar(funcionario.getId());
+				CriarContaPanel funcionarioPanel = new CriarContaPanel(modalWindow.getContentId(), user,
 						endereco) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
 						/*Search search = new Search(Funcionario.class);
 						search.addFilterEqual("id", funcionario.getId());
 						search.addFilterEqual("funcionario", endereco.getFuncionario().getId());
 						List<Funcionario> lista = funcionarioService.search(search);
 						funcionariosList = lista;*/
 	//					enderecoService.buscarPorId(funcionario.getId());
-						funcionarioService.SalvarOuAlterar(funcionario);
+						usuarioService.SalvarOuAlterar(funcionario);
 //						endereco.setFuncionario(funcionario);
 //						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);
@@ -220,21 +217,21 @@ public class FuncionarioForm extends HomePage {
 	// Removendo
 	public Component remover(final Integer index) {
 
-		AjaxLink<Funcionario> button = new AjaxLink<Funcionario>("excluir") {
-			Funcionario answer = new Funcionario();
+		AjaxLink<Usuario> button = new AjaxLink<Usuario>("excluir") {
+			Usuario answer = new Usuario();
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				DeletFuncionario deletFuncionario = new DeletFuncionario(modalWindowDel.getContentId(), answer) {
+				DeletConta deletFuncionario = new DeletConta(modalWindowDel.getContentId(), answer) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoExcluir(AjaxRequestTarget target, Funcionario funcionario) {
+					public void executarAoExcluir(AjaxRequestTarget target, Usuario funcionario) {
 						if (funcionario.isAnswer() == true) {
 	//						enderecoService.excluir(index);
-							funcionarioService.excluir(index);
+							usuarioService.excluir(index);
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

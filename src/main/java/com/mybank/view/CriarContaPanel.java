@@ -16,25 +16,25 @@ import org.apache.wicket.model.LoadableDetachableModel;
 
 import com.mybank.model.Endereco;
 import com.mybank.model.Funcao;
-import com.mybank.model.Funcionario;
+import com.mybank.model.Usuario;
 
 
-public class FuncionarioPanel extends Panel {
+public class CriarContaPanel extends Panel {
 
 	private static final long serialVersionUID = 8991195474675368668L;
 
-	private Form<Funcionario> formFunc;
+	private Form<Usuario> formFunc;
 	private Form<Endereco> formEnd;
 //	private Funcionario funcionario;
 //	private Endereco endereco;
 
-	public FuncionarioPanel(String id) {
-		this(id, new Funcionario(), new Endereco());
+	public CriarContaPanel(String id) {
+		this(id, new Usuario(), new Endereco());
 	}
 
-	public FuncionarioPanel(String id, Funcionario funcionario, Endereco endereco) {
+	public CriarContaPanel(String id, Usuario funcionario, Endereco endereco) {
 		super(id);
-		formFunc = new Form<Funcionario>("formFunc", new CompoundPropertyModel<Funcionario>(funcionario));
+		formFunc = new Form<Usuario>("formFunc", new CompoundPropertyModel<Usuario>(funcionario));
 //		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));
 
 		TextField<String> nome = new TextField<>("nome");
@@ -123,7 +123,7 @@ public class FuncionarioPanel extends Panel {
 	}
 
 	// Enviando os dados para o HomePage
-	public void executarAoSalvar(AjaxRequestTarget target, Funcionario funcionario) {
+	public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
 
 	}
 

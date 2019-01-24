@@ -1,25 +1,44 @@
 package com.mybank.view;
 
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.Radio;
+import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.mybank.model.Usuario;
+import com.mybank.service.UsuarioService;
 
 public class SolicitarAberturaConta extends WebPage {
 
 	private static final long serialVersionUID = 1L;
-	public Form<Usuario> form;
-	private Usuario usuario;
+
+	@SpringBean(name = "usuarioService")
+	private UsuarioService usuarioService;
 
 	public SolicitarAberturaConta() {
-		usuario = new Usuario();
-		form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
-		add(form);
+		Usuario usuario = new Usuario();
+		Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(
+				usuario)); /*
+							 * {
+							 * 
+							 * private static final long serialVersionUID = 1L;
+							 * 
+							 * @Override protected void onSubmit() { super.onSubmit();
+							 * usuarioService.SalvarOuAlterar(usuario); setResponsePage(Login.class); }
+							 * 
+							 * };
+							 */
 		TextField<String> nome = new TextField<>("nome");
 		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
@@ -51,6 +70,14 @@ public class SolicitarAberturaConta extends WebPage {
 		form.add(nome, identidade, cpf, renda, telefone, email, nomeBanco, logradouro, bairro, cidade, estado, numero,
 				cep);
 
+		RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
+		radioGroupAtivo.setRequired(true);
+		radioGroupAtivo
+				.add(new Radio<Boolean>("sim", new Model<Boolean>(true)).add(new AttributeModifier("id", "sim")));
+		radioGroupAtivo
+				.add(new Radio<Boolean>("nao", new Model<Boolean>(false)).add(new AttributeModifier("id", "nao")));
+		form.add(radioGroupAtivo);
+
 		// Data de Nascimento
 		DatePicker datePickerInicial = new DatePicker() {
 			private static final long serialVersionUID = 1L;
@@ -71,6 +98,36 @@ public class SolicitarAberturaConta extends WebPage {
 		data.add(datePickerInicial);
 		data.setOutputMarkupId(true);
 		form.add(data);
+
+		AjaxButton button = new AjaxButton("submit") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				super.onSubmit(target, form);
+				Usuario user = (Usuario) form.getModelObject();
+				usuarioService.SalvarOuAlterar(user);
+				target.add(nome);
+				target.add(identidade);
+				target.add(cpf);
+				target.add(renda);
+				target.add(telefone);
+				target.add(email);
+				target.add(cep);
+				target.add(logradouro);
+				target.add(numero);
+				target.add(bairro);
+				target.add(cidade);
+				target.add(estado);
+				setResponsePage(Login.class);
+			}
+
+		};
+
+		button.setOutputMarkupId(true);
+		form.add(button);
+		add(form);
 	}
 
 }

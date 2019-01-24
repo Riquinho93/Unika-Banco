@@ -47,9 +47,9 @@
 								wicket:id="dataNascimento" type="text" class="form-data"
 								placeholder="dd/MM/yyyy" />
 						</div>
-						<div class="col">
-							<Label class="text2">Genero: *</label><input type="radio"
-								name="group2" value="true">Masculino</input> <input type="radio"
+						<div wicket:id="sexo" class="col">
+							<Label class="text2">Genero: *</label><input wicket:id="sim" type="radio"
+								name="group2" value="true">Masculino</input> <input wicket:id="nao" type="radio"
 								name="group2" value="false">Feminino</input>
 						</div>
 						<div class="col-md-4">
@@ -114,11 +114,19 @@
 								placeholder="example@example.com" />
 						</div>
 					</div>
-					<!-- </form> -->
-					<br /> <button class="btn btn-success" type="submit">Salvar</button>
+					<br /> <button wicket:id="submit" class="btn btn-success" type="submit">Salvar</button>
 				</form>
-
-				<!-- Adicionando Javascript -->
+			</div>
+		</div>
+		<!-- RODAPE -->
+		<div class="row">
+			<div class="col rodape">
+				<br /> <br />
+				<p>Desenvolvendo Sistema de controle de Faccionista &#174;
+					Direitos Reservados</p>
+			</div>
+		</div>
+			<!-- Adicionando Javascript -->
 				<script type="text/javascript">
 					function limpa_formulário_cep() {
 						//Limpa valores do formulário de cep.
@@ -186,16 +194,6 @@
 						}
 					};
 				</script>
-			</div>
-		</div>
-		<!-- RODAPE -->
-		<div class="row">
-			<div class="col rodape">
-				<br /> <br />
-				<p>Desenvolvendo Sistema de controle de Faccionista &#174;
-					Direitos Reservados</p>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

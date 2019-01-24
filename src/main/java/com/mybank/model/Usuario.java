@@ -28,7 +28,7 @@ public class Usuario extends Conta {
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	private String sexo;
+	private boolean sexo;
 
 	@Column(unique = true)
 	private int identidade;
@@ -39,7 +39,7 @@ public class Usuario extends Conta {
 	private String email;
 	private Agencia agencia;
 	private Perfil perfil;
-	
+
 	private Banco banco;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -77,6 +77,14 @@ public class Usuario extends Conta {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
 
 	public String getNome() {
 		return nome;
@@ -110,11 +118,11 @@ public class Usuario extends Conta {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSexo() {
+	public boolean isSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(boolean sexo) {
 		this.sexo = sexo;
 	}
 

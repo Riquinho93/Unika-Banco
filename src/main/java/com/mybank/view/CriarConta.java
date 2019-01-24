@@ -63,8 +63,8 @@ public class CriarConta extends HomePage {
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(400);
-		modalWindow.setInitialWidth(800);
+		modalWindow.setInitialHeight(500);
+		modalWindow.setInitialWidth(900);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 

@@ -22,11 +22,11 @@
 		}
 	</script>
 	<div class="container-fluid">
-		<h1>Funcionarios</h1>
+		<h1>Cadastro de Usuario</h1>
+		<h3>Dados pessoais</h3>
 		<form wicket:id="formFunc">
 			<div class="row">
-				<h3>Dados pessoais</h3>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<label class="text">Nome: *</label> <input type="text"
 						class="form-control" wicket:id="nome" placeholder="Digite o nome" />
 				</div>
@@ -35,65 +35,66 @@
 						type="text" class="form-data" placeholder="dd/MM/yyyy" />
 				</div>
 				<div class="col-md-4">
-					<label class="text">Sexo: *</label> <select class="form-control"></select>
+			 		<Label class="text2">Genero: *</label><br />
+					<input type="radio" name="group2" value="true">Masculino</input> 
+					<input type="radio" name="group2" value="false">Feminino</input>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<label class="text">RG: *</label> <input type="number"
 						class="number form-control" placeholder="Digite o n° do RG" />
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<label class="text">CPF: *</label> <input type="number"
 						class="number form-control" placeholder="Digite o n° do CPF" />
 				</div>
 				<div class="col-md-3">
-					<label class="text">Cep</label> <input wicket:id="endereco.cep"
+					<label class="text">Cep: *</label> <input wicket:id="endereco.cep"
 						name="cep" id="#cep" type="text" class="form-control" size="10"
 						maxlength="9" onblur="pesquisacep(this.value);"
 						placeholder="Digite o cep" />
 				</div>
-				<div class="col-md-3">
-					<label class="text">Logradouro</label> <input
+				<div class="col-md-4">
+					<label class="text">Logradouro: *</label> <input
 						wicket:id="endereco.logradouro" name="rua" id="rua" type="text"
-						class="form-control" placeholder="Digite o nome" />
+						class="form-control" placeholder="Digite o logradouro" />
 				</div>
 				<div class="col-md-3">
-					<label class="text">Numero</label> <input
+					<label class="text">Numero: *</label> <input
 						wicket:id="endereco.numero" type="number"
 						class="number form-control" placeholder="Digite o n°" />
 				</div>
 
-				<div class="col-md-3">
-					<label class="text">Bairro</label> <input
+				<div class="col-md-4">
+					<label class="text">Bairro: *</label> <input
 						wicket:id="endereco.bairro" name="bairro" id="bairro" size="40"
 						type="text" class="form-control" placeholder="Digite o bairro" />
 				</div>
-				<div class="col-md-3">
-					<label class="text">Cidade</label> <input
+				<div class="col-md-4">
+					<label class="text">Cidade: *</label> <input
 						wicket:id="endereco.cidade" name="cidade" id="cidade" size="40"
 						type="text" class="form-control" placeholder="Digite a cidade" />
 				</div>
 				<div class="col-md-3">
-					<label class="text">Estado</label> <input
+					<label class="text">Estado: *</label> <input
 						wicket:id="endereco.estado" name="uf" id="uf" size="2" type="text"
 						class="form-control" placeholder="Digite o estado" />
 				</div>
-				<div class="col-md-3">
-					<label class="text">Renda</label> <input
-						 type="number"
-						class="number form-control" placeholder="" />
+				<div class="col-md-4">
+					<label class="text">Renda: *</label> <input type="number"
+						class="number form-control" placeholder="0,0" />
 				</div>
 
 			</div>
-				<h3>Informações para contato</h3>
+			<h3>Informações para contato</h3>
 			<div class="row">
 				<div class="col-md-4">
-					<label class="text">Telefone</label> <input type="text"
+					<label class="text">Telefone: *</label> <input type="text"
 						name="telefone" class="form-control" wicket:id="telefone"
 						placeholder="62 99999-9999"
 						onkeypress="mascara(this, '## #####-####')" maxlength="13" />
 				</div>
 				<div class="col-md-6">
-					<label class="text">Email</label> <input type="text"
+					<label class="text">Email:</label> <input type="text"
 						class="form-control" wicket:id="email"
 						placeholder="example@example.com" />
 				</div>

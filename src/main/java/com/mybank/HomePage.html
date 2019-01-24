@@ -12,17 +12,12 @@
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </wicket:head>
-<body>
+<body class="body"><br />
 	<div class="container">
 		<!-- TOPO -->
-		
 		<div class="row topo">
-		<div class="col-12">
-			<button wicket:id="sair" class="btn" style="float: right;">Sair</button>
-			</div>
-			
 			<div class="row topo justify-context-between">
-				<h1 style="color: blue">Unika Banco</h1>
+				<img alt="img" src="logo2.png">
 			</div>
 
 		</div>
@@ -31,8 +26,11 @@
 		<div class="row menu-horizontal col-12">
 			<div class="col-12">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link">Home</a></li>
-					<li class="nav-item"><a class="nav-link">Criar Conta</a></li>
+					<li class="nav-item"><a wicket:id="telaPrincipal"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a wicket:id="criarConta"
+						class="nav-link">Criar Conta</a></li>
+					<li class="nav-item"><a wicket:id="bancoForm" class="nav-link">Banco</a></li>
 				</ul>
 			</div>
 		</div>
@@ -42,18 +40,19 @@
 			<!-- MENU VERTICAL -->
 			<div class="col-3 menu-vertical">
 				<ul class="nav flex-column">
-					<li class="nav-item"><a class="nav-link">Saldo</a></li>
-					<li class="nav-item"><a class="nav-link">Depositos</a></li>
-					<li class="nav-item"><a class="nav-link">Transferencias</a></li>
-					<li class="nav-item"><a class="nav-link">Saques</a></li>
-					<li class="nav-item"><a class="nav-link">Solicitar outra conta</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Depositos</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Transferencias</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Saques</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Solicitar
+							outra conta</a></li>
+					<li class="nav-item"><a wicket:id="sair" class="nav-link">Sair</a></li>
 				</ul>
 			</div>
 
-		<!-- CONTEUDO -->
-		<div class="col-9">
-			<wicket:child />
-		</div>
+			<!-- CONTEUDO -->
+			<div class="col-9">
+				<wicket:child />
+			</div>
 		</div>
 		<!-- RODAPE -->
 		<div class="row">

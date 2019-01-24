@@ -1,16 +1,21 @@
 /* TOPO */
+.body{
+	background-color: #004E95;
+	margin: 0px;
+	
+}
 .container{
-    margin: 10px 5px 2px 20 px;
+    margin: 10px 0px 10px 20 px;
     padding: 4px;
+    background-color: #eaea8b;
 }
 .topo {
     margin: 5px 5px;
-    padding: 30px;
+    padding: 5px;
 }
     .logo{
-        width: 300px;
+        width: 100px;
     }
-
 
 /* MENU HORIZONTAL */
 .menu-horizontal{

@@ -2,17 +2,21 @@ package com.mybank.view;
 
 import java.util.List;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.Radio;
+import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.Model;
 
 import com.mybank.model.Endereco;
 import com.mybank.model.Funcao;
@@ -65,8 +69,14 @@ public class CriarContaPanel extends Panel {
 		bairro.setOutputMarkupId(true);
 		cidade.setOutputMarkupId(true);
 		estado.setOutputMarkupId(true);
+		
+		/*RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
+		radioGroupAtivo.setRequired(true);
+		radioGroupAtivo.add(new Radio<Boolean>("sim", new Model<Boolean>(true)).add(new AttributeModifier("id", "sim")));
+		radioGroupAtivo.add(new Radio<Boolean>("nao", new Model<Boolean>(false)).add(new AttributeModifier("id", "nao")));
+		formFunc.add(radioGroupAtivo);*/
 
-		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
+/*		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
 		IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
 
 			private static final long serialVersionUID = 1L;
@@ -78,7 +88,7 @@ public class CriarContaPanel extends Panel {
 		};
 
 		DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model, renderer);
-
+*/
 		// funcionario.setEndereco(endereco);
 		AjaxButton button = new AjaxButton("submit") {
 
@@ -107,7 +117,7 @@ public class CriarContaPanel extends Panel {
 		formFunc.add(nome);
 		formFunc.add(telefone);
 		formFunc.add(email);
-		formFunc.add(funcoes);
+//		formFunc.add(funcoes);
 		
 		formFunc.add(cep);
 		formFunc.add(logradouro);

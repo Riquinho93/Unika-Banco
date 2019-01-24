@@ -19,7 +19,7 @@ public class DeletConta extends Panel {
 		this.user = answer;
 		Form<Usuario> form = new Form<>("resposta");
 
-		add(new Label("msg", "Deseja realmente excluir este funcionario?"));
+		add(new Label("msg", "Deseja realmente excluir este Usuario?"));
 
 		// Se a resposta == sim
 		AjaxButton yesButton = new AjaxButton("sim") {

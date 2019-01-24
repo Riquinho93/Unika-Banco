@@ -25,6 +25,7 @@ import com.mybank.model.Endereco;
 import com.mybank.model.Usuario;
 import com.mybank.service.EnderecoService;
 import com.mybank.service.UsuarioService;
+import com.mybank.service.ClienteService;
 
 public class CriarConta extends HomePage {
 
@@ -87,12 +88,12 @@ public class CriarConta extends HomePage {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 //						funcionario.setEndereco(endereco);
-						usuarioService.SalvarOuAlterar(funcionario);
+						usuarioService.SalvarOuAlterar(usuario);
 //						endereco.setFuncionario(funcionario);
 //						enderecoService.SalvarOuAlterar(endereco);
-						funcionariosList.add(funcionario);
+						funcionariosList.add(usuario);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -177,27 +178,27 @@ public class CriarConta extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Usuario> editando(Usuario funcionario) {
+	AjaxLink<Usuario> editando(Usuario usuario) {
 		AjaxLink<Usuario> editar = new AjaxLink<Usuario>("alterar") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				Usuario user = usuarioService.alterar(funcionario.getId());
+				Usuario user = usuarioService.alterar(usuario.getId());
 				CriarContaPanel funcionarioPanel = new CriarContaPanel(modalWindow.getContentId(), user,
 						endereco) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
+					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 						/*Search search = new Search(Funcionario.class);
 						search.addFilterEqual("id", funcionario.getId());
 						search.addFilterEqual("funcionario", endereco.getFuncionario().getId());
 						List<Funcionario> lista = funcionarioService.search(search);
 						funcionariosList = lista;*/
 	//					enderecoService.buscarPorId(funcionario.getId());
-						usuarioService.SalvarOuAlterar(funcionario);
+						usuarioService.SalvarOuAlterar(usuario);
 //						endereco.setFuncionario(funcionario);
 //						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);

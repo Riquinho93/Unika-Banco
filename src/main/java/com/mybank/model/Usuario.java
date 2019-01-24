@@ -1,5 +1,6 @@
 package com.mybank.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -17,58 +18,39 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario extends Conta {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String nome;
+	protected Integer id;
+	protected String nome;
 
 	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
-	private boolean sexo;
+	protected Date dataNascimento;
+	protected boolean sexo;
 
 	@Column(unique = true)
-	private int identidade;
+	protected int identidade;
 	@Column(unique = true)
-	private int cpf;
-	private double Renda;
-	private String telefone;
-	private String email;
-	private Agencia agencia;
-	private Perfil perfil;
+	protected int cpf;
+	protected double renda;
+	protected String telefone;
+	protected String email;
+//	private Agencia agencia;
+	protected Perfil perfil;
+	protected Situacao situacao;
 
-	private Banco banco;
+	protected Banco banco;
+	private String nomeBanco;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
-	private Endereco endereco;
+	protected Endereco endereco;
 
 	@Transient
-	private boolean answer;
-
-	// Metodos
-
-	@Override
-	public void atualizarSaldo() {
-
-	}
-
-	public void sacar(int conta) {
-
-	}
-
-	public void tranferir(int conta) {
-
-	}
-
-	public void depositar(int conta) {
-
-	}
-
-	// Getters e Setters
+	protected boolean answer;
 
 	public Integer getId() {
 		return id;
@@ -77,14 +59,6 @@ public class Usuario extends Conta {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public Banco getBanco() {
-		return banco;
-	}
-
-	public void setBanco(Banco banco) {
-		this.banco = banco;
-	}
 
 	public String getNome() {
 		return nome;
@@ -92,22 +66,6 @@ public class Usuario extends Conta {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public Date getDataNascimento() {
@@ -143,27 +101,19 @@ public class Usuario extends Conta {
 	}
 
 	public double getRenda() {
-		return Renda;
+		return renda;
 	}
 
 	public void setRenda(double renda) {
-		Renda = renda;
+		this.renda = renda;
 	}
 
-	public Agencia getAgencia() {
-		return agencia;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setAgencia(Agencia agencia) {
-		this.agencia = agencia;
-	}
-
-	public Perfil getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getEmail() {
@@ -174,12 +124,52 @@ public class Usuario extends Conta {
 		this.email = email;
 	}
 
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	public boolean isAnswer() {
 		return answer;
 	}
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	public String getNomeBanco() {
+		return nomeBanco;
+	}
+
+	public void setNomeBanco(String nomeBanco) {
+		this.nomeBanco = nomeBanco;
+	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 
 }

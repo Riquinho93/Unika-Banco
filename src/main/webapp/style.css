@@ -6,9 +6,11 @@
 }
 .container{
     margin: 10px 0px 10px 20 px;
-    padding: 4px;
-    background-color: #eaea8b;
+    padding: 10px;
+    background-color: #20b2aa;
 }
+/*Cor reserva #20b2aa 
+#e0e094*/
 .topo {
     margin: 5px 5px;
     padding: 5px;
@@ -19,10 +21,10 @@
 
 /* MENU HORIZONTAL */
 .menu-horizontal{
-    padding: 5px 0px;
+    padding: 5px 5px;
     background-color: #3D3D3D;
     border-radius: 10px;
-    margin: 0px 5px 8px 5px;
+    margin: 0px 5px 8px 0px;
 }
 .menu-horizontal a {
     text-transform: uppercase;
@@ -31,15 +33,15 @@
 
 /* MEIO */
 .meio{
-    margin: 10px 0 ;
+    margin: 5px 0px;
 }
 
 
 /* MENU VERTICAL */
 .menu-vertical{
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    padding: 10px;
+    background-color: #F8F8FF;
+    border-radius: 8px;
+    padding: 8px;
 }
 .menu-vertical a {
     text-transform: uppercase;

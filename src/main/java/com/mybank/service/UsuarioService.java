@@ -7,26 +7,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.dao.UsuarioDao;
+import com.mybank.model.Cliente;
 import com.mybank.model.Usuario;
 
 @Service
-public class UsuarioService implements IUsuarioService{
-	
+public class UsuarioService implements IUsuarioService {
+
 	private UsuarioDao usuarioDao;
-	
+
 	public void setUsuarioDao(UsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
 	}
 
 	@Override
 	@Transactional
-	public void SalvarOuAlterar(Usuario usuario) {
-		usuarioDao.SalvarOuAlterar(usuario);		
+	public void SalvarOuAlterar(Usuario pessoa) {
+		usuarioDao.SalvarOuAlterar(pessoa);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Usuario buscarPorid(Integer id) {
+	public Usuario buscarPorId(Integer id) {
 		return usuarioDao.buscarPorId(id);
 	}
 

@@ -36,9 +36,9 @@ public class CriarContaPanel extends Panel {
 		this(id, new Usuario(), new Endereco());
 	}
 
-	public CriarContaPanel(String id, Usuario funcionario, Endereco endereco) {
+	public CriarContaPanel(String id, Usuario usuario, Endereco endereco) {
 		super(id);
-		formFunc = new Form<Usuario>("formFunc", new CompoundPropertyModel<Usuario>(funcionario));
+		formFunc = new Form<Usuario>("formFunc", new CompoundPropertyModel<Usuario>(usuario));
 //		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));
 
 		TextField<String> nome = new TextField<>("nome");
@@ -98,7 +98,7 @@ public class CriarContaPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 
-				executarAoSalvar(target, funcionario);
+				executarAoSalvar(target, usuario);
 				target.add(nome);
 				target.add(telefone);
 				target.add(email);
@@ -133,7 +133,7 @@ public class CriarContaPanel extends Panel {
 	}
 
 	// Enviando os dados para o HomePage
-	public void executarAoSalvar(AjaxRequestTarget target, Usuario funcionario) {
+	public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 
 	}
 

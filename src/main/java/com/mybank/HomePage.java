@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 
 import com.mybank.model.Endereco;
-import com.mybank.model.Usuario;
+import com.mybank.model.Cliente;
 import com.mybank.view.BancoForm;
 import com.mybank.view.CriarConta;
 import com.mybank.view.Login;
@@ -40,8 +40,8 @@ public class HomePage extends WebPage {
 	}
 
 	// Metodo de chamada de Criar Conta
-	AjaxLink<Usuario> criarConta() {
-		AjaxLink<Usuario> ajaxLink = new AjaxLink<Usuario>("criarConta") {
+	AjaxLink<Cliente> criarConta() {
+		AjaxLink<Cliente> ajaxLink = new AjaxLink<Cliente>("criarConta") {
 
 			private static final long serialVersionUID = 1L;
 

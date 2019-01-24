@@ -7,7 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +27,7 @@ public class Endereco implements Serializable {
 	private String estado;
 
 	@OneToOne(mappedBy = "endereco", targetEntity = Usuario.class, fetch = FetchType.LAZY)
-	private Usuario funcionario;
+	private Usuario usuario;
 
 	public Integer getId() {
 		return id;
@@ -86,12 +85,12 @@ public class Endereco implements Serializable {
 		this.estado = estado;
 	}
 
-	public Usuario getFuncionario() {
-		return funcionario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setFuncionario(Usuario funcionario) {
-		this.funcionario = funcionario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mybank.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,10 @@ public class Banco implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(unique = true)
+	private String nome;
 	
-	private Usuario usuario;
+//	private Cliente usuario;
 
 	// Getters e Setters
 
@@ -30,13 +33,13 @@ public class Banco implements Serializable{
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	/*public Cliente getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Cliente usuario) {
 		this.usuario = usuario;
-	}
+	}*/
 	
 	
 }

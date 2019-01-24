@@ -6,27 +6,28 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.mybank.model.Usuario;
+import com.mybank.model.Cliente;
 
 @Repository
-public class UsuarioDao extends GenericDao<Usuario, Serializable>{
+public class ClienteDao extends GenericDao<Cliente, Serializable> {
 	
 	@SuppressWarnings("unchecked")
 //	@Transactional(readOnly = true)
-	public List<Usuario> listar() {
-		String hql = "select f from Pessoa f";
+	public List<Cliente> listar() {
+		String hql = "select f from Cliente f";
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
-		List<Usuario> userList = query.list();
+		List<Cliente> userList = query.list();
 		return userList;
 	}
+	
 //	@Transactional(readOnly = true)
-	public Usuario alterar(Integer id) {
-		String hql = "select f from Usuario f left join fetch f.endereco e "
+	public Cliente alterar(Integer id) {
+		String hql = "select f from Cliente f left join fetch f.endereco e "
 				+ "where f.id = :id";
 		
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		query.setParameter("id", id);
-		Usuario user = (Usuario) query.uniqueResult();
+		Cliente user = (Cliente) query.uniqueResult();
 		return user;
 	}
 }

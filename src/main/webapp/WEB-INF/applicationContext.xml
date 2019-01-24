@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -12,14 +13,17 @@
 	<!-- <context:property-placeholder location="classpath:/jdbc.properties"></context:property-placeholder> -->
 
 
-	<context:component-scan base-package="com.mybank" />
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
+	<context:component-scan
+		base-package="com.mybank" />
+	<tx:annotation-driven
+		transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/unika_banco"></property>
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/unika_banco"></property>
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -33,6 +37,7 @@
 			<list>
 				<value>com.mybank.model.Endereco</value>
 				<value>com.mybank.model.Usuario</value>
+				<!-- <value>com.mybank.model.Gerente</value> -->
 				<value>com.mybank.model.Banco</value>
 			</list>
 		</property>
@@ -52,7 +57,8 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="enderecoService" class="com.mybank.service.EnderecoService">
+	<bean id="enderecoService"
+		class="com.mybank.service.EnderecoService">
 		<property name="enderecoDao" ref="enderecoDao"></property>
 	</bean>
 
@@ -61,9 +67,18 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="usuarioService" class="com.mybank.service.UsuarioService">
+	<bean id="usuarioService"
+		class="com.mybank.service.UsuarioService">
 		<property name="usuarioDao" ref="usuarioDao"></property>
 	</bean>
+
+	<!-- <bean id="gerenteDao" class="com.mybank.dao.GerenteDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="gerenteService" class="com.mybank.service.GerenteService">
+		<property name="gerenteDao" ref="gerenteDao"></property>
+	</bean> -->
 
 	<bean id="bancoDao" class="com.mybank.dao.BancoDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>

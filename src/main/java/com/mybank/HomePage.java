@@ -6,11 +6,16 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.Link;
 
 import com.mybank.model.Endereco;
-import com.mybank.model.Cliente;
+import com.mybank.model.Funcionario;
 import com.mybank.view.BancoForm;
-import com.mybank.view.CriarConta;
+import com.mybank.view.FuncionarioForm;
+import com.mybank.view.ContaForm;
+import com.mybank.view.UsuarioForm;
+import com.mybank.view.DepositoForm;
 import com.mybank.view.Login;
+import com.mybank.view.SaqueForm;
 import com.mybank.view.TelaPrincipal;
+import com.mybank.view.TransferenciaForm;
 
 public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
@@ -24,9 +29,14 @@ public class HomePage extends WebPage {
 		// UsuarioForm usuarioForm = new UsuarioForm();
 		// usuarioForm.setEnabled(false);
 
-		add(criarConta());
+		add(usuarioForm());
 		add(telaPrincipal());
 		add(bancoForm());
+		add(contaForm());
+		add(clienteForm());
+		add(depositoForm());
+		add(saqueForm());
+		add(transferenciaForm());
 		add(new Link<Void>("sair") {
 
 			private static final long serialVersionUID = 1L;
@@ -40,14 +50,14 @@ public class HomePage extends WebPage {
 	}
 
 	// Metodo de chamada de Criar Conta
-	AjaxLink<Cliente> criarConta() {
-		AjaxLink<Cliente> ajaxLink = new AjaxLink<Cliente>("criarConta") {
+	AjaxLink<Funcionario> usuarioForm() {
+		AjaxLink<Funcionario> ajaxLink = new AjaxLink<Funcionario>("usuarioForm") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				setResponsePage(CriarConta.class);
+				setResponsePage(UsuarioForm.class);
 			}
 		};
 		ajaxLink.setOutputMarkupId(true);
@@ -78,6 +88,81 @@ public class HomePage extends WebPage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				setResponsePage(BancoForm.class);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		return ajaxLink;
+	}
+
+	private AjaxLink<ContaForm> contaForm() {
+		AjaxLink<ContaForm> ajaxLink = new AjaxLink<ContaForm>("contaForm") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(ContaForm.class);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		return ajaxLink;
+	}
+
+	private AjaxLink<FuncionarioForm> clienteForm() {
+		AjaxLink<FuncionarioForm> ajaxLink = new AjaxLink<FuncionarioForm>("clienteForm") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(FuncionarioForm.class);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		return ajaxLink;
+	}
+
+	private AjaxLink<DepositoForm> depositoForm() {
+		AjaxLink<DepositoForm> ajaxLink = new AjaxLink<DepositoForm>("depositoForm") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(DepositoForm.class);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		return ajaxLink;
+	}
+
+	private AjaxLink<SaqueForm> saqueForm() {
+		AjaxLink<SaqueForm> ajaxLink = new AjaxLink<SaqueForm>("saqueForm") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(SaqueForm.class);
+			}
+		};
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		return ajaxLink;
+	}
+
+	private AjaxLink<TransferenciaForm> transferenciaForm() {
+		AjaxLink<TransferenciaForm> ajaxLink = new AjaxLink<TransferenciaForm>("transferenciaForm") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(TransferenciaForm.class);
 			}
 		};
 		ajaxLink.setOutputMarkupId(true);

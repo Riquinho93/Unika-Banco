@@ -47,5 +47,10 @@ public class ContaService implements IContaService {
 	public List<Conta> search(Search search) {
 		return contaDao.searchDao(search);
 	}
+	
+	@Transactional(readOnly = true)
+	public Conta alterar(Integer id) {
+		return contaDao.alterar(id);
+	}
 
 }

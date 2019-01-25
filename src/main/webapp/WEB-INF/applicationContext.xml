@@ -39,6 +39,7 @@
 				<value>com.mybank.model.Usuario</value>
 				<value>com.mybank.model.Banco</value>
 				<value>com.mybank.model.Conta</value>
+				<value>com.mybank.model.Funcionario</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -71,14 +72,14 @@
 		class="com.mybank.service.UsuarioService">
 		<property name="usuarioDao" ref="usuarioDao"></property>
 	</bean>
-
- <bean id="contaDao" class="com.mybank.dao.ContaDao">
+	<bean id="funcionarioDao" class="com.mybank.dao.FuncionarioDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="contaService" class="com.mybank.service.ContaService">
-		<property name="contaDao" ref="contaDao"></property>
-	</bean> 
+	<bean id="funcionarioService"
+		class="com.mybank.service.FuncionarioService">
+		<property name="funcionarioDao" ref="funcionarioDao"></property>
+	</bean>
 
 	<bean id="bancoDao" class="com.mybank.dao.BancoDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -87,6 +88,15 @@
 	<bean id="bancoService" class="com.mybank.service.BancoService">
 		<property name="bancoDao" ref="bancoDao"></property>
 	</bean>
+
+	<bean id="contaDao" class="com.mybank.dao.ContaDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="contaService" class="com.mybank.service.ContaService">
+		<property name="contaDao" ref="contaDao"></property>
+	</bean>
+
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">

@@ -9,31 +9,42 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "conta")
+@Table(name ="conta")
 public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private double saldo;
+	protected Integer id;
+	protected double saldo;
 	@Column(unique = true)
-	private int conta;
-	
+	protected int numeroConta;
+
 	@ManyToOne
 	@JoinColumn(name = "banco")
-	private Banco banco;
-	
-	private TipoConta tipoConta;
+	protected Banco banco;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
+
+	private Perfil perfil;
+
+	@Transient
+	protected boolean answer;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public double getSaldo() {
 		return saldo;
@@ -43,12 +54,12 @@ public class Conta implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public int getConta() {
-		return conta;
+	public int getNumeroConta() {
+		return numeroConta;
 	}
 
-	public void setConta(int conta) {
-		this.conta = conta;
+	public void setNumeroConta(int numeroConta) {
+		this.numeroConta = numeroConta;
 	}
 
 	public Banco getBanco() {
@@ -59,22 +70,6 @@ public class Conta implements Serializable {
 		this.banco = banco;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoConta getTipoConta() {
-		return tipoConta;
-	}
-
-	public void setTipoConta(TipoConta tipoConta) {
-		this.tipoConta = tipoConta;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -83,8 +78,20 @@ public class Conta implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+	public boolean isAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(boolean answer) {
+		this.answer = answer;
 	}
 
 }

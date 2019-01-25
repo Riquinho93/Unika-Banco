@@ -1,0 +1,36 @@
+<wicket:panel>
+	<div class="container-fluid">
+		<h1>Criando Funcionario</h1>
+		<form wicket:id="form">
+			<div class="row">
+				<div class="col-md-6">
+					<label class="text">Nome: *</label> <input wicket:id="nome"
+						type="text" class="form-control" placeholder="Digite o nome" />
+				</div>
+				<div class="col-md-6">
+					<label class="text">Cpf: *</label> <input wicket:id="cpf"
+						type="number" class="form-control" placeholder="Digite o cpf" />
+				</div>
+				<div class="col-md-6">
+					<Label class="text2">Genero: *</label><br /> <input type="radio"
+						name="group2" value="true">Masculino</input> <input type="radio"
+						name="group2" value="false">Feminino</input>
+				</div>
+
+				<div class="col-md-6">
+					<label class="text">Telefone: *</label> <input wicket:id="telefone"
+						type="text" class="form-control" placeholder="Digite o nome" />
+				</div>
+				<div class="form-group col-md-6">
+					<Label class="text">Perfil: </label> <select class="form-control"></select>
+				</div>
+
+				<div class="form-group col-md-6">
+					<Label class="text">Situacao: </label> <select class="form-control"></select>
+				</div>
+
+			</div>
+			<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
+		</form>
+	</div>
+</wicket:panel>

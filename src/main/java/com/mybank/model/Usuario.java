@@ -48,8 +48,8 @@ public class Usuario implements Serializable {
 	/* protected Banco banco; */
 	private String nomeBanco;
 
-	@OneToMany(mappedBy = "usuario", targetEntity = Conta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Conta> contas;
+	@OneToMany(mappedBy = "usuario", targetEntity = Conta.class,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Conta> listacontas;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
@@ -170,12 +170,12 @@ public class Usuario implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public List<Conta> getContas() {
-		return contas;
+	public List<Conta> getListacontas() {
+		return listacontas;
 	}
 
-	public void setContas(List<Conta> contas) {
-		this.contas = contas;
+	public void setListacontas(List<Conta> listacontas) {
+		this.listacontas = listacontas;
 	}
 
 }

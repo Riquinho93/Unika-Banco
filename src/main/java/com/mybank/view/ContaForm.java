@@ -1,6 +1,6 @@
 package com.mybank.view;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.wicket.Component;
@@ -11,6 +11,7 @@ import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
@@ -22,36 +23,35 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Banco;
+import com.mybank.model.Conta;
 import com.mybank.model.Usuario;
-import com.mybank.service.BancoService;
+import com.mybank.service.ContaService;
 
-public class BancoForm extends HomePage {
+public class ContaForm extends HomePage {
 
 	private static final long serialVersionUID = 1L;
 
-	private Form<Banco> form = new Form<>("form");
-	private Banco filtrar;
-	private Form<Banco> formFiltrar;
-	private List<Banco> listaBancos = new ArrayList<>();
-	private PageableListView<Banco> listView;
-	private LoadableDetachableModel<List<Banco>> atualizarLista;
+	private Form<Conta> form = new Form<Conta>("form");
+	private Conta filtrar;
+	private Form<Conta> formFiltrar;
+	private List<Conta> listaContas = new LinkedList<>();
+	private PageableListView<Conta> listView;
+	private LoadableDetachableModel<List<Conta>> atualizarLista;
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
-	@SpringBean(name = "bancoService")
-	private BancoService bancoService;
+	@SpringBean(name = "contaService")
+	private ContaService contaService;
 
-	public BancoForm() {
+	public ContaForm() {
 
 		add(container());
 		add(filtrar());
-		
-		listaBancos = bancoService.listar();
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(500);
-		modalWindow.setInitialWidth(700);
+		modalWindow.setInitialHeight(350);
+		modalWindow.setInitialWidth(500);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 
@@ -70,47 +70,48 @@ public class BancoForm extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				BancoPanel bancoPanel = new BancoPanel(modalWindow.getContentId()) {
+				ContaPanel contaPanel = new ContaPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Banco banco) {
-						bancoService.SalvarOuAlterar(banco);
-						listaBancos.add(banco);
+					public void executarAoSalvar(AjaxRequestTarget target, Conta conta) {
+						contaService.SalvarOuAlterar(conta);
+						listaContas.add(conta);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
 				};
-				bancoPanel.setOutputMarkupId(true);
-				add(bancoPanel);
-				modalWindow.setContent(bancoPanel);
+				contaPanel.setOutputMarkupId(true);
+				add(contaPanel);
+				modalWindow.setContent(contaPanel);
 				modalWindow.show(target);
 			}
 		});
+
 	}
 
 	private WebMarkupContainer container() {
 		listContainer = new WebMarkupContainer("container");
 		listContainer.setOutputMarkupId(true);
-		atualizarLista = new LoadableDetachableModel<List<Banco>>() {
+		atualizarLista = new LoadableDetachableModel<List<Conta>>() {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected List<Banco> load() {
-				return listaBancos;
+			protected List<Conta> load() {
+				return listaContas;
 			}
 		};
 
-		listView = new PageableListView<Banco>("listView", atualizarLista, 5) {
+		listView = new PageableListView<Conta>("listView", atualizarLista, 5) {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected void populateItem(ListItem<Banco> item) {
-				Banco user = item.getModelObject();
-				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("endereco", user.getEndereco().getCidade()));
+			protected void populateItem(ListItem<Conta> item) {
+				Conta user = item.getModelObject();
+				item.add(new Label("numeroConta", user.getNumeroConta()));
+				item.add(new Label("saldo", user.getSaldo()));
 				item.add(remover(user.getId()));
 				item.add(editando(user));
 			}
@@ -123,25 +124,25 @@ public class BancoForm extends HomePage {
 		return listContainer;
 	}
 
-	public Form<Banco> filtrar() {
-		filtrar = new Banco();
-		formFiltrar = new Form<Banco>("formFiltrar", new CompoundPropertyModel<Banco>(filtrar));
-		TextField<String> nome = new TextField<String>("nome");
-		nome.setOutputMarkupId(true);
-		formFiltrar.add(nome);
+	public Form<Conta> filtrar() {
+		filtrar = new Conta();
+		formFiltrar = new Form<Conta>("formFiltrar", new CompoundPropertyModel<Conta>(filtrar));
+		NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
+		numeroConta.setOutputMarkupId(true);
+		formFiltrar.add(numeroConta);
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", formFiltrar) {
 
 			private static final long serialVersionUID = 8104552052869900594L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				Search search = new Search(Banco.class);
+				Search search = new Search(Conta.class);
 
-				if (filtrar.getNome() != null && !filtrar.getNome().equals("")) {
-					search.addFilterLike("nome", "%" + filtrar.getNome() + "%");
+				if (filtrar.getNumeroConta() != 0) {
+					search.addFilterLike("numeroConta", "%" + filtrar.getNumeroConta() + "%");
 				}
 
-				listaBancos = bancoService.search(search);
+				listaContas = contaService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}
@@ -154,26 +155,26 @@ public class BancoForm extends HomePage {
 	}
 
 	// Editando
-	AjaxLink<Usuario> editando(Banco banco) {
+	AjaxLink<Usuario> editando(Conta conta) {
 		AjaxLink<Usuario> editar = new AjaxLink<Usuario>("alterar") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				Banco user = bancoService.alterar(banco.getId());
-				BancoPanel bancoPanel = new BancoPanel(modalWindow.getContentId(), user) {
+				Conta user = contaService.alterar(conta.getId());
+				ContaPanel contaPanel = new ContaPanel(modalWindow.getContentId(), user) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Banco banco) {
-						bancoService.SalvarOuAlterar(banco);
+					public void executarAoSalvar(AjaxRequestTarget target, Conta conta) {
+						contaService.SalvarOuAlterar(conta);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
 				};
-				bancoPanel.setOutputMarkupId(true);
-				modalWindow.setContent(bancoPanel);
+				contaPanel.setOutputMarkupId(true);
+				modalWindow.setContent(contaPanel);
 				modalWindow.show(target);
 			}
 		};
@@ -186,27 +187,27 @@ public class BancoForm extends HomePage {
 	public Component remover(final Integer index) {
 
 		AjaxLink<Banco> button = new AjaxLink<Banco>("excluir") {
-			Banco answer = new Banco();
+			Conta answer = new Conta();
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				DeletBanco deletBanco = new DeletBanco(modalWindowDel.getContentId(), answer) {
+				DeletConta deletConta = new DeletConta(modalWindowDel.getContentId(), answer) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoExcluir(AjaxRequestTarget target, Banco banco) {
-						if (banco.isAnswer() == true) {
+					public void executarAoExcluir(AjaxRequestTarget target, Conta conta) {
+						if (conta.isAnswer() == true) {
 							// enderecoService.excluir(index);
-							bancoService.excluir(index);
+							contaService.excluir(index);
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);
 					};
 				};
-				deletBanco.setOutputMarkupId(true);
-				modalWindowDel.setContent(deletBanco);
+				deletConta.setOutputMarkupId(true);
+				modalWindowDel.setContent(deletConta);
 				modalWindowDel.show(target);
 			}
 		};

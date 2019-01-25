@@ -31,7 +31,7 @@ public class Banco implements Serializable {
 	@OneToMany(mappedBy = "banco", targetEntity = Conta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Conta> contas;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 

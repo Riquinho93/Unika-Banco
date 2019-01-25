@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.dao.GerenteDao;
-import com.mybank.model.Gerente;
+import com.mybank.model.Funcionario;
 
 public class GerenteService implements IGerenteService {
 
@@ -22,13 +22,13 @@ public class GerenteService implements IGerenteService {
 
 	@Override
 	@Transactional
-	public void SalvarOuAlterar(Gerente gerente) {
+	public void SalvarOuAlterar(Funcionario gerente) {
 		gerenteDao.SalvarOuAlterar(gerente);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Gerente buscarPorId(Integer id) {
+	public Funcionario buscarPorId(Integer id) {
 		return gerenteDao.buscarPorId(id);
 	}
 
@@ -40,13 +40,13 @@ public class GerenteService implements IGerenteService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Gerente> listar() {
+	public List<Funcionario> listar() {
 		return gerenteDao.listar();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Gerente> search(Search search) {
+	public List<Funcionario> search(Search search) {
 		return gerenteDao.searchDao(search);
 	}
 

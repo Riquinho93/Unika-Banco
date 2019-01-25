@@ -5,16 +5,15 @@ import java.util.List;
 import com.googlecode.genericdao.search.Search;
 import com.mybank.model.Funcionario;
 
-public interface IGerenteService {
-	
-	public void SalvarOuAlterar(Funcionario gerente);
+public interface IFuncionarioService {
 
-	public Funcionario buscarPorId(Integer id);
+	public void SalvarOuAlterar(Funcionario cliente);
+
+	public Funcionario buscarPorid(Integer id);
 
 	public void excluir(Integer id);
 
 	public List<Funcionario> listar();
-	
-	public List<Funcionario> search(Search search);
 
+	public List<Funcionario> search(Search search);
 }

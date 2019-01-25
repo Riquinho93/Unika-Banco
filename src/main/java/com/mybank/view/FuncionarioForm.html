@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:wicket="http://wicket.apache.org">
-<wicket:head>
-</wicket:head>
+<html>
 <body>
 	<wicket:extend>
 		<div class="container" style="background-color: white">
-			<h1>Banco</h1>
+			<h1>Funcionario</h1>
 			<br>
 			<div class="container-fluid">
 				<form wicket:id="formFiltrar">
 					<div class="form-row">
 						<div class="col-sm-4">
-							<label type="text">Nome</label> <input wicket:id="nome"
+							<label type="text">Nome:</label> <input wicket:id="nome"
 								type="text" class="form-control" placeholder="Informe o nome">
 						</div>
 					</div>
@@ -30,14 +27,14 @@
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>Endereco</th>
+						<th>Perfil</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody wicket:id="container">
 					<tr wicket:id="listView">
 						<td wicket:id="nome" class="text"></td>
-						<td wicket:id="endereco" class="text"></td>
+						<td wicket:id="perfil" class="text"></td>
 						<td class="text-center"><a wicket:id="alterar"
 							class="btn btn-default" rel="tooltip" title="Editar"> <i
 								class="fas fa-pencil-alt"></i>
@@ -52,6 +49,7 @@
 			<div wicket:id="modalWindowDel"></div>
 			<br />
 		</div>
+	
 	</wicket:extend>
 </body>
 </html>

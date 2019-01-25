@@ -28,9 +28,11 @@
 				<ul class="nav">
 					<li class="nav-item"><a wicket:id="telaPrincipal"
 						class="nav-link">Home</a></li>
-					<li class="nav-item"><a wicket:id="criarConta"
-						class="nav-link">Criar Conta</a></li>
+					<li class="nav-item"><a wicket:id="usuarioForm"
+						class="nav-link">Usuario</a></li>
 					<li class="nav-item"><a wicket:id="bancoForm" class="nav-link">Banco</a></li>
+					<li class="nav-item"><a wicket:id="contaForm" class="nav-link">Conta</a></li>
+					<li class="nav-item"><a wicket:id="clienteForm" class="nav-link">Funcionario</a></li>
 				</ul>
 			</div>
 		</div>
@@ -38,19 +40,18 @@
 		<!-- MEIO -->
 		<div class="row meio">
 			<!-- MENU VERTICAL -->
-			<div class="col-3 menu-vertical">
+			<div class="col-2 menu-vertical">
 				<ul class="nav flex-column">
-					<li class="nav-item"><a href="#" class="nav-link">Depositos</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Transferencias</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Saques</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">abrir
-							outra conta</a></li>
+					<li class="nav-item"><a wicket:id="depositoForm" class="nav-link">Depositos</a></li>
+					<li class="nav-item"><a wicket:id="saqueForm" class="nav-link">Saques</a></li>
+					<li class="nav-item"><a wicket:id="transferenciaForm"
+						class="nav-link">Transferencias</a></li>
 					<li class="nav-item"><a wicket:id="sair" class="nav-link">Sair</a></li>
 				</ul>
 			</div>
 
 			<!-- CONTEUDO -->
-			<div class="col-9">
+			<div class="col-10">
 				<wicket:child />
 			</div>
 		</div>

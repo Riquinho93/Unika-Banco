@@ -11,10 +11,9 @@ import com.mybank.model.Banco;
 public class DeletBanco extends Panel{
 
 	private static final long serialVersionUID = 1L;
-	
 	private Banco user = new Banco();
 
-	public DeletBanco(String id, Banco answer) {
+	public DeletBanco(String id,final Banco answer) {
 		super(id);
 		this.user = answer;
 		Form<Banco> form = new Form<>("resposta");

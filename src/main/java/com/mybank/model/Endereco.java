@@ -26,10 +26,10 @@ public class Endereco implements Serializable {
 	private String cidade;
 	private String estado;
 
-	@OneToOne(mappedBy = "endereco", targetEntity = Usuario.class, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "endereco", targetEntity = Usuario.class, fetch = FetchType.EAGER)
 	private Usuario usuario;
 
-	@OneToOne(mappedBy = "endereco", targetEntity = Banco.class, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "endereco", targetEntity = Banco.class, fetch = FetchType.EAGER)
 	private Banco banco;
 
 	public Integer getId() {

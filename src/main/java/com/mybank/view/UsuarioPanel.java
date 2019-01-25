@@ -1,29 +1,18 @@
 package com.mybank.view;
 
-import java.util.List;
-
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
-import org.apache.wicket.markup.html.form.Radio;
-import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.Model;
 
 import com.mybank.model.Endereco;
-import com.mybank.model.Funcao;
 import com.mybank.model.Usuario;
 
 
-public class CriarContaPanel extends Panel {
+public class UsuarioPanel extends Panel {
 
 	private static final long serialVersionUID = 8991195474675368668L;
 
@@ -32,11 +21,11 @@ public class CriarContaPanel extends Panel {
 //	private Funcionario funcionario;
 //	private Endereco endereco;
 
-	public CriarContaPanel(String id) {
+	public UsuarioPanel(String id) {
 		this(id, new Usuario(), new Endereco());
 	}
 
-	public CriarContaPanel(String id, Usuario usuario, Endereco endereco) {
+	public UsuarioPanel(String id, Usuario usuario, Endereco endereco) {
 		super(id);
 		formFunc = new Form<Usuario>("formFunc", new CompoundPropertyModel<Usuario>(usuario));
 //		formEnd = new Form<Endereco>("formEnd", new CompoundPropertyModel<Endereco>(funcionario.getEndereco()));

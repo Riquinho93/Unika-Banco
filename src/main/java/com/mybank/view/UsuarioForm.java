@@ -25,9 +25,8 @@ import com.mybank.model.Endereco;
 import com.mybank.model.Usuario;
 import com.mybank.service.EnderecoService;
 import com.mybank.service.UsuarioService;
-import com.mybank.service.ClienteService;
 
-public class CriarConta extends HomePage {
+public class UsuarioForm extends HomePage {
 
 	private static final long serialVersionUID = 2474313326427632580L;
 
@@ -47,14 +46,14 @@ public class CriarConta extends HomePage {
 	private EnderecoService enderecoService;
 	private Usuario filtrar;
 
-	public CriarConta() {
+	public UsuarioForm() {
 
 		endereco = new Endereco();
 		// formEnd = new Form<>("formEnd", new
 		// CompoundPropertyModel<Endereco>(endereco));
+/*
+		funcionariosList = usuarioService.listar();*/
 
-		funcionariosList = usuarioService.listar();
-		
 		add(filtrar());
 
 //		add(formEnd);
@@ -84,7 +83,7 @@ public class CriarConta extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				CriarContaPanel funcionarioPanel = new CriarContaPanel(modalWindow.getContentId()) {
+				UsuarioPanel funcionarioPanel = new UsuarioPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
@@ -186,18 +185,18 @@ public class CriarConta extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				Usuario user = usuarioService.alterar(usuario.getId());
-				CriarContaPanel funcionarioPanel = new CriarContaPanel(modalWindow.getContentId(), user,
-						endereco) {
+				UsuarioPanel funcionarioPanel = new UsuarioPanel(modalWindow.getContentId(), user, endereco) {
 
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
-						/*Search search = new Search(Funcionario.class);
-						search.addFilterEqual("id", funcionario.getId());
-						search.addFilterEqual("funcionario", endereco.getFuncionario().getId());
-						List<Funcionario> lista = funcionarioService.search(search);
-						funcionariosList = lista;*/
-	//					enderecoService.buscarPorId(funcionario.getId());
+						/*
+						 * Search search = new Search(Funcionario.class); search.addFilterEqual("id",
+						 * funcionario.getId()); search.addFilterEqual("funcionario",
+						 * endereco.getFuncionario().getId()); List<Funcionario> lista =
+						 * funcionarioService.search(search); funcionariosList = lista;
+						 */
+						// enderecoService.buscarPorId(funcionario.getId());
 						usuarioService.SalvarOuAlterar(usuario);
 //						endereco.setFuncionario(funcionario);
 //						enderecoService.SalvarOuAlterar(endereco);
@@ -225,13 +224,13 @@ public class CriarConta extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				DeletConta deletFuncionario = new DeletConta(modalWindowDel.getContentId(), answer) {
+				DeletUsuario deletFuncionario = new DeletUsuario(modalWindowDel.getContentId(), answer) {
 
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoExcluir(AjaxRequestTarget target, Usuario funcionario) {
 						if (funcionario.isAnswer() == true) {
-	//						enderecoService.excluir(index);
+							// enderecoService.excluir(index);
 							usuarioService.excluir(index);
 							target.add(listContainer);
 						}

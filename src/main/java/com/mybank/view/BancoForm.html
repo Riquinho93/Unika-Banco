@@ -2,7 +2,52 @@
 <html>
 <body>
 	<wicket:extend>
-		<h1>Banco</h1>
+		<div class="container" style="background-color: white">
+			<h1>Banco</h1>
+			<br>
+			<div class="container-fluid">
+				<form wicket:id="formFiltrar">
+					<div class="form-row">
+						<div class="col-sm-4">
+							<label type="text">Nome</label> <input wicket:id="nome" type="text"
+								class="form-control" placeholder="Informe o nome">
+						</div>
+					</div>
+					<br /> <a wicket:id="filtrar" class="btn btn-secondary"
+						style="float: right; color: white;">Filtrar</a>
+				</form>
+				<div>
+					<a wicket:id="abrirModal" class="btn btn-success"
+						margin:-2px;
+						style="float: right;">Novo <i
+						class="fas fa-plus"></i>
+					</a><br /> <br />
+				</div>
+			</div>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Endereco</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody wicket:id="container">
+					<tr wicket:id="listView">
+						<td wicket:id="nome" class="text"></td>
+						<td wicket:id="endereco" class="text"></td>
+						<td class="text-center"><a wicket:id="alterar" class="btn btn-default"
+							rel="tooltip" title="Editar"> <i class="fas fa-pencil-alt"></i>
+						</a> <a wicket:id="excluir" class="btn btn-default modal-confirm" title="Excluir"> <i
+								class="fa fa-trash"></i>
+						</a></td>
+					</tr>
+				</tbody>
+				 <div wicket:id="pag"></div> 
+			</table>
+			 <div wicket:id="modalWindow"></div>
+			<div wicket:id="modalWindowDel"></div><br /> 
+		</div>
 	</wicket:extend>
 </body>
 </html>

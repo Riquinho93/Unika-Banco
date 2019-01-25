@@ -29,6 +29,9 @@ public class Endereco implements Serializable {
 	@OneToOne(mappedBy = "endereco", targetEntity = Usuario.class, fetch = FetchType.LAZY)
 	private Usuario usuario;
 
+	@OneToOne(mappedBy = "endereco", targetEntity = Banco.class, fetch = FetchType.LAZY)
+	private Banco banco;
+
 	public Integer getId() {
 		return id;
 	}
@@ -91,6 +94,14 @@ public class Endereco implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
 	}
 
 }

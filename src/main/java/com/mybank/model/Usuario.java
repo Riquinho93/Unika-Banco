@@ -2,14 +2,17 @@ package com.mybank.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,12 +41,15 @@ public class Usuario implements Serializable {
 	protected double renda;
 	protected String telefone;
 	protected String email;
-//	private Agencia agencia;
+	// private Agencia agencia;
 	protected Perfil perfil;
 	protected Situacao situacao;
 
-	protected Banco banco;
+	/* protected Banco banco; */
 	private String nomeBanco;
+
+	@OneToMany(mappedBy = "usuario", targetEntity = Conta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Conta> contas;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
@@ -132,14 +138,6 @@ public class Usuario implements Serializable {
 		this.perfil = perfil;
 	}
 
-	public Banco getBanco() {
-		return banco;
-	}
-
-	public void setBanco(Banco banco) {
-		this.banco = banco;
-	}
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -170,6 +168,14 @@ public class Usuario implements Serializable {
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
+	}
+
+	public List<Conta> getContas() {
+		return contas;
+	}
+
+	public void setContas(List<Conta> contas) {
+		this.contas = contas;
 	}
 
 }

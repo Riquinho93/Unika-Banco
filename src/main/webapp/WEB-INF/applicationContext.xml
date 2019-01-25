@@ -37,8 +37,8 @@
 			<list>
 				<value>com.mybank.model.Endereco</value>
 				<value>com.mybank.model.Usuario</value>
-				<!-- <value>com.mybank.model.Gerente</value> -->
 				<value>com.mybank.model.Banco</value>
+				<value>com.mybank.model.Conta</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -72,13 +72,13 @@
 		<property name="usuarioDao" ref="usuarioDao"></property>
 	</bean>
 
-	<!-- <bean id="gerenteDao" class="com.mybank.dao.GerenteDao">
+ <bean id="contaDao" class="com.mybank.dao.ContaDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="gerenteService" class="com.mybank.service.GerenteService">
-		<property name="gerenteDao" ref="gerenteDao"></property>
-	</bean> -->
+	<bean id="contaService" class="com.mybank.service.ContaService">
+		<property name="contaDao" ref="contaDao"></property>
+	</bean> 
 
 	<bean id="bancoDao" class="com.mybank.dao.BancoDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>

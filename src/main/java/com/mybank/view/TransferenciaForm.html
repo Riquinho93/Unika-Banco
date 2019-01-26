@@ -3,64 +3,36 @@
 	<wicket:extend>
 		<div class="container" style="background-color: white">
 			<h1>Realizar Transferencia</h1>
-			<br>
-			<div class="container-fluid">
-				<form>
-					<div class="form-row">
-						<div class="col-sm-4">
-							<label type="text">Banco:</label> <input type="text"
-								class="form-control" placeholder="Informe o banco">
-						</div>
+			<form wicket:id="form">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<Label class="text">Banco Destinatario: </label> <select class="form-control"></select>
 					</div>
-					<br /> <a class="btn btn-secondary"
-						style="float: right; color: white;">Filtrar</a>
-				</form>
-				<div>
-					<a class="btn btn-success"
-						margin:-2px;
-						style="float: right;">Novo <i
-						class="fas fa-plus"></i>
-					</a><br /> <br />
+					<div class="form-group col-md-6">
+						<Label class="text">Tipo Destinatario: </label> <select class="form-control"></select>
+					</div>
+					<div class="col-md-6">
+						<label class="text">Valor: *</label> <input wicket:id="valor"
+							type="number" class="form-control" placeholder="Digite o valor" />
+					</div>
+					<div class="col-md-6">
+						<label class="text">Conta Destinatario: *</label> <input
+							wicket:id="numeroConta" type="number" class="form-control"
+							placeholder="Digite o numero conta" />
+					</div>
+					<div class="col-md-6">
+						<label class="text">CPF Destinatario: *</label> <input wicket:id="cpf"
+							type="number" class="form-control" placeholder="Digite o valor" />
+					</div>
+
+					<div class="col-md-6">
+						<label class="text">Senha</label> <input wicket:id="senha"
+							class="form-control" type="password" placeholder="senha">
+					</div>
+
 				</div>
-			</div>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Banco</th>
-						<th>Tipo</th>
-						<th>Saldo</th>
-						<th>Nome Destinario</th>
-						<th>CPF</th>
-						<th>Valor</th>
-						<th>Conta Destinario</th>
-						<th>Conta Emissor</th>
-						<th>Senha</th>
-						<th>Ações</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text"></td>
-						<td class="text-center"><a class="btn btn-default"
-							rel="tooltip" title="Editar"> <i class="fas fa-pencil-alt"></i>
-						</a> <a class="btn btn-default modal-confirm" title="Excluir"> <i
-								class="fa fa-trash"></i>
-						</a></td>
-					</tr>
-				</tbody>
-				<!-- <div wicket:id="pag"></div> -->
-			</table>
-			<!-- <div wicket:id="modalWindow"></div>
-			<div wicket:id="modalWindowDel"></div> -->
-			<br />
+				<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
+			</form>
 		</div>
 
 	</wicket:extend>

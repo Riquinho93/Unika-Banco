@@ -39,6 +39,7 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	protected int cpf;
 	protected String senha;
+	protected String confirmarSenha;
 	protected double renda;
 	protected String telefone;
 	protected String email;
@@ -194,6 +195,18 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

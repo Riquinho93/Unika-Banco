@@ -1,8 +1,68 @@
 <html>
 <body>
 	<wicket:extend>
-		<h1>Realizar Transferencia</h1>
-	
+		<div class="container" style="background-color: white">
+			<h1>Realizar Transferencia</h1>
+			<br>
+			<div class="container-fluid">
+				<form>
+					<div class="form-row">
+						<div class="col-sm-4">
+							<label type="text">Banco:</label> <input type="text"
+								class="form-control" placeholder="Informe o banco">
+						</div>
+					</div>
+					<br /> <a class="btn btn-secondary"
+						style="float: right; color: white;">Filtrar</a>
+				</form>
+				<div>
+					<a class="btn btn-success"
+						margin:-2px;
+						style="float: right;">Novo <i
+						class="fas fa-plus"></i>
+					</a><br /> <br />
+				</div>
+			</div>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Banco</th>
+						<th>Tipo</th>
+						<th>Saldo</th>
+						<th>Nome Destinario</th>
+						<th>CPF</th>
+						<th>Valor</th>
+						<th>Conta Destinario</th>
+						<th>Conta Emissor</th>
+						<th>Senha</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text"></td>
+						<td class="text-center"><a class="btn btn-default"
+							rel="tooltip" title="Editar"> <i class="fas fa-pencil-alt"></i>
+						</a> <a class="btn btn-default modal-confirm" title="Excluir"> <i
+								class="fa fa-trash"></i>
+						</a></td>
+					</tr>
+				</tbody>
+				<!-- <div wicket:id="pag"></div> -->
+			</table>
+			<!-- <div wicket:id="modalWindow"></div>
+			<div wicket:id="modalWindowDel"></div> -->
+			<br />
+		</div>
+
 	</wicket:extend>
 </body>
 </html>

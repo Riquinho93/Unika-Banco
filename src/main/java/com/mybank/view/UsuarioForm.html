@@ -15,7 +15,7 @@
 
 		<div class="container" style="background-color: white">
 			<h1>Criar Usuario</h1>
-			<br >
+			<br>
 			<div class="container-fluid">
 				<form wicket:id="form2">
 					<div class="form-row">
@@ -38,19 +38,18 @@
 					<tr>
 						<th>Nome</th>
 						<th>Telefone</th>
-					<!-- 	<th>Endereco</th> -->
+						<!-- 	<th>Endereco</th> -->
 						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody wicket:id="theContainer">
 					<tr wicket:id="listView">
-						<td class="text" wicket:id="id"></td>
 						<td class="text" wicket:id="nome"></td>
 						<td class="text" wicket:id="telefone"></td>
 						<!-- <td class="text" wicket:id="endereco"></td> -->
-						<td class="text-center">
-						 <a wicket:id="alterar" class="btn btn-default" rel="tooltip"
-							title="Editar"> <i class="fas fa-pencil-alt"></i>
+						<td class="text-center"><a wicket:id="alterar"
+							class="btn btn-default" rel="tooltip" title="Editar"> <i
+								class="fas fa-pencil-alt"></i>
 						</a> <a wicket:id="excluir" class="btn btn-default modal-confirm"
 							title="Excluir"> <i class="fa fa-trash"></i>
 						</a></td>
@@ -59,7 +58,8 @@
 				<div wicket:id="pag"></div>
 			</table>
 			<div wicket:id="modalWindow"></div>
-			<div wicket:id="modalWindowDel"></div><br />
+			<div wicket:id="modalWindowDel"></div>
+			<br />
 		</div>
 	</wicket:extend>
 </body>

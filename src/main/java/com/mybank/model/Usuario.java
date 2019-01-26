@@ -38,17 +38,19 @@ public class Usuario implements Serializable {
 	protected int identidade;
 	@Column(unique = true)
 	protected int cpf;
+	protected String senha;
 	protected double renda;
 	protected String telefone;
 	protected String email;
 	// private Agencia agencia;
 	protected Perfil perfil;
 	protected Situacao situacao;
+	protected Integer numeroCartao;
 
 	/* protected Banco banco; */
 	private String nomeBanco;
 
-	@OneToMany(mappedBy = "usuario", targetEntity = Conta.class,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", targetEntity = Conta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Conta> listacontas;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -176,6 +178,22 @@ public class Usuario implements Serializable {
 
 	public void setListacontas(List<Conta> listacontas) {
 		this.listacontas = listacontas;
+	}
+
+	public Integer getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(Integer numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

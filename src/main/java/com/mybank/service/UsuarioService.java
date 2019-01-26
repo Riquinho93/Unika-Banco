@@ -48,7 +48,7 @@ public class UsuarioService implements IUsuarioService {
 	public List<Usuario> search(Search search) {
 		return usuarioDao.searchDao(search);
 	}
-
+	@Transactional(readOnly = true)
 	public Usuario alterar(Integer id) {
 		return usuarioDao.alterar(id);
 	}

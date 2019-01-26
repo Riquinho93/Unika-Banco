@@ -31,10 +31,10 @@ public class UsuarioForm extends HomePage {
 	private static final long serialVersionUID = 2474313326427632580L;
 
 	private Form<Usuario> formFunc = new Form<>("formFunc");
-//	private Form<Endereco> formEnd;
+	// private Form<Endereco> formEnd;
 	private Form<Usuario> form2;
 	private Endereco endereco;
-	private List<Usuario> funcionariosList = new ArrayList<>();
+	private List<Usuario> listaUsuarios = new ArrayList<>();
 	private PageableListView<Usuario> listView;
 	private LoadableDetachableModel<List<Usuario>> atualizarLista;
 	private WebMarkupContainer listContainer = null;
@@ -51,12 +51,12 @@ public class UsuarioForm extends HomePage {
 		endereco = new Endereco();
 		// formEnd = new Form<>("formEnd", new
 		// CompoundPropertyModel<Endereco>(endereco));
-/*
-		funcionariosList = usuarioService.listar();*/
+
+		listaUsuarios = usuarioService.listar();
 
 		add(filtrar());
 
-//		add(formEnd);
+		// add(formEnd);
 
 		// Chamando a listView
 		add(container());
@@ -83,24 +83,21 @@ public class UsuarioForm extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 
-				UsuarioPanel funcionarioPanel = new UsuarioPanel(modalWindow.getContentId()) {
+				UsuarioPanel usuarioPanel = new UsuarioPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 277997013286385910L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
-//						funcionario.setEndereco(endereco);
 						usuarioService.SalvarOuAlterar(usuario);
-//						endereco.setFuncionario(funcionario);
-//						enderecoService.SalvarOuAlterar(endereco);
-						funcionariosList.add(usuario);
+						listaUsuarios.add(usuario);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
 
 				};
-				funcionarioPanel.setOutputMarkupId(true);
-				add(funcionarioPanel);
-				modalWindow.setContent(funcionarioPanel);
+				usuarioPanel.setOutputMarkupId(true);
+				add(usuarioPanel);
+				modalWindow.setContent(usuarioPanel);
 				modalWindow.show(target);
 			};
 
@@ -119,7 +116,7 @@ public class UsuarioForm extends HomePage {
 
 			@Override
 			protected List<Usuario> load() {
-				return funcionariosList;
+				return listaUsuarios;
 			}
 		};
 
@@ -130,7 +127,6 @@ public class UsuarioForm extends HomePage {
 			@Override
 			protected void populateItem(ListItem<Usuario> item) {
 				Usuario user = item.getModelObject();
-				item.add(new Label("id", user.getId()));
 				item.add(new Label("nome", user.getNome()));
 				item.add(new Label("telefone", user.getTelefone()));
 				item.add(editando(user));
@@ -164,7 +160,7 @@ public class UsuarioForm extends HomePage {
 					search.addFilterLike("nome", "%" + filtrar.getNome() + "%");
 				}
 
-				funcionariosList = usuarioService.search(search);
+				listaUsuarios = usuarioService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}
@@ -185,21 +181,13 @@ public class UsuarioForm extends HomePage {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				Usuario user = usuarioService.alterar(usuario.getId());
-				UsuarioPanel funcionarioPanel = new UsuarioPanel(modalWindow.getContentId(), user, endereco) {
+				UsuarioPanel funcionarioPanel = new UsuarioPanel(modalWindow.getContentId(), user) {
 
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
-						/*
-						 * Search search = new Search(Funcionario.class); search.addFilterEqual("id",
-						 * funcionario.getId()); search.addFilterEqual("funcionario",
-						 * endereco.getFuncionario().getId()); List<Funcionario> lista =
-						 * funcionarioService.search(search); funcionariosList = lista;
-						 */
-						// enderecoService.buscarPorId(funcionario.getId());
+
 						usuarioService.SalvarOuAlterar(usuario);
-//						endereco.setFuncionario(funcionario);
-//						enderecoService.SalvarOuAlterar(endereco);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};

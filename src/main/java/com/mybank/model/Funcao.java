@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum Funcao {
 
-	FACCIONISTA("Faccionista"), CORTADOR("Cortador"), FUNCIONARIO("Funcionario");
+	GERENTE("Gerente"), FUNCIONARIO("Funcionario"), CLIENTE("Cliente");
 	private String descricaoFuncao;
 
 	private Funcao(String descricaoFuncao) {
@@ -14,9 +14,9 @@ public enum Funcao {
 
 	public static List<Funcao> funcoes() {
 		List<Funcao> funcao = new ArrayList<>();
-		funcao.add(CORTADOR);
-		funcao.add(FACCIONISTA);
+		funcao.add(CLIENTE);
 		funcao.add(FUNCIONARIO);
+		funcao.add(GERENTE);
 		return funcao;
 	}
 
@@ -27,7 +27,7 @@ public enum Funcao {
 	public void setDescricaoFuncao(String descricaoFuncao) {
 		this.descricaoFuncao = descricaoFuncao;
 	}
-	
+
 	public String getDescricao() {
 		return descricaoFuncao;
 	}
@@ -35,5 +35,5 @@ public enum Funcao {
 	public void setDescricao(String descricao) {
 		this.descricaoFuncao = descricao;
 	}
-	
+
 }

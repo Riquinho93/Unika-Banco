@@ -22,7 +22,7 @@ public class FuncionarioDao extends GenericDao<Funcionario, Serializable> {
 	
 //	@Transactional(readOnly = true)
 	public Funcionario alterar(Integer id) {
-		String hql = "select f from Funcionario f left join fetch f.endereco e "
+		String hql = "select f from Funcionario f "
 				+ "where f.id = :id";
 		
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);

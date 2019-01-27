@@ -47,7 +47,8 @@ public class FuncionarioService implements IFuncionarioService {
 	public List<Funcionario> search(Search search) {
 		return funcionarioDao.searchDao(search);
 	}
-
+	
+	@Transactional
 	public Funcionario alterar(Integer id) {
 		return funcionarioDao.alterar(id);
 	}

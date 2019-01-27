@@ -33,7 +33,7 @@ public class FuncionarioForm extends HomePage {
 	private Form<Funcionario> form = new Form<Funcionario>("form");
 	private Funcionario filtrar;
 	private Form<Funcionario> formFiltrar;
-	private List<Funcionario> listaClientes = new LinkedList<>();
+	private List<Funcionario> listaFuncionarios = new LinkedList<>();
 	private PageableListView<Funcionario> listView;
 	private LoadableDetachableModel<List<Funcionario>> atualizarLista;
 	private WebMarkupContainer listContainer = null;
@@ -46,7 +46,9 @@ public class FuncionarioForm extends HomePage {
 
 		add(container());
 		add(filtrar());
-
+		
+		listaFuncionarios = funcionarioService.listar();
+		
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
 		modalWindow.setInitialHeight(400);
@@ -75,7 +77,7 @@ public class FuncionarioForm extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario cliente) {
 						funcionarioService.SalvarOuAlterar(cliente);
-						listaClientes.add(cliente);
+						listaFuncionarios.add(cliente);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -98,7 +100,7 @@ public class FuncionarioForm extends HomePage {
 
 			@Override
 			protected List<Funcionario> load() {
-				return listaClientes;
+				return listaFuncionarios;
 			}
 		};
 
@@ -110,7 +112,7 @@ public class FuncionarioForm extends HomePage {
 			protected void populateItem(ListItem<Funcionario> item) {
 				Funcionario user = item.getModelObject();
 				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("perfil", user.getPerfil()));
+				item.add(new Label("funcao", user.getFuncao()));
 				item.add(remover(user.getId()));
 				item.add(editando(user));
 			}
@@ -141,7 +143,7 @@ public class FuncionarioForm extends HomePage {
 					search.addFilterLike("numeroConta", "%" + filtrar.getNome() + "%");
 				}
 
-				listaClientes = funcionarioService.search(search);
+				listaFuncionarios = funcionarioService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}

@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	protected String telefone;
 	protected String email;
 	// private Agencia agencia;
-	protected Perfil perfil;
+	protected Funcao funcao;
 	protected Situacao situacao;
 	protected Integer numeroCartao;
 
@@ -133,12 +133,12 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Funcao getFuncao() {
+		return funcao;
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setFuncao(Funcao funcao) {
+		this.funcao = funcao;
 	}
 
 	public Endereco getEndereco() {

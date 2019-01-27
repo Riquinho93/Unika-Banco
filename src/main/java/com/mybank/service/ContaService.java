@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.dao.ContaDao;
+import com.mybank.model.Banco;
 import com.mybank.model.Conta;
+import com.mybank.model.Usuario;
 
 @Service
 public class ContaService implements IContaService {
@@ -42,12 +44,22 @@ public class ContaService implements IContaService {
 		return contaDao.listar();
 	}
 
+	@Transactional(readOnly = true)
+	public List<Usuario> listarUsuarios() {
+		return contaDao.listarUsuarios();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Banco> listarBancos() {
+		return contaDao.listarBancos();
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Conta> search(Search search) {
 		return contaDao.searchDao(search);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Conta alterar(Integer id) {
 		return contaDao.alterar(id);

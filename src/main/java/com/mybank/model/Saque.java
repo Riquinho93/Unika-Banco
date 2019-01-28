@@ -7,10 +7,8 @@ public class Saque implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private int numeroConta;
 	private double valor;
 	private String senha;
-	private Banco banco;
 
 	public Integer getId() {
 		return id;
@@ -18,14 +16,6 @@ public class Saque implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public int getNumeroConta() {
-		return numeroConta;
-	}
-
-	public void setNumeroConta(int numeroConta) {
-		this.numeroConta = numeroConta;
 	}
 
 	public double getValor() {
@@ -42,14 +32,6 @@ public class Saque implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Banco getBanco() {
-		return banco;
-	}
-
-	public void setBanco(Banco banco) {
-		this.banco = banco;
 	}
 
 }

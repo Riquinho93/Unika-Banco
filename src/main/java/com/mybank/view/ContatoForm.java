@@ -17,42 +17,35 @@ import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Banco;
-import com.mybank.model.Funcionario;
-import com.mybank.model.Usuario;
-import com.mybank.service.FuncionarioService;
+import com.mybank.model.Contato;
 
-public class FuncionarioForm extends HomePage {
+public class ContatoForm extends HomePage {
 
 	private static final long serialVersionUID = 1L;
 
-	private Form<Funcionario> form = new Form<Funcionario>("form");
-	private Funcionario filtrar;
-	private Form<Funcionario> formFiltrar;
-	private List<Funcionario> listaFuncionarios = new LinkedList<>();
-	private PageableListView<Funcionario> listView;
-	private LoadableDetachableModel<List<Funcionario>> atualizarLista;
+	private Form<Contato> form = new Form<Contato>("form");
+	private Contato filtrar;
+	private Form<Contato> formFiltrar;
+	private List<Contato> listaContatos = new LinkedList<>();
+	private PageableListView<Contato> listView;
+	private LoadableDetachableModel<List<Contato>> atualizarLista;
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
-	@SpringBean(name = "funcionarioService")
-	private FuncionarioService funcionarioService;
 
-	public FuncionarioForm() {
+	public ContatoForm() {
 
 		add(container());
 		add(filtrar());
-		
-		listaFuncionarios = funcionarioService.listar();
-		
+
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(400);
-		modalWindow.setInitialWidth(700);
+		modalWindow.setInitialHeight(350);
+		modalWindow.setInitialWidth(500);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 
@@ -71,20 +64,19 @@ public class FuncionarioForm extends HomePage {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				FuncionarioPanel funcionarioPanel = new FuncionarioPanel(modalWindow.getContentId()) {
+				ContatoPanel contatoPanel = new ContatoPanel(modalWindow.getContentId()) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario cliente) {
-						funcionarioService.SalvarOuAlterar(cliente);
-						listaFuncionarios.add(cliente);
+					public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
+						listaContatos.add(contato);
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
 				};
-				funcionarioPanel.setOutputMarkupId(true);
-				add(funcionarioPanel);
-				modalWindow.setContent(funcionarioPanel);
+				contatoPanel.setOutputMarkupId(true);
+				add(contatoPanel);
+				modalWindow.setContent(contatoPanel);
 				modalWindow.show(target);
 			}
 		});
@@ -94,27 +86,26 @@ public class FuncionarioForm extends HomePage {
 	private WebMarkupContainer container() {
 		listContainer = new WebMarkupContainer("container");
 		listContainer.setOutputMarkupId(true);
-		atualizarLista = new LoadableDetachableModel<List<Funcionario>>() {
+		atualizarLista = new LoadableDetachableModel<List<Contato>>() {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected List<Funcionario> load() {
-				return listaFuncionarios;
+			protected List<Contato> load() {
+				return listaContatos;
 			}
 		};
 
-		listView = new PageableListView<Funcionario>("listView", atualizarLista, 5) {
+		listView = new PageableListView<Contato>("listView", atualizarLista, 5) {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			protected void populateItem(ListItem<Funcionario> item) {
-				Funcionario user = item.getModelObject();
-				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("funcao", user.getFuncao()));
+			protected void populateItem(ListItem<Contato> item) {
+				Contato user = item.getModelObject();
+				item.add(new Label("nome", user.getUsuario().getNome()));
+				item.add(new Label("numeroConta", user.getNumeroConta()));
 				item.add(remover(user.getId()));
-				item.add(editando(user));
 			}
 		};
 		add(listView);
@@ -125,10 +116,10 @@ public class FuncionarioForm extends HomePage {
 		return listContainer;
 	}
 
-	public Form<Funcionario> filtrar() {
-		filtrar = new Funcionario();
-		formFiltrar = new Form<Funcionario>("formFiltrar", new CompoundPropertyModel<Funcionario>(filtrar));
-		TextField<String> nome = new TextField<>("nome");
+	public Form<Contato> filtrar() {
+		filtrar = new Contato();
+		formFiltrar = new Form<Contato>("formFiltrar", new CompoundPropertyModel<Contato>(filtrar));
+		TextField<String> nome = new TextField<String>("usuario.nome");
 		nome.setOutputMarkupId(true);
 		formFiltrar.add(nome);
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", formFiltrar) {
@@ -137,13 +128,13 @@ public class FuncionarioForm extends HomePage {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				Search search = new Search(Funcionario.class);
+				Search search = new Search(Contato.class);
 
-				if (filtrar.getNome() != null) {
-					search.addFilterLike("nome", "%" + filtrar.getNome() + "%");
+				if (filtrar.getUsuario().getNome() != null) {
+					search.addFilterLike("usuario.nome", "%" + filtrar.getUsuario().getNome() + "%");
 				}
 
-				listaFuncionarios = funcionarioService.search(search);
+//				listaContatos = contatoService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}
@@ -155,60 +146,31 @@ public class FuncionarioForm extends HomePage {
 
 	}
 
-	// Editando
-	AjaxLink<Usuario> editando(Funcionario cliente) {
-		AjaxLink<Usuario> editar = new AjaxLink<Usuario>("alterar") {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-				Funcionario user = funcionarioService.alterar(cliente.getId());
-				FuncionarioPanel clientePanel = new FuncionarioPanel(modalWindow.getContentId(), user) {
-
-					private static final long serialVersionUID = 1L;
-
-					public void executarAoSalvar(AjaxRequestTarget target, Funcionario cliente) {
-						funcionarioService.SalvarOuAlterar(cliente);
-						target.add(listContainer);
-						modalWindow.close(target);
-					};
-				};
-				clientePanel.setOutputMarkupId(true);
-				modalWindow.setContent(clientePanel);
-				modalWindow.show(target);
-			}
-		};
-		editar.setOutputMarkupId(true);
-		form.add(editar);
-		return editar;
-	}
-
 	// Removendo
 	public Component remover(final Integer index) {
 
 		AjaxLink<Banco> button = new AjaxLink<Banco>("excluir") {
-			Funcionario answer = new Funcionario();
+			Contato answer = new Contato();
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				DeletFuncionario deletCliente = new DeletFuncionario(modalWindowDel.getContentId(), answer) {
+				DeletContato deletConta = new DeletContato(modalWindowDel.getContentId(), answer) {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoExcluir(AjaxRequestTarget target, Funcionario cliente) {
-						if (cliente.isAnswer() == true) {
+					public void executarAoExcluir(AjaxRequestTarget target, Contato contato) {
+						if (contato.isAnswer() == true) {
 							// enderecoService.excluir(index);
-							funcionarioService.excluir(index);
+//								contatoService.excluir(index);
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);
 					};
 				};
-				deletCliente.setOutputMarkupId(true);
-				modalWindowDel.setContent(deletCliente);
+				deletConta.setOutputMarkupId(true);
+				modalWindowDel.setContent(deletConta);
 				modalWindowDel.show(target);
 			}
 		};

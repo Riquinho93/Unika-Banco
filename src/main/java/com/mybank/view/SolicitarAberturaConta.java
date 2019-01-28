@@ -36,8 +36,6 @@ public class SolicitarAberturaConta extends WebPage {
 		TextField<String> nome = new TextField<>("nome");
 		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
-		PasswordTextField senha = new PasswordTextField("senha");
-		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
 		NumberTextField<Double> renda = new NumberTextField<>("renda");
 		TextField<String> telefone = new TextField<>("telefone");
 		TextField<String> email = new TextField<>("email");
@@ -52,8 +50,6 @@ public class SolicitarAberturaConta extends WebPage {
 		nome.setOutputMarkupId(true);
 		identidade.setOutputMarkupId(true);
 		cpf.setOutputMarkupId(true);
-		senha.setOutputMarkupId(true);
-		confirmarSenha.setOutputMarkupId(true);
 		renda.setOutputMarkupId(true);
 		telefone.setOutputMarkupId(true);
 		email.setOutputMarkupId(true);
@@ -65,7 +61,7 @@ public class SolicitarAberturaConta extends WebPage {
 		numero.setOutputMarkupId(true);
 		cep.setOutputMarkupId(true);
 
-		form.add(nome, identidade, cpf, senha, confirmarSenha, renda, telefone, email, nomeBanco, logradouro, bairro,
+		form.add(nome, identidade, cpf, renda, telefone, email, nomeBanco, logradouro, bairro,
 				cidade, estado, numero, cep);
 
 		RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
@@ -106,7 +102,7 @@ public class SolicitarAberturaConta extends WebPage {
 				super.onSubmit(target, form);
 				Usuario user = (Usuario) form.getModelObject();
 				usuarioService.SalvarOuAlterar(user);
-				target.add(nome, identidade, cpf, senha, confirmarSenha, renda, telefone, email, cep, logradouro,
+				target.add(nome, identidade, cpf, renda, telefone, email, cep, logradouro,
 						numero, bairro, cidade, estado);
 
 				setResponsePage(Login.class);

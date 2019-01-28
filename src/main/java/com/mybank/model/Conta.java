@@ -23,7 +23,10 @@ public class Conta implements Serializable {
 	protected Integer id;
 	protected double saldo;
 	@Column(unique = true)
-	protected int numeroConta;
+	protected Integer numeroConta;
+
+	private String senha;
+	private String confirmarSenha;
 
 	@ManyToOne
 	@JoinColumn(name = "banco")
@@ -33,7 +36,7 @@ public class Conta implements Serializable {
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
-	private Perfil perfil;
+	private Situacao situacao;
 
 	private TipoConta tipoConta;
 
@@ -56,11 +59,11 @@ public class Conta implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public int getNumeroConta() {
+	public Integer getNumeroConta() {
 		return numeroConta;
 	}
 
-	public void setNumeroConta(int numeroConta) {
+	public void setNumeroConta(Integer numeroConta) {
 		this.numeroConta = numeroConta;
 	}
 
@@ -80,12 +83,12 @@ public class Conta implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Situacao getSituacao() {
+		return situacao;
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 
 	public boolean isAnswer() {
@@ -102,6 +105,22 @@ public class Conta implements Serializable {
 
 	public void setTipoConta(TipoConta tipoConta) {
 		this.tipoConta = tipoConta;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 
 }

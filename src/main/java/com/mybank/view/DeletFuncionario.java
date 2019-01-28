@@ -20,7 +20,7 @@ public class DeletFuncionario extends Panel{
 		this.user = answer;
 		Form<Funcionario> form = new Form<>("resposta");
 
-		add(new Label("msg", "Deseja realmente excluir este Banco?"));
+		add(new Label("msg", "Deseja realmente excluir este Funcionario?"));
 
 		// Se a resposta == sim
 		AjaxButton yesButton = new AjaxButton("sim") {

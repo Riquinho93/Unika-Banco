@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.Radio;
 import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
@@ -37,11 +38,17 @@ public class FuncionarioPanel extends Panel {
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");
+		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
+		PasswordTextField senha = new PasswordTextField("senha");
+		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
 
 		nome.setOutputMarkupId(true);
 		telefone.setOutputMarkupId(true);
+		identidade.setOutputMarkupId(true);
 		cpf.setOutputMarkupId(true);
+		senha.setOutputMarkupId(true);
+		confirmarSenha.setOutputMarkupId(true);
 		
 		RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
 		radioGroupAtivo.setRequired(true);
@@ -82,13 +89,13 @@ public class FuncionarioPanel extends Panel {
 				super.onSubmit(target, form);
 
 				executarAoSalvar(target, cliente);
-				target.add(nome, telefone, cpf);
+				target.add(nome, telefone, cpf, identidade, senha, confirmarSenha);
 			}
 		};
 
 		ajaxButton.setOutputMarkupId(true);
 		form.add(ajaxButton, funcoes, situacoes);
-		form.add(nome, telefone, cpf);
+		form.add(nome, telefone, cpf, identidade, senha, confirmarSenha);
 		add(form);
 	}
 

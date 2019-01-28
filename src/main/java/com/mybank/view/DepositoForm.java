@@ -7,10 +7,13 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.mybank.HomePage;
 import com.mybank.model.Deposito;
+import com.mybank.service.ContaService;
 
 public class DepositoForm extends HomePage {
 
@@ -18,12 +21,14 @@ public class DepositoForm extends HomePage {
 
 	private Form<Deposito> formFiltrar;
 	private List<Deposito> listaDepositos = new LinkedList<>();
+	@SpringBean(name = "contaService")
+	private ContaService contaService;
 
 	public DepositoForm() {
 		Deposito deposito = new Deposito();
 		Form<Deposito> form = new Form<Deposito>("form", new CompoundPropertyModel<Deposito>(deposito));
 
-		NumberTextField<Integer> numeroConta = new NumberTextField<>("numeroConta");
+		TextField<Integer> numeroConta = new TextField<>("numeroConta");
 		NumberTextField<Double> valor = new NumberTextField<>("valor");
 
 		numeroConta.setOutputMarkupId(true);
@@ -36,7 +41,9 @@ public class DepositoForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-
+				int numConta = numeroConta.getConvertedInput();
+				Double valorConta = valor.getConvertedInput();
+				contaService.depositar(numConta, valorConta);
 				target.add(numeroConta, valor);
 			}
 		};

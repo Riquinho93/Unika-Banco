@@ -5,11 +5,16 @@
 			<h1>Realizar Transferencia</h1>
 			<form wicket:id="form">
 				<div class="row">
+					<div class="form-group col-md-4">
+						<Label class="text">Contato: </label> <select class="form-control"></select>
+					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
-						<Label class="text">Banco Destinatario: </label> <select class="form-control"></select>
+						<Label class="text">Banco Destinatario: </label> <select wicket:id="banco" class="form-control"></select>
 					</div>
 					<div class="form-group col-md-6">
-						<Label class="text">Tipo Destinatario: </label> <select class="form-control"></select>
+						<Label class="text">Tipo Destinatario: </label> <select wicket:id="tipoConta" class="form-control"></select>
 					</div>
 					<div class="col-md-6">
 						<label class="text">Valor: *</label> <input wicket:id="valor"

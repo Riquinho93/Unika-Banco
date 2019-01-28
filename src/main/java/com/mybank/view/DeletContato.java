@@ -6,19 +6,25 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.mybank.model.Conta;
+import com.mybank.model.Contato;
 
-public class DeletConta extends Panel {
+public class DeletContato extends Panel {
 
 	private static final long serialVersionUID = 1L;
-	private Conta user = new Conta();
+	
+	private Contato user = new Contato();
 
-	public DeletConta(String id, final Conta answer) {
+	public DeletContato(String id) {
+		this(id, new Contato());
+	}
+
+	public DeletContato(String id, Contato answer) {
 		super(id);
+		
 		this.user = answer;
-		Form<Conta> form = new Form<>("resposta");
+		Form<Contato> form = new Form<>("resposta");
 
-		add(new Label("msg", "Deseja realmente excluir este Conta?"));
+		add(new Label("msg", "Deseja realmente excluir este Contato?"));
 
 		// Se a resposta == sim
 		AjaxButton yesButton = new AjaxButton("sim") {
@@ -57,9 +63,10 @@ public class DeletConta extends Panel {
 		form.add(naoButton);
 
 	}
-
-	public void executarAoExcluir(AjaxRequestTarget target, Conta conta) {
+	
+	public void executarAoExcluir(AjaxRequestTarget target, Contato contato) {
 
 	}
+
 
 }

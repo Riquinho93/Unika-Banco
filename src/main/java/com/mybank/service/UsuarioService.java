@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.dao.UsuarioDao;
+import com.mybank.model.Conta;
 import com.mybank.model.Funcionario;
 import com.mybank.model.Usuario;
 
@@ -48,6 +49,7 @@ public class UsuarioService implements IUsuarioService {
 	public List<Usuario> search(Search search) {
 		return usuarioDao.searchDao(search);
 	}
+
 	@Transactional(readOnly = true)
 	public Usuario alterar(Integer id) {
 		return usuarioDao.alterar(id);

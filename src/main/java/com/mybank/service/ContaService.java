@@ -65,4 +65,50 @@ public class ContaService implements IContaService {
 		return contaDao.alterar(id);
 	}
 
+	public void depositar(Integer numeroConta, double valor) {
+
+		// IMPORTANTE
+		// Tem uma taxa na mesma quantia do Santander e Itau de R$ 1,90
+		// OBS:Mesmo banco não tem taxa
+
+		Search search = new Search(Conta.class);
+		search.addFilterEqual("numeroConta", numeroConta);
+
+		List<Conta> lista = search(search);
+
+		if (lista != null && !lista.isEmpty()) {
+			Conta conta = lista.get(0);
+			double total = conta.getSaldo() + valor;
+			conta.setSaldo(total);
+			SalvarOuAlterar(conta);
+		} else {
+			System.out.println("Erro na ContaService!!!");
+		}
+
+	}
+
+	public void saque(Conta conta, double valor, String senha) {
+
+		// IMPORTANTE
+		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2,12
+
+		if (senha.equals(conta.getSenha())) {
+			if (conta.getSaldo() >= valor) {
+				conta.setSaldo(conta.getSaldo() - valor);
+				SalvarOuAlterar(conta);
+			} else {
+				System.out.println("Saldo Infuficente!!!");
+			}
+		} else {
+			System.out.println("Errro Saque!!!");
+		}
+
+	}
+
+	public void transferir(Conta conta, Banco banco) {
+		// IMPORTANTE
+		// Tem uma taxa na mesma quantia do Banco Santader de R$17,40 por evento.
+
+	}
+
 }

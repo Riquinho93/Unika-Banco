@@ -9,6 +9,8 @@ import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -19,6 +21,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.mybank.model.Banco;
 import com.mybank.model.Conta;
+import com.mybank.model.Situacao;
 import com.mybank.model.TipoConta;
 import com.mybank.model.Usuario;
 import com.mybank.service.BancoService;
@@ -54,11 +57,26 @@ public class ContaPanel extends Panel {
 
 		Form<Conta> form = new Form<Conta>("form", new CompoundPropertyModel<Conta>(conta));
 
-		NumberTextField<Integer> numeroConta = new NumberTextField<>("numeroConta");
+		TextField<Integer> numeroConta = new TextField<Integer>("numeroConta");
+		PasswordTextField senha = new PasswordTextField("senha");
+		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
 		// NumberTextField<Double> limite = new NumberTextField<>("limite");
 
 		numeroConta.setOutputMarkupId(true);
+		senha.setOutputMarkupId(true);
+		confirmarSenha.setOutputMarkupId(true);
 		// limite.setOutputMarkupId(true).setVisible(false);
+		
+		 //Situacao
+		  ChoiceRenderer<Situacao> renderer2 = new ChoiceRenderer<Situacao>("descricao");
+		  IModel<List<Situacao>> model2 = new LoadableDetachableModel<List<Situacao>>() {
+		  
+		  private static final long serialVersionUID = 1L;
+		  
+		  @Override protected List<Situacao> load() { return Situacao.situacao(); } };
+		  
+		  DropDownChoice<Situacao> situacoes = new DropDownChoice<>("situacao", model2,
+		  renderer2);
 
 		// Select usuarios
 		usuario = new Usuario();
@@ -104,12 +122,17 @@ public class ContaPanel extends Panel {
 				Banco banco = bancoService.buscarPorId(conta.getBanco().getId());
 				banco.setListaContas(listaContas);
 				bancoService.SalvarOuAlterar(banco);
-				target.add(numeroConta);
+				listaContas = new ArrayList<>();
+				form.clearInput();
+				form.modelChanged();
+				form.setDefaultModelObject(conta);
+				target.add(form);
+				target.add(numeroConta, senha, confirmarSenha);
 			}
 		};
 		ajaxButton.setOutputMarkupId(true);
-		form.add(ajaxButton, tipos, usuarios, bancos);
-		form.add(numeroConta);
+		form.add(ajaxButton, tipos, usuarios, bancos, situacoes);
+		form.add(numeroConta, senha, confirmarSenha);
 		add(form);
 	}
 

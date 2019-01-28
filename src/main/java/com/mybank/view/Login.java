@@ -14,18 +14,18 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
-import com.mybank.model.Endereco;
+import com.mybank.model.Conta;
 import com.mybank.service.AlertFeedback;
-import com.mybank.service.EnderecoService;
+import com.mybank.service.ContaService;
 
 public class Login extends WebPage {
 
 	private static final long serialVersionUID = -2850628051987758424L;
 
-	private Form<Endereco> formularioLogin;
-	private Endereco filtrarUsuario;
-	@SpringBean(name = "enderecoService")
-	private EnderecoService enderecoService;
+	private Form<Conta> formularioLogin;
+	private Conta filtrarUsuario;
+	@SpringBean(name = "contaService")
+	private ContaService contaService;
 
 	public Login() {
 
@@ -33,36 +33,36 @@ public class Login extends WebPage {
 
 		add(aberturaConta());
 
-		filtrarUsuario = new Endereco();
-		final TextField<String> estado = new TextField<String>("estado");
-		final PasswordTextField numero = new PasswordTextField("numero");
-		estado.setRequired(true);
-		numero.setRequired(true);
-		estado.setOutputMarkupId(true);
-		numero.setOutputMarkupId(true);
+		filtrarUsuario = new Conta();
+		final TextField<String> numeroConta = new TextField<String>("numeroConta");
+		final PasswordTextField senha = new PasswordTextField("senha");
+		numeroConta.setRequired(true);
+		senha.setRequired(true);
+		numeroConta.setOutputMarkupId(true);
+		senha.setOutputMarkupId(true);
 
 		final Label errorLogin = new Label("errorLogin", Model.of("Login Incorreto!!"));
 		errorLogin.setOutputMarkupId(true).setVisible(false);
 
-		formularioLogin = new Form<Endereco>("formularioLogin", new CompoundPropertyModel<>(filtrarUsuario)) {
+		formularioLogin = new Form<Conta>("formularioLogin", new CompoundPropertyModel<>(filtrarUsuario)) {
 
 			private static final long serialVersionUID = -5095534494215850537L;
 
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-				Search search = new Search(Endereco.class);
+				Search search = new Search(Conta.class);
 
-				search.addFilterEqual("estado", estado.getModelObject());
-				search.addFilterEqual("numero", numero.getModelObject());
+				search.addFilterEqual("numeroConta", numeroConta.getModelObject());
+				search.addFilterEqual("senha", senha.getModelObject());
 
-				List<Endereco> lista = enderecoService.search(search);
+				List<Conta> lista = contaService.search(search);
 
 				if (lista != null && !lista.isEmpty()) {
-
+					Conta conta = lista.get(0);
 					alertFeedback.success("Login com sucesso!!");
 					getSession().setAttribute("userName", lista.get(0));
-					setResponsePage(TelaPrincipal.class);
+					setResponsePage(new TelaPrincipal(conta));
 				} else {
 
 					alertFeedback.error("Login Incorreto");
@@ -74,7 +74,7 @@ public class Login extends WebPage {
 
 		};
 		add(alertFeedback, formularioLogin);
-		formularioLogin.add(estado, numero).setOutputMarkupId(true);
+		formularioLogin.add(numeroConta, senha).setOutputMarkupId(true);
 	}
 
 	private AjaxLink<SolicitarAberturaConta> aberturaConta() {

@@ -29,7 +29,7 @@ public class Banco implements Serializable {
 	private String nome;
 
 	@OneToMany(mappedBy = "banco", targetEntity = Conta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Conta> contas;
+	private List<Conta> listaContas;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
@@ -56,12 +56,12 @@ public class Banco implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Conta> getContas() {
-		return contas;
+	public List<Conta> getListaContas() {
+		return listaContas;
 	}
 
-	public void setContas(List<Conta> contas) {
-		this.contas = contas;
+	public void setListaContas(List<Conta> listaContas) {
+		this.listaContas = listaContas;
 	}
 
 	public Endereco getEndereco() {

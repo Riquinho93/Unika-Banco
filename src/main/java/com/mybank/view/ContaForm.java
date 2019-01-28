@@ -1,5 +1,6 @@
 package com.mybank.view;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,7 +26,9 @@ import com.mybank.HomePage;
 import com.mybank.model.Banco;
 import com.mybank.model.Conta;
 import com.mybank.model.Usuario;
+import com.mybank.service.BancoService;
 import com.mybank.service.ContaService;
+import com.mybank.service.UsuarioService;
 
 public class ContaForm extends HomePage {
 
@@ -47,6 +50,8 @@ public class ContaForm extends HomePage {
 
 		add(container());
 		add(filtrar());
+
+		listaContas = contaService.listar();
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal

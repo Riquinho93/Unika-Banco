@@ -102,7 +102,7 @@ public class UsuarioPanel extends Panel {
 		data.setOutputMarkupId(true);
 		formFunc.add(data);
 
-		
+		//Funcao
 		  ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
 		  IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
 		  

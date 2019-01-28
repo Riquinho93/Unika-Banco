@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name ="conta")
+@Table(name = "conta")
 public class Conta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +34,8 @@ public class Conta implements Serializable {
 	private Usuario usuario;
 
 	private Perfil perfil;
+
+	private TipoConta tipoConta;
 
 	@Transient
 	protected boolean answer;
@@ -92,6 +94,14 @@ public class Conta implements Serializable {
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	public TipoConta getTipoConta() {
+		return tipoConta;
+	}
+
+	public void setTipoConta(TipoConta tipoConta) {
+		this.tipoConta = tipoConta;
 	}
 
 }

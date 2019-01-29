@@ -71,8 +71,8 @@ public class UsuarioForm extends HomePage {
 		// Modal Window do delete
 		modalWindowDel = new ModalWindow("modalWindowDel");
 		// Tamanho
-		modalWindowDel.setInitialHeight(200);
-		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setInitialHeight(250);
+		modalWindowDel.setInitialWidth(350);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
 		// Criando o botao para o Modal
@@ -188,6 +188,7 @@ public class UsuarioForm extends HomePage {
 					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 
 						usuarioService.SalvarOuAlterar(usuario);
+						listaUsuarios = usuarioService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -220,6 +221,7 @@ public class UsuarioForm extends HomePage {
 						if (funcionario.isAnswer() == true) {
 							// enderecoService.excluir(index);
 							usuarioService.excluir(index);
+							listaUsuarios = usuarioService.listar();
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

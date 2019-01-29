@@ -40,6 +40,10 @@
 				<value>com.mybank.model.Banco</value>
 				<value>com.mybank.model.Conta</value>
 				<value>com.mybank.model.Funcionario</value>
+				<value>com.mybank.model.Deposito</value>
+				<value>com.mybank.model.Saque</value>
+				<value>com.mybank.model.Transferencia</value>
+				<value>com.mybank.model.Contato</value>
 			</list>
 		</property>
 		<!-- configurações para o hibernate properties -->
@@ -95,6 +99,14 @@
 
 	<bean id="contaService" class="com.mybank.service.ContaService">
 		<property name="contaDao" ref="contaDao"></property>
+	</bean>
+	
+	<bean id="contatoDao" class="com.mybank.dao.ContatoDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="contatoService" class="com.mybank.service.ContatoService">
+		<property name="contatoDao" ref="contatoDao"></property>
 	</bean>
 
 

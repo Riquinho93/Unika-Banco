@@ -57,7 +57,7 @@ public class ContaPanel extends Panel {
 
 		Form<Conta> form = new Form<Conta>("form", new CompoundPropertyModel<Conta>(conta));
 
-		TextField<Integer> numeroConta = new TextField<Integer>("numeroConta");
+		NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
 		PasswordTextField senha = new PasswordTextField("senha");
 		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
 		// NumberTextField<Double> limite = new NumberTextField<>("limite");

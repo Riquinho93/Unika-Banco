@@ -35,6 +35,12 @@ public class Banco implements Serializable {
 	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 
+	@OneToMany(mappedBy = "banco", targetEntity = Deposito.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Deposito> listaDeposito;
+
+	@OneToMany(mappedBy = "banco", targetEntity = Transferencia.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Transferencia> listaTransferencia;
+
 	@Transient
 	protected boolean answer;
 
@@ -78,6 +84,22 @@ public class Banco implements Serializable {
 
 	public void setAnswer(boolean answer) {
 		this.answer = answer;
+	}
+
+	public List<Deposito> getListaDeposito() {
+		return listaDeposito;
+	}
+
+	public void setListaDeposito(List<Deposito> listaDeposito) {
+		this.listaDeposito = listaDeposito;
+	}
+
+	public List<Transferencia> getListaTransferencia() {
+		return listaTransferencia;
+	}
+
+	public void setListaTransferencia(List<Transferencia> listaTransferencia) {
+		this.listaTransferencia = listaTransferencia;
 	}
 
 }

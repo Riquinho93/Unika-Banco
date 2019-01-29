@@ -40,6 +40,7 @@ public class FuncionarioPanel extends Panel {
 		TextField<String> telefone = new TextField<>("telefone");
 		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
+		TextField<Integer> numeroConta = new TextField<Integer>("numeroConta");
 		PasswordTextField senha = new PasswordTextField("senha");
 		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
 
@@ -47,9 +48,10 @@ public class FuncionarioPanel extends Panel {
 		telefone.setOutputMarkupId(true);
 		identidade.setOutputMarkupId(true);
 		cpf.setOutputMarkupId(true);
+		numeroConta.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
 		confirmarSenha.setOutputMarkupId(true);
-		
+
 		RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
 		radioGroupAtivo.setRequired(true);
 		radioGroupAtivo
@@ -57,28 +59,34 @@ public class FuncionarioPanel extends Panel {
 		radioGroupAtivo
 				.add(new Radio<Boolean>("nao", new Model<Boolean>(false)).add(new AttributeModifier("id", "nao")));
 		form.add(radioGroupAtivo);
-		
-		//Funcao
+
+		// Funcao
 		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
-		  IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
-		  
-		  private static final long serialVersionUID = 1L;
-		  
-		  @Override protected List<Funcao> load() { return Funcao.funcoes(); } };
-		  
-		  DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model,
-		  renderer);
-		  
-		  //Situacao
-		  ChoiceRenderer<Situacao> renderer2 = new ChoiceRenderer<Situacao>("descricao");
-		  IModel<List<Situacao>> model2 = new LoadableDetachableModel<List<Situacao>>() {
-		  
-		  private static final long serialVersionUID = 1L;
-		  
-		  @Override protected List<Situacao> load() { return Situacao.situacao(); } };
-		  
-		  DropDownChoice<Situacao> situacoes = new DropDownChoice<>("situacao", model2,
-		  renderer2);
+		IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<Funcao> load() {
+				return Funcao.funcoes();
+			}
+		};
+
+		DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model, renderer);
+
+		// Situacao
+		ChoiceRenderer<Situacao> renderer2 = new ChoiceRenderer<Situacao>("descricao");
+		IModel<List<Situacao>> model2 = new LoadableDetachableModel<List<Situacao>>() {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<Situacao> load() {
+				return Situacao.situacao();
+			}
+		};
+
+		DropDownChoice<Situacao> situacoes = new DropDownChoice<>("situacao", model2, renderer2);
 
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
@@ -89,13 +97,13 @@ public class FuncionarioPanel extends Panel {
 				super.onSubmit(target, form);
 
 				executarAoSalvar(target, cliente);
-				target.add(nome, telefone, cpf, identidade, senha, confirmarSenha);
+				target.add(nome, telefone, cpf, identidade, numeroConta, senha, confirmarSenha);
 			}
 		};
 
 		ajaxButton.setOutputMarkupId(true);
 		form.add(ajaxButton, funcoes, situacoes);
-		form.add(nome, telefone, cpf, identidade, senha, confirmarSenha);
+		form.add(nome, telefone, cpf, identidade, numeroConta, senha, confirmarSenha);
 		add(form);
 	}
 

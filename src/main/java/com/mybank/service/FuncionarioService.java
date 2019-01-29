@@ -20,8 +20,8 @@ public class FuncionarioService implements IFuncionarioService {
 
 	@Override
 	@Transactional
-	public void SalvarOuAlterar(Funcionario cliente) {
-		funcionarioDao.SalvarOuAlterar(cliente);
+	public void SalvarOuAlterar(Funcionario funcionario) {
+		funcionarioDao.SalvarOuAlterar(funcionario);
 	}
 
 	@Override

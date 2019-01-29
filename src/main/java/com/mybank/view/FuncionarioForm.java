@@ -59,8 +59,8 @@ public class FuncionarioForm extends HomePage {
 		// Modal Window do delete
 		modalWindowDel = new ModalWindow("modalWindowDel");
 		// Tamanho
-		modalWindowDel.setInitialHeight(200);
-		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setInitialHeight(250);
+		modalWindowDel.setInitialWidth(350);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
 
@@ -170,6 +170,7 @@ public class FuncionarioForm extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Funcionario cliente) {
 						funcionarioService.SalvarOuAlterar(cliente);
+						listaFuncionarios = funcionarioService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -202,6 +203,7 @@ public class FuncionarioForm extends HomePage {
 						if (cliente.isAnswer() == true) {
 							// enderecoService.excluir(index);
 							funcionarioService.excluir(index);
+							listaFuncionarios = funcionarioService.listar();
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

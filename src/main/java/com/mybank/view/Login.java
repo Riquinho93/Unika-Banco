@@ -7,6 +7,7 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -34,7 +35,7 @@ public class Login extends WebPage {
 		add(aberturaConta());
 
 		filtrarUsuario = new Conta();
-		final TextField<String> numeroConta = new TextField<String>("numeroConta");
+		final NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
 		final PasswordTextField senha = new PasswordTextField("senha");
 		numeroConta.setRequired(true);
 		senha.setRequired(true);

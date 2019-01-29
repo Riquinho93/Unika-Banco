@@ -38,7 +38,7 @@ public class HomePage extends WebPage {
 		add(depositoForm());
 		add(saqueForm(userName));
 		add(transferenciaForm(userName));
-		add(contatoForm());
+		add(contatoForm(userName));
 		add(new Link<Void>("sair") {
 
 			private static final long serialVersionUID = 1L;
@@ -172,14 +172,14 @@ public class HomePage extends WebPage {
 		return ajaxLink;
 	}
 
-	private AjaxLink<Contato> contatoForm() {
+	private AjaxLink<Contato> contatoForm(Conta conta) {
 		AjaxLink<Contato> ajaxLink = new AjaxLink<Contato>("contatoForm") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				setResponsePage(ContatoForm.class);
+				setResponsePage(new ContatoForm(conta));
 			}
 		};
 		ajaxLink.setOutputMarkupId(true);

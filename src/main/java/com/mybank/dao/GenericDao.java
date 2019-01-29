@@ -68,17 +68,13 @@ public abstract class GenericDao<Entidade, id extends Serializable> extends Gene
 
 	}
 
-	/*public void pesquisar(String nome) {
-		try {
-			Connection conexao = null;
-			String sql = "select * from Contato where nome like ?";
-			PreparedStatement ps = (PreparedStatement) conexao.prepareStatement(sql);
-			ps.setString(1, nome + "%");
-			ps.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}*/
+	/*
+	 * public void pesquisar(String nome) { try { Connection conexao = null; String
+	 * sql = "select * from Contato where nome like ?"; PreparedStatement ps =
+	 * (PreparedStatement) conexao.prepareStatement(sql); ps.setString(1, nome +
+	 * "%"); ps.executeQuery(); } catch (SQLException e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 
 }

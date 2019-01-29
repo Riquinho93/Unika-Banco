@@ -28,6 +28,7 @@ public class TelaPrincipal extends HomePage {
 		add(new Label("numeroConta", conta.getNumeroConta()));
 		/* add(new Label("banco", conta.getBanco().getNome())); */
 		add(new Label("saldo", conta.getSaldo()));
+		add(new Label("tipoConta", conta.getTipoConta()));
 
 	}
 

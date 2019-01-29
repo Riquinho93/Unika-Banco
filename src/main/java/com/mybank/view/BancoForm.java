@@ -45,7 +45,7 @@ public class BancoForm extends HomePage {
 
 		add(container());
 		add(filtrar());
-		
+
 		listaBancos = bancoService.listar();
 
 		modalWindow = new ModalWindow("modalWindow");
@@ -58,8 +58,8 @@ public class BancoForm extends HomePage {
 		// Modal Window do delete
 		modalWindowDel = new ModalWindow("modalWindowDel");
 		// Tamanho
-		modalWindowDel.setInitialHeight(200);
-		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setInitialHeight(250);
+		modalWindowDel.setInitialWidth(350);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
 
@@ -110,7 +110,7 @@ public class BancoForm extends HomePage {
 			protected void populateItem(ListItem<Banco> item) {
 				Banco user = item.getModelObject();
 				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("endereco", user.getEndereco().getCidade()));
+				/* item.add(new Label("endereco", user.getEndereco().getCidade())); */
 				item.add(remover(user.getId()));
 				item.add(editando(user));
 			}
@@ -168,6 +168,7 @@ public class BancoForm extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Banco banco) {
 						bancoService.SalvarOuAlterar(banco);
+						listaBancos = bancoService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -200,6 +201,7 @@ public class BancoForm extends HomePage {
 						if (banco.isAnswer() == true) {
 							// enderecoService.excluir(index);
 							bancoService.excluir(index);
+							listaBancos = bancoService.listar();
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

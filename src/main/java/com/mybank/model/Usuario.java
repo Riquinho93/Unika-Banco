@@ -35,9 +35,9 @@ public class Usuario implements Serializable {
 	protected boolean sexo;
 
 	@Column(unique = true)
-	protected int identidade;
+	protected Integer identidade;
 	@Column(unique = true)
-	protected int cpf;
+	protected Integer cpf;
 	protected String senha;
 	protected String confirmarSenha;
 	protected double renda;
@@ -93,19 +93,15 @@ public class Usuario implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public int getIdentidade() {
+	public Integer getIdentidade() {
 		return identidade;
 	}
 
-	public void setIdentidade(int identidade) {
+	public void setIdentidade(Integer identidade) {
 		this.identidade = identidade;
 	}
 
-	public int getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(int cpf) {
+	public void setCpf(Integer cpf) {
 		this.cpf = cpf;
 	}
 
@@ -207,6 +203,10 @@ public class Usuario implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getCpf() {
+		return cpf;
 	}
 
 }

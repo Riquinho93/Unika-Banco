@@ -17,11 +17,14 @@ import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Banco;
+import com.mybank.model.Conta;
 import com.mybank.model.Contato;
+import com.mybank.service.ContatoService;
 
 public class ContatoForm extends HomePage {
 
@@ -37,10 +40,15 @@ public class ContatoForm extends HomePage {
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
 
-	public ContatoForm() {
+	@SpringBean(name = "contatoService")
+	private ContatoService contatoService;
+
+	public ContatoForm(Conta conta) {
 
 		add(container());
 		add(filtrar());
+		
+		listaContatos = contatoService.listar();
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
@@ -52,8 +60,8 @@ public class ContatoForm extends HomePage {
 		// Modal Window do delete
 		modalWindowDel = new ModalWindow("modalWindowDel");
 		// Tamanho
-		modalWindowDel.setInitialHeight(200);
-		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setInitialHeight(250);
+		modalWindowDel.setInitialWidth(350);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
 
@@ -68,8 +76,8 @@ public class ContatoForm extends HomePage {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
-						listaContatos.add(contato);
+					public void executarAoSalvar(AjaxRequestTarget target) {
+						listaContatos = contatoService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -103,8 +111,8 @@ public class ContatoForm extends HomePage {
 			@Override
 			protected void populateItem(ListItem<Contato> item) {
 				Contato user = item.getModelObject();
-				item.add(new Label("nome", user.getUsuario().getNome()));
-				item.add(new Label("numeroConta", user.getNumeroConta()));
+				item.add(new Label("nome", user.getNome()));
+				item.add(new Label("numeroConta", user.getListacontas().get(0)));
 				item.add(remover(user.getId()));
 			}
 		};
@@ -119,7 +127,7 @@ public class ContatoForm extends HomePage {
 	public Form<Contato> filtrar() {
 		filtrar = new Contato();
 		formFiltrar = new Form<Contato>("formFiltrar", new CompoundPropertyModel<Contato>(filtrar));
-		TextField<String> nome = new TextField<String>("usuario.nome");
+		TextField<String> nome = new TextField<String>("nome");
 		nome.setOutputMarkupId(true);
 		formFiltrar.add(nome);
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", formFiltrar) {
@@ -130,8 +138,8 @@ public class ContatoForm extends HomePage {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				Search search = new Search(Contato.class);
 
-				if (filtrar.getUsuario().getNome() != null) {
-					search.addFilterLike("usuario.nome", "%" + filtrar.getUsuario().getNome() + "%");
+				if (filtrar.getNome() != null) {
+					search.addFilterLike("usuario.nome", "%" + filtrar.getNome() + "%");
 				}
 
 //				listaContatos = contatoService.search(search);

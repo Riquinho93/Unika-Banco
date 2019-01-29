@@ -63,8 +63,8 @@ public class ContaForm extends HomePage {
 		// Modal Window do delete
 		modalWindowDel = new ModalWindow("modalWindowDel");
 		// Tamanho
-		modalWindowDel.setInitialHeight(200);
-		modalWindowDel.setInitialWidth(200);
+		modalWindowDel.setInitialHeight(250);
+		modalWindowDel.setInitialWidth(350);
 		modalWindowDel.setOutputMarkupId(true);
 		add(modalWindowDel);
 
@@ -174,6 +174,7 @@ public class ContaForm extends HomePage {
 
 					public void executarAoSalvar(AjaxRequestTarget target, Conta conta) {
 						contaService.SalvarOuAlterar(conta);
+						listaContas = contaService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -206,6 +207,7 @@ public class ContaForm extends HomePage {
 						if (conta.isAnswer() == true) {
 							// enderecoService.excluir(index);
 							contaService.excluir(index);
+							listaContas = contaService.listar();
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

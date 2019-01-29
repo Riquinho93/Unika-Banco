@@ -31,14 +31,16 @@
 					<a class="btn btn-success" margin:-2px; wicket:id="viewLink"
 						style="float: right;">Novo <i class="fas fa-plus"></i>
 					</a><br /> <br />
+					<button type="button" class="btn btn-light" title="Gerar PDF"style="float: right;">PDF
+					<i class="fas fa-print"></i></button>
 				</div>
 			</div>
-			<table class="table table-bordered">
+			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Nome</th>
-						<th>Telefone</th>
-						<th>Ações</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Telefone</th>
+						<th scope="col">Ações</th>
 					</tr>
 				</thead>
 				<tbody wicket:id="theContainer">

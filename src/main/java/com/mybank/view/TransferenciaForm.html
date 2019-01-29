@@ -2,44 +2,50 @@
 <body>
 	<wicket:extend>
 		<div class="container" style="background-color: white">
-			<h1>Realizar Transferencia</h1>
-			<form wicket:id="form">
-				<div class="row">
-					<div class="form-group col-md-4">
-						<Label class="text">Contato: </label> <select class="form-control"></select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-md-6">
-						<Label class="text">Banco Destinatario: </label> <select wicket:id="banco" class="form-control"></select>
-					</div>
-					<div class="form-group col-md-6">
-						<Label class="text">Tipo Destinatario: </label> <select wicket:id="tipoConta" class="form-control"></select>
-					</div>
-					<div class="col-md-6">
-						<label class="text">Valor: *</label> <input wicket:id="valor"
-							type="number" class="form-control" placeholder="Digite o valor" />
-					</div>
-					<div class="col-md-6">
-						<label class="text">Conta Destinatario: *</label> <input
-							wicket:id="numeroConta" type="number" class="form-control"
-							placeholder="Digite o numero conta" />
-					</div>
-					<div class="col-md-6">
-						<label class="text">CPF Destinatario: *</label> <input wicket:id="cpf"
-							type="number" class="form-control" placeholder="Digite o valor" />
-					</div>
+			<div class="card">
+				<h5 class="card-header">Transferencia</h5>
+				<div class="card-body">
+					<form wicket:id="form">
+						<div class="row">
+							<div class="col-md-4">
+								<Label class="text">Contato: </label> <select
+									class="form-control"></select>
+							</div>
 
-					<div class="col-md-6">
-						<label class="text">Senha</label> <input wicket:id="senha"
-							class="form-control" type="password" placeholder="senha">
-					</div>
+							<div class="col-md-4">
+								<Label class="text">Banco Destinatario: </label> <select
+									wicket:id="banco" class="form-control"></select>
+							</div>
+							<div class="col-md-4">
+								<Label class="text">Tipo Destinatario: </label> <select
+									wicket:id="tipoConta" class="form-control"></select>
+							</div>
+							<div class="col-md-4">
+								<label class="text">Valor: *</label> <input wicket:id="valor"
+									type="number" class="form-control" placeholder="Digite o valor" />
+							</div>
+							<div class="col-md-4">
+								<label class="text">Conta Destinatario: *</label> <input
+									wicket:id="numeroConta" type="number" class="form-control"
+									placeholder="Digite o numero conta" />
+							</div>
+							<div class="col-md-4">
+								<label class="text">CPF Destinatario: *</label> <input
+									wicket:id="cpf" type="number" class="form-control"
+									placeholder="Digite o valor" />
+							</div>
 
+							<div class="col-md-4">
+								<label class="text">Senha</label> <input wicket:id="senha"
+									class="form-control" type="password" placeholder="senha">
+							</div>
+						</div>
+						<br /> <a wicket:id="salvar" class="btn btn-success"
+							type="submit">Salvar</a>
+					</form>
 				</div>
-				<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
-			</form>
+			</div>
 		</div>
-
 	</wicket:extend>
 </body>
 </html>

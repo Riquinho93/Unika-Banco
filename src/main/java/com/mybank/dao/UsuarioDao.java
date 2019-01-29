@@ -14,7 +14,7 @@ public class UsuarioDao extends GenericDao<Usuario, Serializable>{
 	@SuppressWarnings("unchecked")
 //	@Transactional(readOnly = true)
 	public List<Usuario> listar() {
-		String hql = "select f from Usuario f";
+		String hql = "select f from Usuario f order by nome";
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		List<Usuario> userList = query.list();
 		return userList;

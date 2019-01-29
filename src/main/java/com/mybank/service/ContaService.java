@@ -93,6 +93,7 @@ public class ContaService implements IContaService {
 		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2,12
 
 		if (senha.equals(conta.getSenha())) {
+			System.out.println("Slado: "+ conta.getSaldo());
 			if (conta.getSaldo() >= valor) {
 				conta.setSaldo(conta.getSaldo() - valor);
 				SalvarOuAlterar(conta);

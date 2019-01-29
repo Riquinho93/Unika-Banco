@@ -29,22 +29,31 @@
 		<div class="centerdiv">
 			<h1>Abertura de Conta</h1>
 			<div class="container-fluid">
-				<h1>Cadastro de Usuario</h1>
 				<h3>Dados pessoais</h3>
 				<form wicket:id="form">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label for="nome" class="text">Nome: *</label> <input type="text"
 								class="form-control" wicket:id="nome" name="nome"
 								placeholder="Digite o nome" />
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Banco: *</label> <input type="text"
 								class="form-control" wicket:id="nomeBanco"
 								placeholder="Digite o nome do banco" />
 						</div>
+						<div class="col-md-6">
+							<label class="text">RG: *</label> <input wicket:id="identidade"
+								type="number" class="number form-control"
+								placeholder="Digite o n° do RG" />
+						</div>
+						<div class="col-md-6">
+							<label class="text">CPF: *</label> <input wicket:id="cpf"
+								type="number" class="number form-control"
+								placeholder="Digite o n° do CPF" />
+						</div>
 						<div class="col-md-4">
-							<Label class="text2">Data de Nascimento: *</label> <input
+							<Label class="text2">Data de Nascimento: *</label> <br /><input
 								wicket:id="dataNascimento" type="text" class="form-data"
 								placeholder="dd/MM/yyyy" />
 						</div>
@@ -56,48 +65,38 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-							<label class="text">RG: *</label> <input wicket:id="identidade"
-								type="number" class="number form-control"
-								placeholder="Digite o n° do RG" />
-						</div>
-						<div class="col-md-4">
-							<label class="text">CPF: *</label> <input wicket:id="cpf"
-								type="number" class="number form-control"
-								placeholder="Digite o n° do CPF" />
-						</div>
-						<div class="col-md-3">
 							<label class="text">Cep: *</label> <input
 								wicket:id="endereco.cep" name="cep" id="#cep" type="text"
 								class="form-control" size="10" maxlength="9"
 								onblur="pesquisacep(this.value);" placeholder="Digite o cep" />
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Logradouro: *</label> <input
 								wicket:id="endereco.logradouro" name="rua" id="rua" type="text"
 								class="form-control" placeholder="Digite o logradouro" />
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<label class="text">Numero: *</label> <input
 								wicket:id="endereco.numero" type="number"
 								class="number form-control" placeholder="Digite o n°" />
 						</div>
 
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Bairro: *</label> <input
 								wicket:id="endereco.bairro" name="bairro" id="bairro" size="40"
 								type="text" class="form-control" placeholder="Digite o bairro" />
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Cidade: *</label> <input
 								wicket:id="endereco.cidade" name="cidade" id="cidade" size="40"
 								type="text" class="form-control" placeholder="Digite a cidade" />
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<label class="text">Estado: *</label> <input
 								wicket:id="endereco.estado" name="uf" id="uf" size="2"
 								type="text" class="form-control" placeholder="Digite o estado" />
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Renda: *</label> <input wicket:id="renda"
 								type="number" class="number form-control" placeholder="0,0" />
 						</div>
@@ -105,7 +104,7 @@
 					</div>
 					<h3>Informações para contato</h3>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<label class="text">Telefone: *</label> <input type="text"
 								name="telefone" class="form-control" wicket:id="telefone"
 								placeholder="62 99999-9999"

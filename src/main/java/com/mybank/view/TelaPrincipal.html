@@ -3,13 +3,18 @@
 <body>
 	<wicket:extend>
 		<div class="container" style="background-color: white">
-			<!-- 	<span><strong>Nome: </strong></span><span wicket:id="usuario"></span><br /> -->
-			<span><strong>Numero da Conta: </strong></span><span
-				wicket:id="numeroConta"></span><br />
-			<!-- <span><strong>Banco: </strong></span><span wicket:id="banco"></span> -->
-			<span><strong>Saldo: </strong></span><span wicket:id="saldo"></span>
-
-			<br /> <br /> <br /> <br /> <br /><br />
+			<div class="card">
+				<h5 class="card-header">Saldo e Extrato da Conta</h5>
+				<div class="card-body">
+					<span><strong>Numero da Conta: </strong></span><span
+						wicket:id="numeroConta"></span><br />
+					<!-- <span><strong>Banco: </strong></span><span wicket:id="banco"></span> -->
+					<span><strong>Saldo em conta(Tipo de conta): </strong></span><span
+						wicket:id="saldo"></span>
+				</div>
+			</div>
+			<br /> <br /> <br /> <br /> <br />
+			<br />
 		</div>
 
 	</wicket:extend>

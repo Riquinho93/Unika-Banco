@@ -2,22 +2,26 @@
 <body>
 	<wicket:extend>
 		<div class="container" style="background-color: white">
-			<h1>Realizar Deposito</h1>
-			<form wicket:id="form">
-				<div class="row">
-					<div class="col-md-6">
-						<label class="text">Numero Conta: *</label> <input
-							wicket:id="numeroConta" type="text" class="form-control"
-							placeholder="Digite o numero conta" />
-					</div>
-					<div class="col-md-6">
-						<label class="text">Valor: *</label> <input wicket:id="valor"
-							type="number" class="form-control" placeholder="Digite o valor" />
-					</div>
+				<div class="card">
+					<h5 class="card-header">Realizar Deposito</h5>
+					<div class="card-body">
+						<form wicket:id="form">
+							<div class="col-md-6">
+								<label class="text">Numero Conta: *</label> <input
+									wicket:id="numeroConta" type="text" class="form-control"
+									placeholder="Digite o numero conta" />
+							</div>
+							<div class="col-md-6">
+								<label class="text">Valor: *</label> <input wicket:id="valor"
+									type="number" class="form-control" placeholder="Digite o valor" />
+							</div>
 
-				</div>
-				<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
-			</form>
+							<br /> <a wicket:id="salvar" class="btn btn-success"
+								type="submit">Salvar</a>
+						</form>
+					</div>
+			</div>
+				<div wicket:id="modalWindowSucesso"></div>
 		</div>
 	</wicket:extend>
 </body>

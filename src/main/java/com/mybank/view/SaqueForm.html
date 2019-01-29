@@ -2,21 +2,24 @@
 <body>
 	<wicket:extend>
 		<div class="container" style="background-color: white">
-			<h1>Realizar Saque</h1>
-			<form wicket:id="form">
-				<div class="row">
-					<div class="col-md-6">
-						<label class="text">Valor: *</label> <input wicket:id="valor"
-							type="number" class="form-control" placeholder="Digite o valor" />
-					</div>
-					<div class="col-md-6">
-						<label class="text">Senha</label> <input wicket:id="senha"
-							class="form-control" type="password" placeholder="senha">
-					</div>
+			<div class="card">
+				<h5 class="card-header">Realizar Saque</h5>
+				<div class="card-body">
+					<form wicket:id="form">
+						<div class="col-md-6">
+							<label class="text">Valor: *</label> <input wicket:id="valor"
+								type="number" class="form-control" placeholder="Digite o valor" />
+						</div>
+						<div class="col-md-6">
+							<label class="text">Senha</label> <input wicket:id="senha"
+								class="form-control" type="password" placeholder="senha">
+						</div>
 
+						<br /> <a wicket:id="salvar" class="btn btn-success"
+							type="submit">Salvar</a>
+					</form>
 				</div>
-				<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
-			</form>
+			</div>
 		</div>
 	</wicket:extend>
 </body>

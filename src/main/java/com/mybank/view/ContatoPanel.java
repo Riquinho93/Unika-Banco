@@ -15,8 +15,10 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.googlecode.genericdao.search.Search;
 import com.mybank.model.Conta;
 import com.mybank.model.Contato;
+import com.mybank.model.Usuario;
 import com.mybank.service.ContaService;
 import com.mybank.service.ContatoService;
+import com.mybank.service.UsuarioService;
 
 public class ContatoPanel extends Panel {
 
@@ -32,19 +34,20 @@ public class ContatoPanel extends Panel {
 	@SpringBean(name = "contatoService")
 	private ContatoService contatoService;
 
+	@SpringBean(name = "usuarioService")
+	private UsuarioService usuarioService;
+
 	public ContatoPanel(String id) {
 		super(id);
 		contato = new Contato();
 
-		conta = new Conta();
-
 		form = new Form<Contato>("form", new CompoundPropertyModel<Contato>(contato));
 
-		final NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
-		final NumberTextField<Integer> numCpf = new NumberTextField<>("numCpf");
+		final NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("conta.numeroConta");
+		final NumberTextField<Integer> cpf = new NumberTextField<>("usuario.cpf");
 
 		numeroConta.setOutputMarkupId(true);
-		numCpf.setOutputMarkupId(true);
+		cpf.setOutputMarkupId(true);
 
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
@@ -54,32 +57,37 @@ public class ContatoPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 				Search search = new Search(Conta.class);
-				
+				Search search2 = new Search(Usuario.class);
+
 				search.addFilterEqual("numeroConta", numeroConta.getModelObject());
 				List<Conta> listacontas = contaService.search(search);
 				Conta conta = listacontas.get(0);
-				
-				if (conta.getUsuario().getCpf() == numCpf.getModelObject()) {
+
+				search2.addFilterEqual("cpf", cpf.getModelObject());
+				List<Usuario> listausuarios = usuarioService.search(search2);
+				Usuario usuario = listausuarios.get(0);
+
+				if (conta.getUsuario().getId() == usuario.getId()) {
 					listacontas.add(conta);
-					contato.setListacontas(listacontas);
-					contatoService.SalvarOuAlterar(contato);
-					executarAoSalvar(target);
+					contato.setConta(conta);
+					contato.setUsuario(usuario);
+					executarAoSalvar(target, contato);
 				} else {
 					System.out.println("Erro no ContatoPanel");
 				}
 
-				target.add(numeroConta, numCpf);
+				target.add(numeroConta, cpf);
 			}
 		};
 
 		ajaxButton.setOutputMarkupId(true);
-		form.add(numeroConta, numCpf);
+		form.add(numeroConta, cpf);
 		form.add(ajaxButton);
 		add(form);
 
 	}
 
-	public void executarAoSalvar(AjaxRequestTarget target) {
+	public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
 	}
 
 }

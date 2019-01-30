@@ -78,7 +78,7 @@ public class ContaService implements IContaService {
 
 		if (lista != null && !lista.isEmpty()) {
 			Conta conta = lista.get(0);
-			double total = conta.getSaldo() + valor;
+			double total = conta.getSaldo() + valor - 1.9;
 			conta.setSaldo(total);
 			SalvarOuAlterar(conta);
 		} else {
@@ -93,9 +93,9 @@ public class ContaService implements IContaService {
 		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2,12
 
 		if (senha.equals(conta.getSenha())) {
-			System.out.println("Slado: "+ conta.getSaldo());
+			System.out.println("Slado: " + conta.getSaldo());
 			if (conta.getSaldo() >= valor) {
-				conta.setSaldo(conta.getSaldo() - valor);
+				conta.setSaldo(conta.getSaldo() - valor - 2.12);
 				SalvarOuAlterar(conta);
 			} else {
 				System.out.println("Saldo Infuficente!!!");
@@ -106,9 +106,29 @@ public class ContaService implements IContaService {
 
 	}
 
-	public void transferir(Conta conta, Banco banco) {
+	public void transferir(Conta contaUsuario, Conta contaDestinario, double valor) {
 		// IMPORTANTE
 		// Tem uma taxa na mesma quantia do Banco Santader de R$17,40 por evento.
+		if (contaUsuario.getBanco().equals(contaDestinario.getBanco())) {
+			System.out.println("Teste Completo");
+			if (contaUsuario.getSaldo() >= valor) {
+				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor);
+				contaDestinario.setSaldo(contaDestinario.getSaldo() + valor);
+				SalvarOuAlterar(contaUsuario);
+				SalvarOuAlterar(contaDestinario);
+			} else {
+				System.out.println("Saldo Infuciente");
+			}
+		} else {
+			if (contaUsuario.getSaldo() >= valor) {
+				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor - 17.40);
+				contaDestinario.setSaldo(contaDestinario.getSaldo() + valor);
+				SalvarOuAlterar(contaUsuario);
+				SalvarOuAlterar(contaDestinario);
+			} else {
+				System.out.println("Saldo Infuciente");
+			}
+		}
 
 	}
 

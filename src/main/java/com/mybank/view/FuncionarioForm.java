@@ -199,9 +199,8 @@ public class FuncionarioForm extends HomePage {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoExcluir(AjaxRequestTarget target, Funcionario cliente) {
-						if (cliente.isAnswer() == true) {
-							// enderecoService.excluir(index);
+					public void executarAoExcluir(AjaxRequestTarget target, Funcionario funcionario) {
+						if (funcionario.isAnswer() == true) {
 							funcionarioService.excluir(index);
 							listaFuncionarios = funcionarioService.listar();
 							target.add(listContainer);

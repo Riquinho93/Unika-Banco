@@ -50,6 +50,11 @@ public class SaqueForm extends HomePage {
 				String senhaConta = senha.getConvertedInput();
 				contaService.saque(conta, valorConta, senhaConta);
 				target.add(senha, valor);
+				saque = new Saque();
+				form.clearInput();
+				form.modelChanged();
+				form.setDefaultModelObject(saque);
+				target.add(form);
 			}
 		};
 

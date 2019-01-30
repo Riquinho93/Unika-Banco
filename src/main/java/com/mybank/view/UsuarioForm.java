@@ -90,6 +90,7 @@ public class UsuarioForm extends HomePage {
 					public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 						usuarioService.SalvarOuAlterar(usuario);
 						listaUsuarios.add(usuario);
+						listaUsuarios = usuarioService.listar();
 						target.add(listContainer);
 						modalWindow.close(target);
 					};

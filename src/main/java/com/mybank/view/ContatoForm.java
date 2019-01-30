@@ -47,8 +47,8 @@ public class ContatoForm extends HomePage {
 
 		add(container());
 		add(filtrar());
-		
-		/*listaContatos = contatoService.listar();*/
+
+		listaContatos = contatoService.listar();
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
@@ -76,9 +76,10 @@ public class ContatoForm extends HomePage {
 
 					private static final long serialVersionUID = 1L;
 
-					public void executarAoSalvar(AjaxRequestTarget target) {
-						listaContatos = contatoService.listar();
+					public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
+						contatoService.SalvarOuAlterar(contato);
 						target.add(listContainer);
+						listaContatos = contatoService.listar();
 						modalWindow.close(target);
 					};
 				};
@@ -111,8 +112,8 @@ public class ContatoForm extends HomePage {
 			@Override
 			protected void populateItem(ListItem<Contato> item) {
 				Contato user = item.getModelObject();
-				item.add(new Label("nome", user.getNome()));
-				item.add(new Label("numeroConta", user.getListacontas().get(0)));
+				item.add(new Label("nome", user.getUsuario().getNome()));
+				item.add(new Label("numeroConta", user.getConta().getNumeroConta()));
 				item.add(remover(user.getId()));
 			}
 		};
@@ -127,7 +128,7 @@ public class ContatoForm extends HomePage {
 	public Form<Contato> filtrar() {
 		filtrar = new Contato();
 		formFiltrar = new Form<Contato>("formFiltrar", new CompoundPropertyModel<Contato>(filtrar));
-		TextField<String> nome = new TextField<String>("nome");
+		TextField<String> nome = new TextField<String>("usuario.nome");
 		nome.setOutputMarkupId(true);
 		formFiltrar.add(nome);
 		AjaxSubmitLink ajaxSubmitLink = new AjaxSubmitLink("filtrar", formFiltrar) {
@@ -138,8 +139,8 @@ public class ContatoForm extends HomePage {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				Search search = new Search(Contato.class);
 
-				if (filtrar.getNome() != null) {
-					search.addFilterLike("usuario.nome", "%" + filtrar.getNome() + "%");
+				if (filtrar.getUsuario().getNome() != null) {
+					search.addFilterLike("usuario.nome", "%" + filtrar.getUsuario().getNome() + "%");
 				}
 
 //				listaContatos = contatoService.search(search);
@@ -171,7 +172,8 @@ public class ContatoForm extends HomePage {
 					public void executarAoExcluir(AjaxRequestTarget target, Contato contato) {
 						if (contato.isAnswer() == true) {
 							// enderecoService.excluir(index);
-//								contatoService.excluir(index);
+							contatoService.excluir(index);
+							listaContatos = contatoService.listar();
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

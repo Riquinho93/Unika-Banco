@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
 
 	@Column(unique = true)
 	protected Integer identidade;
-	@Column(unique = true)
+	
 	protected Integer cpf;
 	protected String senha;
 	protected String confirmarSenha;
@@ -57,6 +57,9 @@ public class Usuario implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco")
 	protected Endereco endereco;
+	
+	@OneToMany(mappedBy = "usuario", targetEntity = Contato.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Contato> listaContatos;
 
 	@Transient
 	protected boolean answer;

@@ -3,30 +3,25 @@
 	<wicket:extend>
 		<div class="container" style="background-color: white">
 			<div class="card">
-				<h5 class="card-header">Transferencia</h5>
+				<h5 class="card-header">Conta a ser debitada:</h5>
 				<div class="card-body">
-					<div class="row">
-						<h3>Conta a ser debitada:</h3><br /><br />
-						<span><strong>Nome:</strong></span><span wicket:id="nome"></span><br />
-						<span><strong>Tipo:</strong></span><span wicket:id="tipoConta"></span><br />
-						<span><strong>Conta:</strong></span><span wicket:id="numeroConta"></span><br />
-					</div><br />
+					<span><strong>Nome: </strong></span><span wicket:id="nome"></span><br />
+					<span><strong>Tipo: </strong></span><span wicket:id="tipoConta"></span><br />
+					<span><strong>Conta: </strong></span><span wicket:id="numeroConta"></span><br />
+				</div>
+				<br />
+			</div>
+			<div class="card">
+				<h5 class="card-header">Conta a ser creditada:</h5>
+				<div class="card-body">
 					<form wicket:id="form">
 						<div class="row">
-							<h3>Conta a ser creditada:</h3>
 							<div class="col-md-4">
 								<Label class="text">Contato: </label> <select
 									class="form-control"></select>
 							</div>
-
-							<div class="col-md-4">
-								<Label class="text">Banco Destinatario: </label> <select
-									wicket:id="banco" class="form-control"></select>
-							</div>
-							<div class="col-md-4">
-								<label class="text">Valor: *</label> <input wicket:id="valor"
-									type="number" class="form-control" placeholder="Digite o valor" />
-							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-4">
 								<label class="text">Conta Destinatario: *</label> <input
 									wicket:id="numeroConta" type="number" class="form-control"
@@ -37,14 +32,19 @@
 									wicket:id="cpf" type="number" class="form-control"
 									placeholder="Digite o valor" />
 							</div>
-
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<label class="text">Valor: *</label> <input wicket:id="valor"
+									type="number" class="form-control" placeholder="Digite o valor" />
+							</div>
 							<div class="col-md-4">
 								<label class="text">Senha</label> <input wicket:id="senha"
 									class="form-control" type="password" placeholder="senha">
 							</div>
 						</div>
 						<br /> <a wicket:id="salvar" class="btn btn-success"
-							type="submit">Salvar</a>
+							type="submit">Transferir</a>
 					</form>
 				</div>
 			</div>

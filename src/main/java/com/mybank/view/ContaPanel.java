@@ -117,11 +117,9 @@ public class ContaPanel extends Panel {
 				listaContas.add(conta);
 				Usuario usuario = usuarioService.buscarPorId(conta.getUsuario().getId());
 				usuario.setListacontas(listaContas);
-				usuarioService.SalvarOuAlterar(usuario);
 				
 				Banco banco = bancoService.buscarPorId(conta.getBanco().getId());
 				banco.setListaContas(listaContas);
-				bancoService.SalvarOuAlterar(banco);
 				listaContas = new ArrayList<>();
 				form.clearInput();
 				form.modelChanged();
@@ -140,7 +138,7 @@ public class ContaPanel extends Panel {
 
 	}
 
-	public Usuario getUsuario() {
+	/*public Usuario getUsuario() {
 		return usuario;
 	}
 
@@ -154,6 +152,6 @@ public class ContaPanel extends Panel {
 
 	public void setBanco(Banco banco) {
 		this.banco = banco;
-	}
+	}*/
 
 }

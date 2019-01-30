@@ -31,10 +31,10 @@ public class FuncionarioPanel extends Panel {
 		this(id, new Funcionario());
 	}
 
-	public FuncionarioPanel(String id, Funcionario cliente) {
+	public FuncionarioPanel(String id, Funcionario funcionario) {
 		super(id);
 
-		Form<Funcionario> form = new Form<Funcionario>("form", new CompoundPropertyModel<Funcionario>(cliente));
+		Form<Funcionario> form = new Form<Funcionario>("form", new CompoundPropertyModel<Funcionario>(funcionario));
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");
@@ -96,7 +96,7 @@ public class FuncionarioPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 
-				executarAoSalvar(target, cliente);
+				executarAoSalvar(target, funcionario);
 				target.add(nome, telefone, cpf, identidade, numeroConta, senha, confirmarSenha);
 			}
 		};

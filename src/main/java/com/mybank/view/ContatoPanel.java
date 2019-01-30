@@ -41,10 +41,10 @@ public class ContatoPanel extends Panel {
 		form = new Form<Contato>("form", new CompoundPropertyModel<Contato>(contato));
 
 		final NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
-		final NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
+		final NumberTextField<Integer> numCpf = new NumberTextField<>("numCpf");
 
 		numeroConta.setOutputMarkupId(true);
-		cpf.setOutputMarkupId(true);
+		numCpf.setOutputMarkupId(true);
 
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
@@ -55,33 +55,25 @@ public class ContatoPanel extends Panel {
 				super.onSubmit(target, form);
 				Search search = new Search(Conta.class);
 				
-				search.addFilterEqual("numeroConta", + numeroConta.getModelObject());
+				search.addFilterEqual("numeroConta", numeroConta.getModelObject());
 				List<Conta> listacontas = contaService.search(search);
 				Conta conta = listacontas.get(0);
 				
-				System.out.println("conta: " + conta.getUsuario().getCpf());
-				System.out.println("conta: " + cpf.getModelObject());
-				
-				/*
-				 * ESTA TENDO ERRO DE DUPLICIDADE DO CPF
-				 * */
-				
-				
-	//			if (conta.getUsuario().getCpf() == cpf.getModelObject()) {
+				if (conta.getUsuario().getCpf() == numCpf.getModelObject()) {
 					listacontas.add(conta);
 					contato.setListacontas(listacontas);
 					contatoService.SalvarOuAlterar(contato);
 					executarAoSalvar(target);
-//				} else {
-//					System.out.println("Erro no ContatoPanel");
-//				}
+				} else {
+					System.out.println("Erro no ContatoPanel");
+				}
 
-				target.add(numeroConta, cpf);
+				target.add(numeroConta, numCpf);
 			}
 		};
 
 		ajaxButton.setOutputMarkupId(true);
-		form.add(numeroConta, cpf);
+		form.add(numeroConta, numCpf);
 		form.add(ajaxButton);
 		add(form);
 

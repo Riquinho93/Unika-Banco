@@ -12,11 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "transferencia")
+@Table(name = "transferencia")
 public class Transferencia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,7 +24,6 @@ public class Transferencia implements Serializable {
 	private int numeroConta;
 	private double valor;
 	private String senha;
-	private TipoConta tipoConta;
 	@ManyToOne
 	@JoinColumn(name = "banco")
 	private Banco banco;
@@ -67,14 +66,6 @@ public class Transferencia implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public TipoConta getTipoConta() {
-		return tipoConta;
-	}
-
-	public void setTipoConta(TipoConta tipoConta) {
-		this.tipoConta = tipoConta;
 	}
 
 	public Banco getBanco() {

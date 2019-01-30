@@ -9,6 +9,7 @@ public class Contato extends Usuario {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer numCpf;
 	private Integer numeroConta;
 
 	public Integer getNumeroConta() {
@@ -17,6 +18,14 @@ public class Contato extends Usuario {
 
 	public void setNumeroConta(Integer numeroConta) {
 		this.numeroConta = numeroConta;
+	}
+
+	public Integer getNumCpf() {
+		return numCpf;
+	}
+
+	public void setNumCpf(Integer numCpf) {
+		this.numCpf = numCpf;
 	}
 
 }

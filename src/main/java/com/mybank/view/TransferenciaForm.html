@@ -5,8 +5,15 @@
 			<div class="card">
 				<h5 class="card-header">Transferencia</h5>
 				<div class="card-body">
+					<div class="row">
+						<h3>Conta a ser debitada:</h3><br /><br />
+						<span><strong>Nome:</strong></span><span wicket:id="nome"></span><br />
+						<span><strong>Tipo:</strong></span><span wicket:id="tipoConta"></span><br />
+						<span><strong>Conta:</strong></span><span wicket:id="numeroConta"></span><br />
+					</div><br />
 					<form wicket:id="form">
 						<div class="row">
+							<h3>Conta a ser creditada:</h3>
 							<div class="col-md-4">
 								<Label class="text">Contato: </label> <select
 									class="form-control"></select>
@@ -15,10 +22,6 @@
 							<div class="col-md-4">
 								<Label class="text">Banco Destinatario: </label> <select
 									wicket:id="banco" class="form-control"></select>
-							</div>
-							<div class="col-md-4">
-								<Label class="text">Tipo Destinatario: </label> <select
-									wicket:id="tipoConta" class="form-control"></select>
 							</div>
 							<div class="col-md-4">
 								<label class="text">Valor: *</label> <input wicket:id="valor"

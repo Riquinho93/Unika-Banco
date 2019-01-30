@@ -48,7 +48,7 @@ public class ContatoForm extends HomePage {
 		add(container());
 		add(filtrar());
 		
-		listaContatos = contatoService.listar();
+		/*listaContatos = contatoService.listar();*/
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -37,7 +38,10 @@ public class TransferenciaForm extends HomePage {
 	}
 
 	public TransferenciaForm(Conta conta) {
-
+		add(new Label("nome", conta.getUsuario().getNome()));
+		add(new Label("tipoConta", conta.getNumeroConta()));
+		add(new Label("numeroConta", conta.getNumeroConta()));
+		
 		listaBancos = bancoService.listar();
 
 		Transferencia transferencia = new Transferencia();
@@ -58,20 +62,6 @@ public class TransferenciaForm extends HomePage {
 		DropDownChoice<Banco> bancos = new DropDownChoice<Banco>("banco",
 				new PropertyModel<Banco>(transferencia, "banco"), listaBancos, new ChoiceRenderer<Banco>("nome"));
 
-		// Tipo da Conta
-		ChoiceRenderer<TipoConta> renderer = new ChoiceRenderer<TipoConta>("descricao");
-		IModel<List<TipoConta>> model = new LoadableDetachableModel<List<TipoConta>>() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected List<TipoConta> load() {
-				return TipoConta.contas();
-			}
-		};
-
-		DropDownChoice<TipoConta> tipos = new DropDownChoice<>("tipoConta", model, renderer);
-
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
 			private static final long serialVersionUID = 1L;
@@ -79,14 +69,14 @@ public class TransferenciaForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				
+
 				target.add(numeroConta, cpf, senha, valor);
 			}
 		};
 
 		ajaxButton.setOutputMarkupId(true);
 		form.add(numeroConta, cpf, senha, valor);
-		form.add(bancos, tipos);
+		form.add(bancos);
 		form.add(ajaxButton);
 		add(form);
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -35,6 +36,8 @@ public class ContaPanel extends Panel {
 	private List<Usuario> listaUsuarios = new ArrayList<>();
 	private List<Banco> listaBancos = new ArrayList<>();
 	private List<Conta> listaContas;
+	private Form<Conta> form;
+	
 	@SpringBean(name = "usuarioService")
 	private UsuarioService usuarioService;
 	@SpringBean(name = "bancoService")
@@ -52,10 +55,10 @@ public class ContaPanel extends Panel {
 	public ContaPanel(String id, Conta conta) {
 		super(id);
 		listaContas = new ArrayList<>();
-		listaUsuarios = usuarioService.listar();
+		listaUsuarios = usuarioService.listarSolicitacao();
 		listaBancos = bancoService.listar();
 
-		Form<Conta> form = new Form<Conta>("form", new CompoundPropertyModel<Conta>(conta));
+		form = new Form<Conta>("form", new CompoundPropertyModel<Conta>(conta));
 
 		NumberTextField<Integer> numeroConta = new NumberTextField<Integer>("numeroConta");
 		PasswordTextField senha = new PasswordTextField("senha");
@@ -79,6 +82,15 @@ public class ContaPanel extends Panel {
 		  renderer2);
 
 		// Select usuarios
+		 /* IModel<List<Usuario>> model = new LoadableDetachableModel<List<Usuario>>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<Usuario> load() {
+				return usuario;
+			}
+		};*/
+		  
 		usuario = new Usuario();
 		DropDownChoice<Usuario> usuarios = new DropDownChoice<Usuario>("usuario",  new PropertyModel<Usuario>(conta, "usuario"),listaUsuarios,
 				new ChoiceRenderer<Usuario>("nome"));
@@ -132,6 +144,7 @@ public class ContaPanel extends Panel {
 		form.add(ajaxButton, tipos, usuarios, bancos, situacoes);
 		form.add(numeroConta, senha, confirmarSenha);
 		add(form);
+		voltar();
 	}
 
 	public void executarAoSalvar(AjaxRequestTarget target, Conta conta) {
@@ -153,5 +166,20 @@ public class ContaPanel extends Panel {
 	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}*/
+	private void voltar() {
+		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(ContaForm.class);
+			}
+		};
+
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		form.add(ajaxLink);
+	}
 
 }

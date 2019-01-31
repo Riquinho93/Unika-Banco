@@ -54,5 +54,10 @@ public class UsuarioService implements IUsuarioService {
 	public Usuario alterar(Integer id) {
 		return usuarioDao.alterar(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Usuario> listarSolicitacao() {
+		return usuarioDao.listarSolicitacao();
+	}
 
 }

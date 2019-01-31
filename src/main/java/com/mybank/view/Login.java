@@ -41,9 +41,9 @@ public class Login extends WebPage {
 		senha.setRequired(true);
 		numeroConta.setOutputMarkupId(true);
 		senha.setOutputMarkupId(true);
-
-		final Label errorLogin = new Label("errorLogin", Model.of("Login Incorreto!!"));
-		errorLogin.setOutputMarkupId(true).setVisible(false);
+//
+//		final Label errorLogin = new Label("errorLogin", Model.of("Login Incorreto!!"));
+//		errorLogin.setOutputMarkupId(true).setVisible(false);
 
 		formularioLogin = new Form<Conta>("formularioLogin", new CompoundPropertyModel<>(filtrarUsuario)) {
 
@@ -61,20 +61,19 @@ public class Login extends WebPage {
 
 				if (lista != null && !lista.isEmpty()) {
 					Conta conta = lista.get(0);
-					alertFeedback.success("Login com sucesso!!");
 					getSession().setAttribute("userName", lista.get(0));
 					setResponsePage(new TelaPrincipal(conta));
 				} else {
 
 					alertFeedback.error("Login Incorreto");
-					;
-					errorLogin.setVisible(true);
+//					errorLogin.setVisible(true);
 				}
 
 			}
 
 		};
-		add(alertFeedback, formularioLogin);
+		add(alertFeedback);
+		add(formularioLogin);
 		formularioLogin.add(numeroConta, senha).setOutputMarkupId(true);
 	}
 

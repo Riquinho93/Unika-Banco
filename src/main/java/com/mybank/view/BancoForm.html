@@ -1,10 +1,33 @@
-<!--  <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:head>
 	<meta charset="UTF-8">
-</wicket:head> -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="alertMessage.css">
+</wicket:head>
 <body>
 	<wicket:extend>
+
+		<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			swal("Good job!", "You clicked the button!", "success");
+		</script> -->
+		<!-- jQUery-->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+		<!--  Ação para ocultar a div depois de 5 segundos -->
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function() {
+				setTimeout(function() {
+					$("#goaway").fadeOut().empty();
+				}, 4000);
+			}, false);
+		</script>
+
+		<div id="goaway">
+			<span wicket:id="feedbackMessage"></span>
+		</div>
 		<div class="container" style="background-color: white">
 			<h1>Bancos</h1>
 			<br>
@@ -31,7 +54,7 @@
 				<thead>
 					<tr>
 						<th scope="row">Nome</th>
-					<!-- 	<th scope="row">Endereco</th> -->
+						<!-- 	<th scope="row">Endereco</th> -->
 						<th scope="row">Ações</th>
 					</tr>
 				</thead>
@@ -55,3 +78,4 @@
 		</div>
 	</wicket:extend>
 </body>
+</html>

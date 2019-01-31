@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum TipoConta {
-	CORRENTE("Corrente"), POUPANÇA("Popança");
+	CORRENTE("Corrente"), POUPANÇA("Poupança");
 	
 	private String descricao;
 	

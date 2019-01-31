@@ -44,16 +44,6 @@ public class ContaService implements IContaService {
 		return contaDao.listar();
 	}
 
-	@Transactional(readOnly = true)
-	public List<Usuario> listarUsuarios() {
-		return contaDao.listarUsuarios();
-	}
-
-	@Transactional(readOnly = true)
-	public List<Banco> listarBancos() {
-		return contaDao.listarBancos();
-	}
-
 	@Override
 	@Transactional(readOnly = true)
 	public List<Conta> search(Search search) {
@@ -83,7 +73,7 @@ public class ContaService implements IContaService {
 
 	}
 
-	public void saque(Conta conta,double valor, String senha) {
+	public void saque(Conta conta, double valor, String senha) {
 
 		// IMPORTANTE
 		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2
@@ -104,7 +94,7 @@ public class ContaService implements IContaService {
 	public void transferir(Conta contaUsuario, Conta contaDestinario, double valor) {
 		// IMPORTANTE
 		// Tem uma taxa na mesma quantia do Banco Santader de R$17,40 por evento.
-		
+
 		if (contaUsuario.getBanco().equals(contaDestinario.getBanco())) {
 			if (contaUsuario.getSaldo() >= valor) {
 				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor);

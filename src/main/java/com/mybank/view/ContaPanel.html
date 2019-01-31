@@ -6,18 +6,18 @@
 				<form wicket:id="form">
 					<div class="row">
 						<div class="form-group col-sm-3">
-							<Label class="text">Situacao: </label> <select
+							<Label class="text">Situacao: *</label> <select
 								wicket:id="situacao" class="form-control"></select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-4">
-							<Label class="text">Nome: </label> <select wicket:id="usuario"
+							<Label class="text">Nome: *</label> <select wicket:id="usuario"
 								class="form-control"></select>
 						</div>
 
 						<div class="form-group col-md-4">
-							<Label class="text">Banco: </label> <select wicket:id="banco"
+							<Label class="text">Banco: *</label> <select wicket:id="banco"
 								class="form-control"></select>
 						</div>
 						<div class="col-md-4">
@@ -26,7 +26,7 @@
 								placeholder="Digite o numero conta" />
 						</div>
 						<div class="form-group col-md-4">
-							<Label class="text">Tipo: </label> <select wicket:id="tipoConta"
+							<Label class="text">Tipo: *</label> <select wicket:id="tipoConta"
 								class="form-control"></select>
 						</div>
 						<div class="col-md-4">
@@ -39,7 +39,8 @@
 								placeholder="senha">
 						</div>
 					</div>
-					<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
+					<br /> <button wicket:id="salvar" class="btn btn-success" type="submit">Salvar</button>
+					<button wicket:id="voltar" type="button" class="btn btn-primary">Voltar</button>
 				</form>
 			</div>
 		</div>

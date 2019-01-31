@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -26,6 +27,8 @@ import com.mybank.model.Situacao;
 public class FuncionarioPanel extends Panel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Form<Funcionario> form;
 
 	public FuncionarioPanel(String id) {
 		this(id, new Funcionario());
@@ -34,7 +37,7 @@ public class FuncionarioPanel extends Panel {
 	public FuncionarioPanel(String id, Funcionario funcionario) {
 		super(id);
 
-		Form<Funcionario> form = new Form<Funcionario>("form", new CompoundPropertyModel<Funcionario>(funcionario));
+		form = new Form<Funcionario>("form", new CompoundPropertyModel<Funcionario>(funcionario));
 
 		TextField<String> nome = new TextField<>("nome");
 		TextField<String> telefone = new TextField<>("telefone");
@@ -105,10 +108,27 @@ public class FuncionarioPanel extends Panel {
 		form.add(ajaxButton, funcoes, situacoes);
 		form.add(nome, telefone, cpf, identidade, numeroConta, senha, confirmarSenha);
 		add(form);
+		voltar();
 	}
 
 	public void executarAoSalvar(AjaxRequestTarget target, Funcionario cliente) {
 
+	}
+	
+	private void voltar() {
+		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(FuncionarioForm.class);
+			}
+		};
+
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		form.add(ajaxLink);
 	}
 
 }

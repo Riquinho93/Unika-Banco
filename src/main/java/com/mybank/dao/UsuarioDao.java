@@ -29,4 +29,13 @@ public class UsuarioDao extends GenericDao<Usuario, Serializable>{
 		Usuario user = (Usuario) query.uniqueResult();
 		return user;
 	}
+	
+	@SuppressWarnings("unchecked")
+//	@Transactional(readOnly = true)
+	public List<Usuario> listarSolicitacao() {
+		String hql = "select f from Usuario f where f.situacao = 1 order by nome";
+		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+		List<Usuario> userList = query.list();
+		return userList;
+	}
 }

@@ -20,15 +20,14 @@ public class BancoService implements IBancoService {
 
 	@Override
 	@Transactional
-	public void SalvarOuAlterar(Banco banco) {
-		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
-		String fazendoValidacao = validandoCampos(banco);
-		if (fazendoValidacao == null && fazendoValidacao.isEmpty()) {
+	public boolean SalvarOuAlterar(Banco banco) {
+		boolean fazendoValidacao = validandoCampos(banco);
+		if (fazendoValidacao == false) {
 			bancoDao.SalvarOuAlterar(banco);
-			alertFeedback.success("Cadastro com sucesso!!");
 		} else {
-			alertFeedback.error(fazendoValidacao);
+			return fazendoValidacao;
 		}
+		return fazendoValidacao;
 	}
 
 	@Override
@@ -59,12 +58,12 @@ public class BancoService implements IBancoService {
 		return bancoDao.alterar(id);
 	}
 
-	public String validandoCampos(Banco banco) {
+	public boolean validandoCampos(Banco banco) {
 
-		String valida = "";
+		boolean valida = false;
 
 		if (banco.getNome() == null) {
-			valida = "Campo Nome é obrigatório!";
+			valida = true;
 		}
 
 		return valida;

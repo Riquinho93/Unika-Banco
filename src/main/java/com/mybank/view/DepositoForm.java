@@ -32,7 +32,7 @@ public class DepositoForm extends HomePage {
 
 		modalWindowSucesso = new ModalWindow("modalWindowSucesso");
 		// Tamanho
-		modalWindowSucesso.setInitialHeight(200);
+		modalWindowSucesso.setInitialHeight(300);
 		modalWindowSucesso.setInitialWidth(600);
 		modalWindowSucesso.setOutputMarkupId(true);
 		add(modalWindowSucesso);

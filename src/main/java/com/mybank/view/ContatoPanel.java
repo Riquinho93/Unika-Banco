@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -84,10 +85,26 @@ public class ContatoPanel extends Panel {
 		form.add(numeroConta, cpf);
 		form.add(ajaxButton);
 		add(form);
+		voltar();
 
 	}
 
 	public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
 	}
+	
+	private void voltar() {
+		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
 
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(ContatoForm.class);
+			}
+		};
+
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		form.add(ajaxLink);
+	}
 }

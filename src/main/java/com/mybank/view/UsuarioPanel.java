@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -154,12 +155,29 @@ public class UsuarioPanel extends Panel {
 		formFunc.add(nome, identidade, cpf, renda, telefone, email, cep, logradouro, numero, bairro, cidade, estado);
 		formFunc.add(button);
 		add(formFunc);
+		voltar();
 
 	}
 
 	// Enviando os dados para o HomePage
 	public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 
+	}
+	
+	private void voltar() {
+		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(UsuarioForm.class);
+			}
+		};
+
+		ajaxLink.setOutputMarkupId(true);
+		add(ajaxLink);
+		formFunc.add(ajaxLink);
 	}
 
 }

@@ -17,6 +17,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.mybank.model.Situacao;
 import com.mybank.model.Usuario;
 import com.mybank.service.UsuarioService;
 
@@ -24,15 +25,15 @@ public class SolicitarAberturaConta extends WebPage {
 
 	private static final long serialVersionUID = 1L;
 
+	private Form<Usuario> form;
+
 	@SpringBean(name = "usuarioService")
 	private UsuarioService usuarioService;
 
 	public SolicitarAberturaConta() {
 
-		add(voltar());
-
 		Usuario usuario = new Usuario();
-		Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
+		form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
 		TextField<String> nome = new TextField<>("nome");
 		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
@@ -61,8 +62,8 @@ public class SolicitarAberturaConta extends WebPage {
 		numero.setOutputMarkupId(true);
 		cep.setOutputMarkupId(true);
 
-		form.add(nome, identidade, cpf, renda, telefone, email, nomeBanco, logradouro, bairro,
-				cidade, estado, numero, cep);
+		form.add(nome, identidade, cpf, renda, telefone, email, nomeBanco, logradouro, bairro, cidade, estado, numero,
+				cep);
 
 		RadioGroup<Boolean> radioGroupAtivo = new RadioGroup<Boolean>("sexo");
 		radioGroupAtivo.setRequired(true);
@@ -101,9 +102,10 @@ public class SolicitarAberturaConta extends WebPage {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 				Usuario user = (Usuario) form.getModelObject();
+				user.setSituacao(Situacao.DESATIVADO);
 				usuarioService.SalvarOuAlterar(user);
-				target.add(nome, identidade, cpf, renda, telefone, email, cep, logradouro,
-						numero, bairro, cidade, estado);
+				target.add(nome, identidade, cpf, renda, telefone, email, cep, logradouro, numero, bairro, cidade,
+						estado);
 
 				setResponsePage(Login.class);
 			}
@@ -113,9 +115,10 @@ public class SolicitarAberturaConta extends WebPage {
 		button.setOutputMarkupId(true);
 		form.add(button);
 		add(form);
+		voltar();
 	}
 
-	private AjaxLink<Login> voltar() {
+	private void voltar() {
 		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
 
 			private static final long serialVersionUID = 1L;
@@ -128,7 +131,7 @@ public class SolicitarAberturaConta extends WebPage {
 
 		ajaxLink.setOutputMarkupId(true);
 		add(ajaxLink);
-		return ajaxLink;
+		form.add(ajaxLink);
 	}
 
 }

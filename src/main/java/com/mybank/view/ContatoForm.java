@@ -30,7 +30,7 @@ public class ContatoForm extends HomePage {
 
 	private static final long serialVersionUID = 1L;
 
-	private Form<Contato> form = new Form<Contato>("form");
+	private Form<Contato> form;
 	private Contato filtrar;
 	private Form<Contato> formFiltrar;
 	private List<Contato> listaContatos = new LinkedList<>();
@@ -43,7 +43,12 @@ public class ContatoForm extends HomePage {
 	@SpringBean(name = "contatoService")
 	private ContatoService contatoService;
 
+	public ContatoForm() {
+	}
+
 	public ContatoForm(Conta conta) {
+
+		form = new Form<Contato>("form");
 
 		add(container());
 		add(filtrar());
@@ -143,7 +148,7 @@ public class ContatoForm extends HomePage {
 					search.addFilterLike("usuario.nome", "%" + filtrar.getUsuario().getNome() + "%");
 				}
 
-//				listaContatos = contatoService.search(search);
+				listaContatos = contatoService.search(search);
 				target.add(listContainer);
 				super.onSubmit(target, form);
 			}

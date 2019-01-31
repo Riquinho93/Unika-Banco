@@ -24,7 +24,7 @@ public class ContaDao extends GenericDao<Conta, Serializable> {
 
 	// @Transactional(readOnly = true)
 	public Conta alterar(Integer id) {
-		String hql = "select c from Conta c left join fetch Usuario u, Banco b " + "where c.id = :id";
+		String hql = "select c from Conta c join fetch c.usuario u join fetch c.banco b " + "where c.id = :id";
 
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		query.setParameter("id", id);
@@ -32,21 +32,4 @@ public class ContaDao extends GenericDao<Conta, Serializable> {
 		return user;
 	}
 	
-	@SuppressWarnings("unchecked")
-	// @Transactional(readOnly = true)
-	public List<Usuario> listarUsuarios() {
-		String hql = "select f from Usuario f ";
-		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
-		List<Usuario> userList = query.list();
-		return userList;
-	}
-	
-	@SuppressWarnings("unchecked")
-	// @Transactional(readOnly = true)
-	public List<Banco> listarBancos() {
-		String hql = "select f from Banco f";
-		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
-		List<Banco> userList = query.list();
-		return userList;
-	}
 }

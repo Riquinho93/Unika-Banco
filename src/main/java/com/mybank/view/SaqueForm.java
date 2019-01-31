@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -20,7 +21,8 @@ public class SaqueForm extends HomePage {
 
 	private static final long serialVersionUID = 1L;
 
-	Saque saque = new Saque();
+	private Saque saque = new Saque();
+	private ModalWindow modalWindowSucesso;
 
 	@SpringBean(name = "contaService")
 	private ContaService contaService;
@@ -39,6 +41,13 @@ public class SaqueForm extends HomePage {
 		senha.setOutputMarkupId(true);
 		valor.setOutputMarkupId(true);
 
+		modalWindowSucesso = new ModalWindow("modalWindowSucesso");
+		// Tamanho
+		modalWindowSucesso.setInitialHeight(300);
+		modalWindowSucesso.setInitialWidth(600);
+		modalWindowSucesso.setOutputMarkupId(true);
+		add(modalWindowSucesso);
+
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
 			private static final long serialVersionUID = 1L;
@@ -49,7 +58,12 @@ public class SaqueForm extends HomePage {
 				double valorConta = valor.getConvertedInput();
 				String senhaConta = senha.getConvertedInput();
 				contaService.saque(conta, valorConta, senhaConta);
+				TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId());
 				target.add(senha, valor);
+				transacaoSucesso.setOutputMarkupId(true);
+				add(transacaoSucesso);
+				modalWindowSucesso.setContent(transacaoSucesso);
+				modalWindowSucesso.show(target);
 				saque = new Saque();
 				form.clearInput();
 				form.modelChanged();

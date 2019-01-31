@@ -39,10 +39,15 @@ public class BancoForm extends HomePage {
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
+	AlertFeedback alertFeedback;
+	
 	@SpringBean(name = "bancoService")
 	private BancoService bancoService;
 
 	public BancoForm() {
+		
+		alertFeedback = new AlertFeedback("feedbackMessage");
+		alertFeedback.setOutputMarkupId(true);
 		
 		add(container());
 		add(filtrar());
@@ -76,7 +81,13 @@ public class BancoForm extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Banco banco) {
-						bancoService.SalvarOuAlterar(banco);
+						boolean retorno = bancoService.SalvarOuAlterar(banco);
+						if(retorno == false) {
+							alertFeedback.success("Cadastro com Sucesso");
+						
+						}else {
+							alertFeedback.error("Campo Obrigatorio");
+						}
 						listaBancos.add(banco);
 						target.add(listContainer);
 						modalWindow.close(target);
@@ -88,6 +99,9 @@ public class BancoForm extends HomePage {
 				modalWindow.show(target);
 			}
 		});
+		
+		add(alertFeedback);
+		
 	}
 
 	private WebMarkupContainer container() {
@@ -199,11 +213,13 @@ public class BancoForm extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoExcluir(AjaxRequestTarget target, Banco banco) {
-						if (banco.isAnswer() == true) {
-							// enderecoService.excluir(index);
+						if (banco.isAnswer()) {
 							bancoService.excluir(index);
 							listaBancos = bancoService.listar();
 							target.add(listContainer);
+							alertFeedback.success("Removido com sucesso");
+						}else {
+							alertFeedback.error("Nome Obrigatorio!!");
 						}
 						modalWindowDel.close(target);
 					};

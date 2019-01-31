@@ -66,6 +66,8 @@ public class UsuarioForm extends HomePage {
 
 		add(filtrar());
 
+		add(gerarRelatorio(listaUsuarios));
+
 		// add(formEnd);
 
 		// Chamando a listView
@@ -279,7 +281,7 @@ public class UsuarioForm extends HomePage {
 						ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
 						handler.setContentDisposition(ContentDisposition.ATTACHMENT);
 						// nome do pdf
-						handler.setFileName("Produto.pdf");
+						handler.setFileName("Usuarios.pdf");
 						getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
 					}
 				} catch (JRException e) {

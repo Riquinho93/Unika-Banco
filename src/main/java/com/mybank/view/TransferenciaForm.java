@@ -84,9 +84,6 @@ public class TransferenciaForm extends HomePage {
 
 					if (contaDestino.getUsuario().getCpf() == Integer.parseInt(cpf.getValue())) {
 						if (contaParametro.getSenha().equals(senha.getModelObject())) {
-							System.out.println("Senha1: " + contaDestino.getSenha());
-							System.out.println("Senha2: " + contaParametro.getSenha());
-							System.out.println("Deuuuu Erroooooo");
 							Double num = valor.getConvertedInput();
 							contaService.transferir(contaParametro, contaDestino, num);
 						} else {

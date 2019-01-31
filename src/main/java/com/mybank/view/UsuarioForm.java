@@ -1,6 +1,9 @@
 package com.mybank.view;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.wicket.Component;
@@ -12,19 +15,26 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.handler.resource.ResourceStreamRequestHandler;
+import org.apache.wicket.request.resource.ContentDisposition;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.resource.AbstractResourceStreamWriter;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
+import com.mybank.Relatorio.RelatorioUsuario;
 import com.mybank.model.Endereco;
 import com.mybank.model.Usuario;
 import com.mybank.service.EnderecoService;
 import com.mybank.service.UsuarioService;
+
+import net.sf.jasperreports.engine.JRException;
 
 public class UsuarioForm extends HomePage {
 
@@ -63,8 +73,8 @@ public class UsuarioForm extends HomePage {
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(500);
-		modalWindow.setInitialWidth(900);
+		modalWindow.setInitialHeight(750);
+		modalWindow.setInitialWidth(1200);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 
@@ -236,6 +246,51 @@ public class UsuarioForm extends HomePage {
 		button.setOutputMarkupId(true);
 		formFunc.add(button);
 		return button;
+	}
+
+	// Gerar relatorio de Produto
+	public Link<?> gerarRelatorio(List<Usuario> user) {
+		final RelatorioUsuario r = new RelatorioUsuario();
+		final HashMap<String, Object> usuarios = new HashMap<String, Object>();
+		// Chave para o Jasper
+		usuarios.put("user", user);
+		Link<?> button = new Link<Object>("relatorio") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				try {
+					final byte[] bytes;
+					bytes = r.gerarRelatorio(usuarios);
+					if (bytes != null) {
+						AbstractResourceStreamWriter Stream = new AbstractResourceStreamWriter() {
+
+							private static final long serialVersionUID = 1L;
+
+							@Override
+							public void write(OutputStream output) throws IOException {
+								output.write(bytes);
+								output.close();
+							}
+
+						};
+
+						ResourceStreamRequestHandler handler = new ResourceStreamRequestHandler(Stream);
+						handler.setContentDisposition(ContentDisposition.ATTACHMENT);
+						// nome do pdf
+						handler.setFileName("Produto.pdf");
+						getRequestCycle().scheduleRequestHandlerAfterCurrent(handler);
+					}
+				} catch (JRException e) {
+					e.printStackTrace();
+				}
+
+			}
+		};
+		button.setOutputMarkupId(true);
+		return button;
+
 	}
 
 }

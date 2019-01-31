@@ -23,6 +23,7 @@ import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Banco;
 import com.mybank.model.Usuario;
+import com.mybank.service.AlertFeedback;
 import com.mybank.service.BancoService;
 
 public class BancoForm extends HomePage {
@@ -42,7 +43,7 @@ public class BancoForm extends HomePage {
 	private BancoService bancoService;
 
 	public BancoForm() {
-
+		
 		add(container());
 		add(filtrar());
 
@@ -51,7 +52,7 @@ public class BancoForm extends HomePage {
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
 		modalWindow.setInitialHeight(500);
-		modalWindow.setInitialWidth(700);
+		modalWindow.setInitialWidth(900);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 

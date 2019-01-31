@@ -1,44 +1,47 @@
 <wicket:panel>
-	<div class="container-fluid">
-		<h1>Criando Conta</h1>
-		<form wicket:id="form">
-			<div class="row">
-				<div class="form-group col-sm-6">
-					<Label class="text">Situacao: </label> <select wicket:id="situacao"
-						class="form-control"></select>
-				</div>
-			</div>
-			<div class="row">
-			<div class="form-group col-sm-6">
-				<Label class="text">Nome: </label> <select wicket:id="usuario"
-					class="form-control"></select>
-			</div>
+	<div class="container-fluid"><br />
+		<div class="card">
+			<h5 class="card-header">Criando Conta</h5>
+			<div class="card-body">
+				<form wicket:id="form">
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<Label class="text">Situacao: </label> <select
+								wicket:id="situacao" class="form-control"></select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-4">
+							<Label class="text">Nome: </label> <select wicket:id="usuario"
+								class="form-control"></select>
+						</div>
 
-			<div class="form-group col-md-6">
-				<Label class="text">Banco: </label> <select wicket:id="banco"
-					class="form-control"></select>
+						<div class="form-group col-md-4">
+							<Label class="text">Banco: </label> <select wicket:id="banco"
+								class="form-control"></select>
+						</div>
+						<div class="col-md-4">
+							<label class="text">Numero Conta: *</label> <input
+								wicket:id="numeroConta" type="number" class="form-control"
+								placeholder="Digite o numero conta" />
+						</div>
+						<div class="form-group col-md-4">
+							<Label class="text">Tipo: </label> <select wicket:id="tipoConta"
+								class="form-control"></select>
+						</div>
+						<div class="col-md-4">
+							<label class="text">Senha: *</label> <input wicket:id="senha"
+								class="form-control" type="password" placeholder="senha">
+						</div>
+						<div class="col-md-4">
+							<label class="text">ConfirmarSenha: *</label> <input
+								wicket:id="confirmarSenha" class="form-control" type="password"
+								placeholder="senha">
+						</div>
+					</div>
+					<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
+				</form>
 			</div>
-			<div class="col-md-6">
-				<label class="text">Numero Conta: *</label> <input
-					wicket:id="numeroConta" type="number" class="form-control"
-					placeholder="Digite o numero conta" />
-			</div>
-			<div class="form-group col-md-6">
-				<Label class="text">Tipo: </label> <select wicket:id="tipoConta"
-					class="form-control"></select>
-			</div>
-			<div class="col-md-6">
-				<label class="text">Senha: *</label> <input wicket:id="senha"
-					class="form-control" type="password" placeholder="senha">
-			</div>
-			<div class="col-md-6">
-				<label class="text">ConfirmarSenha: *</label> <input
-					wicket:id="confirmarSenha" class="form-control" type="password"
-					placeholder="senha">
-			</div>
-	</div>
-	<br />
-	<a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
-	</form>
+		</div>
 	</div>
 </wicket:panel>

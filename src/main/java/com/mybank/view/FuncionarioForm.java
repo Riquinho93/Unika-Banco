@@ -51,8 +51,8 @@ public class FuncionarioForm extends HomePage {
 		
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(400);
-		modalWindow.setInitialWidth(700);
+		modalWindow.setInitialHeight(450);
+		modalWindow.setInitialWidth(1000);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 

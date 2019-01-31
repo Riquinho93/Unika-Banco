@@ -55,8 +55,8 @@ public class ContaForm extends HomePage {
 
 		modalWindow = new ModalWindow("modalWindow");
 		// Tamanho do Modal
-		modalWindow.setInitialHeight(350);
-		modalWindow.setInitialWidth(500);
+		modalWindow.setInitialHeight(500);
+		modalWindow.setInitialWidth(900);
 		modalWindow.setOutputMarkupId(true);
 		add(modalWindow);
 
@@ -144,7 +144,7 @@ public class ContaForm extends HomePage {
 				Search search = new Search(Conta.class);
 
 				if (filtrar.getNumeroConta() != 0) {
-					search.addFilterLike("numeroConta", "%" + filtrar.getNumeroConta() + "%");
+					search.addFilterEqual("numeroConta", filtrar.getNumeroConta());
 				}
 
 				listaContas = contaService.search(search);

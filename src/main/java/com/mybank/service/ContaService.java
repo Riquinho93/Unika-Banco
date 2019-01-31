@@ -67,10 +67,6 @@ public class ContaService implements IContaService {
 
 	public void depositar(Integer numeroConta, double valor) {
 
-		// IMPORTANTE
-		// Tem uma taxa na mesma quantia do Santander e Itau de R$ 1,90
-		// OBS:Mesmo banco não tem taxa
-
 		Search search = new Search(Conta.class);
 		search.addFilterEqual("numeroConta", numeroConta);
 
@@ -78,24 +74,23 @@ public class ContaService implements IContaService {
 
 		if (lista != null && !lista.isEmpty()) {
 			Conta conta = lista.get(0);
-			double total = conta.getSaldo() + valor - 1.9;
+			double total = conta.getSaldo() + valor;
 			conta.setSaldo(total);
 			SalvarOuAlterar(conta);
 		} else {
-			System.out.println("Erro na ContaService!!!");
+			System.out.println("Conta não Existe!!!");
 		}
 
 	}
 
-	public void saque(Conta conta, double valor, String senha) {
+	public void saque(Conta conta,double valor, String senha) {
 
 		// IMPORTANTE
-		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2,12
+		// Tem uma taxa na mesma quantia do Banco 24 horas de R$ 2
 
 		if (senha.equals(conta.getSenha())) {
-			System.out.println("Slado: " + conta.getSaldo());
 			if (conta.getSaldo() >= valor) {
-				conta.setSaldo(conta.getSaldo() - valor - 2.12);
+				conta.setSaldo(conta.getSaldo() - valor - 2);
 				SalvarOuAlterar(conta);
 			} else {
 				System.out.println("Saldo Infuficente!!!");
@@ -109,8 +104,8 @@ public class ContaService implements IContaService {
 	public void transferir(Conta contaUsuario, Conta contaDestinario, double valor) {
 		// IMPORTANTE
 		// Tem uma taxa na mesma quantia do Banco Santader de R$17,40 por evento.
+		
 		if (contaUsuario.getBanco().equals(contaDestinario.getBanco())) {
-			System.out.println("Teste Completo");
 			if (contaUsuario.getSaldo() >= valor) {
 				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor);
 				contaDestinario.setSaldo(contaDestinario.getSaldo() + valor);
@@ -121,7 +116,7 @@ public class ContaService implements IContaService {
 			}
 		} else {
 			if (contaUsuario.getSaldo() >= valor) {
-				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor - 17.40);
+				contaUsuario.setSaldo(contaUsuario.getSaldo() - valor - 0.58);
 				contaDestinario.setSaldo(contaDestinario.getSaldo() + valor);
 				SalvarOuAlterar(contaUsuario);
 				SalvarOuAlterar(contaDestinario);

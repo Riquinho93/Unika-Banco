@@ -24,7 +24,7 @@ public class ContaDao extends GenericDao<Conta, Serializable> {
 
 	// @Transactional(readOnly = true)
 	public Conta alterar(Integer id) {
-		String hql = "select f from Conta f " + "where f.id = :id";
+		String hql = "select c from Conta c left join fetch Usuario u, Banco b " + "where c.id = :id";
 
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		query.setParameter("id", id);

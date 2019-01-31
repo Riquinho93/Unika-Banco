@@ -4,23 +4,30 @@
 	<meta charset="utf-8" />
 </wicket:head>
 <body>
-<wicket:panel>
-	<div class="container-fluid">
-		<h1>Criando Contatos</h1>
-		<form wicket:id="form">
-			<div class="row">
-				<div class="col-md-6">
-					<label class="text">Numero Conta: *</label> <input wicket:id="conta.numeroConta" type="number"
-						class="form-control" placeholder="Digite o numero conta" />
-				</div>
-				<div class="col-md-6">
-					<label class="text">CPF: *</label> <input wicket:id="usuario.cpf" type="number"
-						class="number form-control" placeholder="Digite o n° do CPF" />
+	<wicket:panel>
+		<div class="container-fluid"><br />
+			<div class="card">
+				<h5 class="card-header">Criando Contato</h5>
+				<div class="card-body">
+					<form wicket:id="form">
+						<div class="row">
+							<div class="col-md-6">
+								<label class="text">Numero Conta: *</label> <input
+									wicket:id="conta.numeroConta" type="number"
+									class="form-control" placeholder="Digite o numero conta" />
+							</div>
+							<div class="col-md-6">
+								<label class="text">CPF: *</label> <input
+									wicket:id="usuario.cpf" type="number"
+									class="number form-control" placeholder="Digite o n° do CPF" />
+							</div>
+						</div>
+						<br /> <a wicket:id="salvar" class="btn btn-success"
+							type="submit">Salvar</a>
+					</form>
 				</div>
 			</div>
-			<br /> <a wicket:id="salvar" class="btn btn-success" type="submit">Salvar</a>
-		</form>
-	</div>
-</wicket:panel>
+		</div>
+	</wicket:panel>
 </body>
 </html>

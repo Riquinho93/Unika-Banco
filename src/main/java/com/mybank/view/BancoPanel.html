@@ -11,50 +11,54 @@
 </wicket:head> -->
 
 <wicket:panel>
-	<div class="container-fluid">
-		<h1>Cadastro de Banco</h1>
-		<form wicket:id="form">
-			<div class="row">
-				<div class="col-md-3">
-					<label class="text">Nome: *</label> <input wicket:id="nome"
-						type="text" class="form-control" placeholder="Digite o nome" />
-				</div>
-				<div class="col-md-3">
-					<label class="text">Cep: *</label> <input wicket:id="endereco.cep"
-						name="cep" id="#cep" type="text" class="form-control" size="10"
-						maxlength="9" onblur="pesquisacep(this.value);"
-						placeholder="Digite o cep" />
-				</div>
-				<div class="col-md-4">
-					<label class="text">Logradouro: *</label> <input
-						wicket:id="endereco.logradouro" name="rua" id="rua" type="text"
-						class="form-control" placeholder="Digite o logradouro" />
-				</div>
-				<div class="col-md-3">
-					<label class="text">Numero: *</label> <input
-						wicket:id="endereco.numero" type="number"
-						class="number form-control" placeholder="Digite o n°" />
-				</div>
+	<div class="container-fluid"><br />
+		<div class="card">
+			<h5 class="card-header">Cadastro de Banco</h5>
+			<div class="card-body">
+				<form wicket:id="form">
+					<div class="row">
+						<div class="col-md-4">
+							<label class="text">Nome: *</label> <input wicket:id="nome"
+								type="text" class="form-control" placeholder="Digite o nome" />
+						</div>
+						<div class="col-md-3">
+							<label class="text">Cep: *</label> <input
+								wicket:id="endereco.cep" name="cep" id="#cep" type="text"
+								class="form-control" size="10" maxlength="9"
+								onblur="pesquisacep(this.value);" placeholder="Digite o cep" />
+						</div>
+						<div class="col-md-4">
+							<label class="text">Logradouro: *</label> <input
+								wicket:id="endereco.logradouro" name="rua" id="rua" type="text"
+								class="form-control" placeholder="Digite o logradouro" />
+						</div>
+						<div class="col-md-3">
+							<label class="text">Numero: *</label> <input
+								wicket:id="endereco.numero" type="number"
+								class="number form-control" placeholder="Digite o n°" />
+						</div>
 
-				<div class="col-md-4">
-					<label class="text">Bairro: *</label> <input
-						wicket:id="endereco.bairro" name="bairro" id="bairro" size="40"
-						type="text" class="form-control" placeholder="Digite o bairro" />
-				</div>
-				<div class="col-md-4">
-					<label class="text">Cidade: *</label> <input
-						wicket:id="endereco.cidade" name="cidade" id="cidade" size="40"
-						type="text" class="form-control" placeholder="Digite a cidade" />
-				</div>
-				<div class="col-md-3">
-					<label class="text">Estado: *</label> <input
-						wicket:id="endereco.estado" name="uf" id="uf" size="2" type="text"
-						class="form-control" placeholder="Digite o estado" />
-				</div>
+						<div class="col-md-4">
+							<label class="text">Bairro: *</label> <input
+								wicket:id="endereco.bairro" name="bairro" id="bairro" size="40"
+								type="text" class="form-control" placeholder="Digite o bairro" />
+						</div>
+						<div class="col-md-4">
+							<label class="text">Cidade: *</label> <input
+								wicket:id="endereco.cidade" name="cidade" id="cidade" size="40"
+								type="text" class="form-control" placeholder="Digite a cidade" />
+						</div>
+						<div class="col-md-3">
+							<label class="text">Estado: *</label> <input
+								wicket:id="endereco.estado" name="uf" id="uf" size="2"
+								type="text" class="form-control" placeholder="Estado" />
+						</div>
 
+					</div>
+					<br /> <a wicket:id="submit" class="btn btn-success" type="submit">Salvar</a>
+				</form>
 			</div>
-			<br /> <a wicket:id="submit" class="btn btn-success" type="submit">Salvar</a>
-		</form>
+		</div>
 	</div>
 	<!-- Adicionando Javascript -->
 	<script type="text/javascript">

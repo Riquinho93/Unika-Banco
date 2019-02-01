@@ -12,7 +12,16 @@
 </wicket:head>
 <body>
 	<wicket:extend>
-
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			function sucessCadastro() {
+				swal("Cadastrado com sucesso!", "!", "success");
+			}
+			function sucessDelet(){
+				swal("Cadastrado excluido com sucesso!", "!", "success");
+			}
+		</script>
+		
 		<div class="container" style="background-color: white"><br />
 			<h1>Usuarios</h1>
 			<br>

@@ -24,10 +24,18 @@
 				}, 4000);
 			}, false);
 		</script>
+		
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			function sucessCadastro() {
+				swal("Cadastrado com sucesso!", "!", "success");
+			}
+			function sucessDelet(){
+				swal("Cadastrado excluido com sucesso!", "!", "success");
+			}
+		</script>
+		
 
-		<div id="goaway">
-			<span wicket:id="feedbackMessage"></span>
-		</div>
 		<div class="container" style="background-color: white">
 			<h1>Bancos</h1>
 			<br>

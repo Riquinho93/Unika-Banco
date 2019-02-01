@@ -9,7 +9,7 @@ import com.mybank.model.Banco;
 public interface IBancoService {
 	
 
-	public boolean SalvarOuAlterar(Banco banco);
+	public List<String> SalvarOuAlterar(Banco banco);
 
 	public Banco buscarPorId(Integer id);
 

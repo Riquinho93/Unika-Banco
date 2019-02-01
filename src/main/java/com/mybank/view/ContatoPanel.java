@@ -9,6 +9,7 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -40,6 +41,10 @@ public class ContatoPanel extends Panel {
 
 	public ContatoPanel(String id) {
 		super(id);
+
+		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+		feedbackPanel.setOutputMarkupId(true);
+
 		contato = new Contato();
 
 		form = new Form<Contato>("form", new CompoundPropertyModel<Contato>(contato));
@@ -67,20 +72,30 @@ public class ContatoPanel extends Panel {
 				search2.addFilterEqual("cpf", cpf.getModelObject());
 				List<Usuario> listausuarios = usuarioService.search(search2);
 				Usuario usuario = listausuarios.get(0);
+				if (numeroConta.getModelObject() == null) {
+					feedbackPanel.error("Numero da conta é obrigatorio!");
+				}
+				if (cpf.getModelObject() == null) {
+					feedbackPanel.error("Cpf é obrigatorio!");
+				}
+				if (conta.getNumeroConta() == null) {
+					feedbackPanel.error("Conta inexistente!");
+				}
+				if (conta.getUsuario().getId() != usuario.getId()) {
+					feedbackPanel.error("Dados invalidos!");
+				}
 
 				if (conta.getUsuario().getId() == usuario.getId()) {
 					listacontas.add(conta);
 					contato.setConta(conta);
 					contato.setUsuario(usuario);
 					executarAoSalvar(target, contato);
-				} else {
-					System.out.println("Erro no ContatoPanel");
 				}
-
+				target.add(feedbackPanel);
 				target.add(numeroConta, cpf);
 			}
 		};
-
+		add(feedbackPanel);
 		ajaxButton.setOutputMarkupId(true);
 		form.add(numeroConta, cpf);
 		form.add(ajaxButton);
@@ -91,7 +106,7 @@ public class ContatoPanel extends Panel {
 
 	public void executarAoSalvar(AjaxRequestTarget target, Contato contato) {
 	}
-	
+
 	private void voltar() {
 		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
 

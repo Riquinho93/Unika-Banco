@@ -3,13 +3,17 @@ package com.mybank.view;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 
 import com.mybank.model.Banco;
+import com.mybank.service.AlertFeedback;
 
 public class BancoPanel extends Panel {
 
@@ -24,6 +28,9 @@ public class BancoPanel extends Panel {
 	public BancoPanel(String id, Banco banco) {
 		super(id);
 
+		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+		feedbackPanel.setOutputMarkupId(true);
+
 		form = new Form<Banco>("form", new CompoundPropertyModel<Banco>(banco));
 
 		TextField<String> nome = new TextField<>("nome");
@@ -33,7 +40,7 @@ public class BancoPanel extends Panel {
 		TextField<String> bairro = new TextField<>("endereco.bairro");
 		TextField<String> cidade = new TextField<>("endereco.cidade");
 		TextField<String> estado = new TextField<>("endereco.estado");
-		
+
 		nome.setOutputMarkupId(true);
 		cep.setOutputMarkupId(true);
 		logradouro.setOutputMarkupId(true);
@@ -50,17 +57,35 @@ public class BancoPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 
-				executarAoSalvar(target, banco);
-				target.add(nome);
-				target.add(cep);
-				target.add(logradouro);
-				target.add(numero);
-				target.add(bairro);
-				target.add(cidade);
-				target.add(estado);
+				if (nome.getModelObject() == null) {
+					feedbackPanel.error("Nome é obrigatorio");
+				}
+				if (logradouro.getModelObject() == null) {
+					feedbackPanel.error("logradouro é obrigatorio!");
+				}
+				if (bairro.getModelObject() == null) {
+					feedbackPanel.error("Bairro é obrigatorio");
+				}
+				if (cidade.getModelObject() == null) {
+					feedbackPanel.error("Cidade é obrigatorio");
+				}
+				if (estado.getModelObject() == null) {
+					feedbackPanel.error("Estado é obrigatorio");
+				} else {
 
+					executarAoSalvar(target, banco);
+					target.add(nome);
+					target.add(cep);
+					target.add(logradouro);
+					target.add(numero);
+					target.add(bairro);
+					target.add(cidade);
+					target.add(estado);
+				}
+				target.add(feedbackPanel);
 			}
 		};
+		add(feedbackPanel);
 		button.setOutputMarkupId(true);
 		form.add(nome, cep, logradouro, numero, bairro, cidade, estado);
 		form.add(button);

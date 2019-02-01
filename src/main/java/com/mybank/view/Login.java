@@ -16,6 +16,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.googlecode.genericdao.search.Search;
 import com.mybank.model.Conta;
+import com.mybank.model.Funcionario;
+import com.mybank.model.Usuario;
 import com.mybank.service.AlertFeedback;
 import com.mybank.service.ContaService;
 
@@ -53,9 +55,13 @@ public class Login extends WebPage {
 			protected void onSubmit() {
 				super.onSubmit();
 				Search search = new Search(Conta.class);
+				Search search2 = new Search(Funcionario.class);
 
 				search.addFilterEqual("numeroConta", numeroConta.getModelObject());
 				search.addFilterEqual("senha", senha.getModelObject());
+
+				search2.addFilterEqual("numeroConta", numeroConta.getModelObject());
+				search2.addFilterEqual("senha", senha.getModelObject());
 
 				List<Conta> lista = contaService.search(search);
 

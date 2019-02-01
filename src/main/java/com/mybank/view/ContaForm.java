@@ -82,6 +82,7 @@ public class ContaForm extends HomePage {
 					public void executarAoSalvar(AjaxRequestTarget target, Conta conta) {
 						contaService.SalvarOuAlterar(conta);
 						listaContas.add(conta);
+						target.appendJavaScript("sucessCadastro();");
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -204,10 +205,10 @@ public class ContaForm extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoExcluir(AjaxRequestTarget target, Conta conta) {
-						if (conta.isAnswer() == true) {
-							// enderecoService.excluir(index);
+						if (conta.isAnswer()) {
 							contaService.excluir(index);
 							listaContas = contaService.listar();
+							target.appendJavaScript("sucessDelet();");
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

@@ -1,10 +1,21 @@
-<!--  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:head>
 	<meta charset="UTF-8">
-</wicket:head> -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</wicket:head>
 <body>
 	<wicket:extend>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			function sucessCadastro() {
+				swal("Cadastrado com sucesso!", "!", "success");
+			}
+			function sucessDelet() {
+				swal("Cadastrado excluido com sucesso!", "!", "success");
+			}
+		</script>
+
 		<div class="container" style="background-color: white">
 			<h1>Contatos</h1>
 			<br>
@@ -53,3 +64,4 @@
 		</div>
 	</wicket:extend>
 </body>
+</html>

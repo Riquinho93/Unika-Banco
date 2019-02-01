@@ -23,7 +23,6 @@ import com.googlecode.genericdao.search.Search;
 import com.mybank.HomePage;
 import com.mybank.model.Banco;
 import com.mybank.model.Usuario;
-import com.mybank.service.AlertFeedback;
 import com.mybank.service.BancoService;
 
 public class BancoForm extends HomePage {
@@ -39,16 +38,12 @@ public class BancoForm extends HomePage {
 	private WebMarkupContainer listContainer = null;
 	private ModalWindow modalWindow;
 	private ModalWindow modalWindowDel;
-	AlertFeedback alertFeedback;
-	
+
 	@SpringBean(name = "bancoService")
 	private BancoService bancoService;
 
 	public BancoForm() {
-		
-		alertFeedback = new AlertFeedback("feedbackMessage");
-		alertFeedback.setOutputMarkupId(true);
-		
+
 		add(container());
 		add(filtrar());
 
@@ -81,13 +76,11 @@ public class BancoForm extends HomePage {
 					private static final long serialVersionUID = 1L;
 
 					public void executarAoSalvar(AjaxRequestTarget target, Banco banco) {
-						boolean retorno = bancoService.SalvarOuAlterar(banco);
-						if(retorno == false) {
-							alertFeedback.success("Cadastro com Sucesso");
-						
-						}else {
-							alertFeedback.error("Campo Obrigatorio");
-						}
+						List<String> listaMessagens = new ArrayList<>();
+						listaMessagens = bancoService.SalvarOuAlterar(banco);
+						if (listaMessagens == null)
+							target.appendJavaScript("sucessCadastro();");
+
 						listaBancos.add(banco);
 						target.add(listContainer);
 						modalWindow.close(target);
@@ -99,9 +92,7 @@ public class BancoForm extends HomePage {
 				modalWindow.show(target);
 			}
 		});
-		
-		add(alertFeedback);
-		
+
 	}
 
 	private WebMarkupContainer container() {
@@ -216,10 +207,8 @@ public class BancoForm extends HomePage {
 						if (banco.isAnswer()) {
 							bancoService.excluir(index);
 							listaBancos = bancoService.listar();
+							target.appendJavaScript("sucessDelet();");
 							target.add(listContainer);
-							alertFeedback.success("Removido com sucesso");
-						}else {
-							alertFeedback.error("Nome Obrigatorio!!");
 						}
 						modalWindowDel.close(target);
 					};

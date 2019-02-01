@@ -85,6 +85,7 @@ public class ContatoForm extends HomePage {
 						contatoService.SalvarOuAlterar(contato);
 						target.add(listContainer);
 						listaContatos = contatoService.listar();
+						target.appendJavaScript("sucessCadastro();");
 						modalWindow.close(target);
 					};
 				};
@@ -176,9 +177,9 @@ public class ContatoForm extends HomePage {
 
 					public void executarAoExcluir(AjaxRequestTarget target, Contato contato) {
 						if (contato.isAnswer() == true) {
-							// enderecoService.excluir(index);
 							contatoService.excluir(index);
 							listaContatos = contatoService.listar();
+							target.appendJavaScript("sucessDelet();");
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

@@ -28,8 +28,7 @@ public class HomePage extends WebPage {
 			setResponsePage(Login.class);
 			return;
 		}
-		// UsuarioForm usuarioForm = new UsuarioForm();
-		// usuarioForm.setEnabled(false);
+		
 		add(usuarioForm());
 		add(telaPrincipal());
 		add(bancoForm());

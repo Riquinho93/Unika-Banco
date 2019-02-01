@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.Radio;
 import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -39,6 +40,10 @@ public class UsuarioPanel extends Panel {
 
 	public UsuarioPanel(String id, Usuario usuario) {
 		super(id);
+
+		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+		feedbackPanel.setOutputMarkupId(true);
+
 		formFunc = new Form<Usuario>("formFunc", new CompoundPropertyModel<Usuario>(usuario));
 
 		TextField<String> nome = new TextField<>("nome");
@@ -103,29 +108,34 @@ public class UsuarioPanel extends Panel {
 		data.setOutputMarkupId(true);
 		formFunc.add(data);
 
-		//Funcao
-		  ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
-		  IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
-		  
-		  private static final long serialVersionUID = 1L;
-		  
-		  @Override protected List<Funcao> load() { return Funcao.funcoes(); } };
-		  
-		  DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model,
-		  renderer);
-		  
-		  //Situacao
-		  ChoiceRenderer<Situacao> renderer2 = new ChoiceRenderer<Situacao>("descricao");
-		  IModel<List<Situacao>> model2 = new LoadableDetachableModel<List<Situacao>>() {
-		  
-		  private static final long serialVersionUID = 1L;
-		  
-		  @Override protected List<Situacao> load() { return Situacao.situacao(); } };
-		  
-		  DropDownChoice<Situacao> situacoes = new DropDownChoice<>("situacao", model2,
-		  renderer2);
+		// Funcao
+		ChoiceRenderer<Funcao> renderer = new ChoiceRenderer<Funcao>("descricao");
+		IModel<List<Funcao>> model = new LoadableDetachableModel<List<Funcao>>() {
 
-		 
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<Funcao> load() {
+				return Funcao.funcoes();
+			}
+		};
+
+		DropDownChoice<Funcao> funcoes = new DropDownChoice<>("funcao", model, renderer);
+
+		// Situacao
+		ChoiceRenderer<Situacao> renderer2 = new ChoiceRenderer<Situacao>("descricao");
+		IModel<List<Situacao>> model2 = new LoadableDetachableModel<List<Situacao>>() {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<Situacao> load() {
+				return Situacao.situacao();
+			}
+		};
+
+		DropDownChoice<Situacao> situacoes = new DropDownChoice<>("situacao", model2, renderer2);
+
 		AjaxButton button = new AjaxButton("submit") {
 
 			private static final long serialVersionUID = 994698440577863113L;
@@ -134,22 +144,65 @@ public class UsuarioPanel extends Panel {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 
-				executarAoSalvar(target, usuario);
-				target.add(nome);
-				target.add(identidade);
-				target.add(cpf);
-				target.add(telefone);
-				target.add(email);
-				target.add(cep);
-				target.add(logradouro);
-				target.add(numero);
-				target.add(bairro);
-				target.add(cidade);
-				target.add(estado);
-				target.add(renda);
+				if (nome.getModelObject() == null) {
+					feedbackPanel.error("Nome é obrigatorio!");
+				}
+				if (identidade.getModelObject() == null) {
+					feedbackPanel.error("Identidade é obrigatorio!");
+				}
+				if (cpf.getModelObject() == null) {
+					feedbackPanel.error("Cpf é obrigatorio!");
+				}
+				if (telefone.getModelObject() == null) {
+					feedbackPanel.error("Telefone é obrigatorio!");
+				}
+				if (renda.getModelObject() == null) {
+					feedbackPanel.error("Renda é obrigatorio!");
+				}
+				if (radioGroupAtivo.getModelObject() == null) {
+					feedbackPanel.error("Sexo é obrigatorio!");
+				}
+				if (data.getModelObject() == null) {
+					feedbackPanel.error("Data de Nascimento é obrigatorio!");
+				}
+				if (funcoes.getModelObject() == null) {
+					feedbackPanel.error("Funcao é obrigatorio!");
+				}
+				if (situacoes.getModelObject() == null) {
+					feedbackPanel.error("Situacao é obrigatorio!");
+				}
+				if (logradouro.getModelObject() == null) {
+					feedbackPanel.error("logradouro é obrigatorio!");
+				}
+				if (bairro.getModelObject() == null) {
+					feedbackPanel.error("Bairro é obrigatorio!");
+				}
+				if (cidade.getModelObject() == null) {
+					feedbackPanel.error("Cidade é obrigatorio!");
+				}
+				if (estado.getModelObject() == null) {
+					feedbackPanel.error("Estado é obrigatorio!");
+				} else {
+
+					executarAoSalvar(target, usuario);
+					target.add(nome);
+					target.add(identidade);
+					target.add(cpf);
+					target.add(telefone);
+					target.add(email);
+					target.add(cep);
+					target.add(logradouro);
+					target.add(numero);
+					target.add(bairro);
+					target.add(cidade);
+					target.add(estado);
+					target.add(renda);
+				}
+				target.add(feedbackPanel);
 
 			}
 		};
+		add(feedbackPanel);
 		button.setOutputMarkupId(true);
 		formFunc.add(funcoes, situacoes);
 		formFunc.add(nome, identidade, cpf, renda, telefone, email, cep, logradouro, numero, bairro, cidade, estado);
@@ -163,7 +216,7 @@ public class UsuarioPanel extends Panel {
 	public void executarAoSalvar(AjaxRequestTarget target, Usuario usuario) {
 
 	}
-	
+
 	private void voltar() {
 		AjaxLink<Login> ajaxLink = new AjaxLink<Login>("voltar") {
 

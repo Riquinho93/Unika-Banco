@@ -103,6 +103,7 @@ public class UsuarioForm extends HomePage {
 						usuarioService.SalvarOuAlterar(usuario);
 						listaUsuarios.add(usuario);
 						listaUsuarios = usuarioService.listar();
+						target.appendJavaScript("sucessCadastro();");
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -202,6 +203,7 @@ public class UsuarioForm extends HomePage {
 
 						usuarioService.SalvarOuAlterar(usuario);
 						listaUsuarios = usuarioService.listar();
+						target.appendJavaScript("sucessCadastro();");
 						target.add(listContainer);
 						modalWindow.close(target);
 					};
@@ -235,6 +237,7 @@ public class UsuarioForm extends HomePage {
 							// enderecoService.excluir(index);
 							usuarioService.excluir(index);
 							listaUsuarios = usuarioService.listar();
+							target.appendJavaScript("sucessDelet();");
 							target.add(listContainer);
 						}
 						modalWindowDel.close(target);

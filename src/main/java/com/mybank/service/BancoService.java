@@ -1,5 +1,6 @@
 package com.mybank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,16 +19,18 @@ public class BancoService implements IBancoService {
 		this.bancoDao = bancoDao;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	@Transactional
-	public boolean SalvarOuAlterar(Banco banco) {
-		boolean fazendoValidacao = validandoCampos(banco);
-		if (fazendoValidacao == false) {
+	public List<String> SalvarOuAlterar(Banco banco) {
+		List<String> listaMessagens = new ArrayList<>();
+		listaMessagens = validandoCampos(banco);
+		if (listaMessagens == null || listaMessagens.isEmpty()) {
 			bancoDao.SalvarOuAlterar(banco);
 		} else {
-			return fazendoValidacao;
+			return listaMessagens;
 		}
-		return fazendoValidacao;
+		return listaMessagens;
 	}
 
 	@Override
@@ -58,14 +61,28 @@ public class BancoService implements IBancoService {
 		return bancoDao.alterar(id);
 	}
 
-	public boolean validandoCampos(Banco banco) {
+	@SuppressWarnings("null")
+	public List<String> validandoCampos(Banco banco) {
 
-		boolean valida = false;
+		List<String> listaMessagens = new ArrayList<>();
+		listaMessagens = null;
 
 		if (banco.getNome() == null) {
-			valida = true;
+			listaMessagens.add("Campo Nome é obrigatorio!");
+		}
+		if (banco.getEndereco().getBairro() == null) {
+			listaMessagens.add("Campo Bairro é obrigatorio!");
+		}
+		if (banco.getEndereco().getLogradouro() == null) {
+			listaMessagens.add("Campo Logradouro é obrigatorio!");
+		}
+		if (banco.getEndereco().getNumero() == null) {
+			listaMessagens.add("Campo Numero é obrigatorio!");
+		}
+		if (banco.getEndereco().getCidade() == null) {
+			listaMessagens.add("Campo Cidade é obrigatorio!");
 		}
 
-		return valida;
+		return listaMessagens;
 	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,12 +30,16 @@ public class Conta implements Serializable {
 	private String confirmarSenha;
 
 	@ManyToOne
-	@JoinColumn(name = "banco")
+	@JoinColumn(name = "idBanco")
 	protected Banco banco;
 
 	@ManyToOne
-	@JoinColumn(name = "usuario")
+	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
+	
+	@OneToOne
+	@JoinColumn(name = "idFuncionario")
+	private Funcionario funcionario;
 
 	private Situacao situacao;
 

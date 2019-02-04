@@ -51,7 +51,7 @@ public class TransferenciaForm extends HomePage {
 		
 		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
 		
-		add(new Label("nome", contaParametro.getUsuario().getNome()));
+//		add(new Label("nome", contaParametro.getUsuario().getNome()));
 		add(new Label("tipoConta", contaParametro.getTipoConta()));
 		add(new Label("numeroConta", contaParametro.getNumeroConta()));
 

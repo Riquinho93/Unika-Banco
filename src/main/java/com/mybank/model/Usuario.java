@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
 	private List<Conta> listacontas;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco")
+	@JoinColumn(name = "idEndereco")
 	protected Endereco endereco;
 	
 	@OneToMany(mappedBy = "usuario", targetEntity = Contato.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

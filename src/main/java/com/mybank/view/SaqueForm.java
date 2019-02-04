@@ -55,16 +55,20 @@ public class SaqueForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				double valorConta = valor.getConvertedInput();
-				String senhaConta = senha.getConvertedInput();
-				contaService.saque(conta, valorConta, senhaConta);
-				TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId());
-				target.add(senha, valor);
-				transacaoSucesso.setOutputMarkupId(true);
-				add(transacaoSucesso);
-				modalWindowSucesso.setContent(transacaoSucesso);
-				modalWindowSucesso.show(target);
-				saque = new Saque();
+				if(valor.getModelObject() > 0) {
+					double valorConta = valor.getConvertedInput();
+					String senhaConta = senha.getConvertedInput();
+					contaService.saque(conta, valorConta, senhaConta);
+					TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId());
+					target.add(senha, valor);
+					transacaoSucesso.setOutputMarkupId(true);
+					add(transacaoSucesso);
+					modalWindowSucesso.setContent(transacaoSucesso);
+					modalWindowSucesso.show(target);
+					saque = new Saque();
+				}else {
+					System.out.println("Digite um valor maior do que 0");
+				}
 				form.clearInput();
 				form.modelChanged();
 				form.setDefaultModelObject(saque);

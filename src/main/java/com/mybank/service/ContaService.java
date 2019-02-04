@@ -15,7 +15,7 @@ import com.mybank.model.Usuario;
 public class ContaService implements IContaService {
 
 	private ContaDao contaDao;
-
+	
 	public void setContaDao(ContaDao contaDao) {
 		this.contaDao = contaDao;
 	}

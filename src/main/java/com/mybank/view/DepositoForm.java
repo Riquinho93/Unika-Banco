@@ -21,7 +21,6 @@ public class DepositoForm extends HomePage {
 	private static final long serialVersionUID = 1L;
 
 	private List<Deposito> listaDepositos = new LinkedList<>();
-	private ModalWindow modalWindowSucesso;
 	private Deposito deposito;
 	@SpringBean(name = "contaService")
 	private ContaService contaService;
@@ -29,13 +28,6 @@ public class DepositoForm extends HomePage {
 	public DepositoForm() {
 		deposito = new Deposito();
 		Form<Deposito> form = new Form<Deposito>("form", new CompoundPropertyModel<Deposito>(deposito));
-
-		modalWindowSucesso = new ModalWindow("modalWindowSucesso");
-		// Tamanho
-		modalWindowSucesso.setInitialHeight(300);
-		modalWindowSucesso.setInitialWidth(600);
-		modalWindowSucesso.setOutputMarkupId(true);
-		add(modalWindowSucesso);
 
 		TextField<Integer> numeroConta = new TextField<>("numeroConta");
 		NumberTextField<Double> valor = new NumberTextField<>("valor");
@@ -50,16 +42,14 @@ public class DepositoForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				int numConta = numeroConta.getConvertedInput();
-				Double valorConta = valor.getConvertedInput();
-				contaService.depositar(numConta, valorConta);
-				TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId()) {
-				};
-				target.add(numeroConta, valor);
-				transacaoSucesso.setOutputMarkupId(true);
-				add(transacaoSucesso);
-				modalWindowSucesso.setContent(transacaoSucesso);
-				modalWindowSucesso.show(target);
+				if(numeroConta.getModelObject() > 0) {
+					int numConta = numeroConta.getConvertedInput();
+					Double valorConta = valor.getConvertedInput();
+					contaService.depositar(numConta, valorConta);
+					target.add(numeroConta, valor);
+				}else {
+					System.out.println("Digite um valor maior do que 0");
+				}
 				deposito = new Deposito();
 				form.clearInput();
 				form.modelChanged();

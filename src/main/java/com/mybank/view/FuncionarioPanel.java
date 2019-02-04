@@ -43,9 +43,9 @@ public class FuncionarioPanel extends Panel {
 		TextField<String> telefone = new TextField<>("telefone");
 		NumberTextField<Integer> identidade = new NumberTextField<>("identidade");
 		NumberTextField<Integer> cpf = new NumberTextField<>("cpf");
-		TextField<Integer> numeroConta = new TextField<Integer>("numeroConta");
-		PasswordTextField senha = new PasswordTextField("senha");
-		PasswordTextField confirmarSenha = new PasswordTextField("confirmarSenha");
+		TextField<Integer> numeroConta = new TextField<Integer>("conta.numeroConta");
+		PasswordTextField senha = new PasswordTextField("conta.senha");
+		PasswordTextField confirmarSenha = new PasswordTextField("conta.confirmarSenha");
 
 		nome.setOutputMarkupId(true);
 		telefone.setOutputMarkupId(true);

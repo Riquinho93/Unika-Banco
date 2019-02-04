@@ -1,5 +1,6 @@
 package com.mybank.view;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.mybank.HomePage;
+import com.mybank.model.Conta;
 import com.mybank.model.Deposito;
 import com.mybank.service.ContaService;
 
@@ -42,14 +44,24 @@ public class DepositoForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				if(numeroConta.getModelObject() > 0) {
-					int numConta = numeroConta.getConvertedInput();
-					Double valorConta = valor.getConvertedInput();
-					contaService.depositar(numConta, valorConta);
-					target.add(numeroConta, valor);
-				}else {
-					System.out.println("Digite um valor maior do que 0");
+				if (numeroConta.getModelObject() > 999) {
+					if (valor.getModelObject() > 10) {
+						int numConta = numeroConta.getConvertedInput();
+						Double valorConta = valor.getConvertedInput();
+						List<Conta> lista = new ArrayList<>();
+						lista = contaService.depositar(numConta, valorConta);
+						if (lista != null && !lista.isEmpty()) {
+							target.appendJavaScript("sucessDeposito();");
+						} else {
+							target.appendJavaScript("contaInexistente();");
+						}
+					}else {
+						target.appendJavaScript("valorInvalido();");
+					}
+				} else {
+					target.appendJavaScript("contaInvalida();");
 				}
+				target.add(numeroConta, valor);
 				deposito = new Deposito();
 				form.clearInput();
 				form.modelChanged();

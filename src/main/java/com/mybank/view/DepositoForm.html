@@ -1,25 +1,47 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+</head>
 <body>
 	<wicket:extend>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			function sucessDeposito() {
+				swal("Depositado com sucesso!", "!", "success");
+			}
+			function contaInexistente() {
+				swal("Essa conta não existe!", "!", "error");
+			}
+			function contaInvalida(){
+				swal("Digite uma conta válida!", "!", "warning");
+			}
+			
+			function valorInvalido(){
+				swal("O valor deve ser acima de R$ 10,00!", "!", "info");
+			}
+		
+		</script>
 		<div class="container" style="background-color: white">
-				<div class="card">
-					<h5 class="card-header">Realizar Deposito</h5>
-					<div class="card-body">
-						<form wicket:id="form">
-							<div class="col-md-6">
-								<label class="text">Numero Conta: *</label> <input
-									wicket:id="numeroConta" type="text" class="form-control"
-									placeholder="Digite o numero conta" />
-							</div>
-							<div class="col-md-6">
-								<label class="text">Valor: *</label> <input wicket:id="valor"
-									type="number" class="form-control" placeholder="Digite o valor" />
-							</div>
+			<div class="card">
+				<h5 class="card-header">Realizar Deposito</h5>
+				<div class="card-body">
+					<form wicket:id="form">
+						<div class="col-md-6">
+							<label class="text">Numero Conta: *</label> <input
+								wicket:id="numeroConta" type="text" class="form-control"
+								placeholder="Digite o numero conta" />
+						</div>
+						<div class="col-md-6">
+							<label class="text">Valor: *</label> <input wicket:id="valor"
+								type="number" class="form-control" placeholder="Digite o valor" />
+						</div>
 
-							<br /> <a wicket:id="salvar" class="btn btn-success"
-								type="submit">Depositar</a>
-						</form>
-					</div>
+						<br /> <a wicket:id="salvar" class="btn btn-success"
+							type="submit">Depositar</a>
+					</form>
+				</div>
 			</div>
 		</div>
 	</wicket:extend>

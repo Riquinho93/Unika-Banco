@@ -35,7 +35,7 @@ public class TransferenciaForm extends HomePage {
 
 	private List<Banco> listaBancos = new ArrayList<>();
 	private Transferencia transferencia;
-	private ModalWindow modalWindowSucesso;
+	private ModalWindow modalWindowConfirmar;
 
 	@SpringBean(name = "bancoService")
 	private BancoService bancoService;
@@ -48,21 +48,21 @@ public class TransferenciaForm extends HomePage {
 	}
 
 	public TransferenciaForm(Conta contaParametro) {
-		
+
 		AlertFeedback alertFeedback = new AlertFeedback("feedbackMessage");
-		
+
 //		add(new Label("nome", contaParametro.getUsuario().getNome()));
 		add(new Label("tipoConta", contaParametro.getTipoConta()));
 		add(new Label("numeroConta", contaParametro.getNumeroConta()));
 
 		listaBancos = bancoService.listar();
 
-		modalWindowSucesso = new ModalWindow("modalWindowSucesso");
+		modalWindowConfirmar = new ModalWindow("modalWindowSucesso");
 		// Tamanho
-		modalWindowSucesso.setInitialHeight(300);
-		modalWindowSucesso.setInitialWidth(600);
-		modalWindowSucesso.setOutputMarkupId(true);
-		add(modalWindowSucesso);
+		modalWindowConfirmar.setInitialHeight(300);
+		modalWindowConfirmar.setInitialWidth(600);
+		modalWindowConfirmar.setOutputMarkupId(true);
+		add(modalWindowConfirmar);
 
 		transferencia = new Transferencia();
 		Form<Transferencia> form = new Form<Transferencia>("form",
@@ -86,8 +86,10 @@ public class TransferenciaForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				
+
 				Search search = new Search(Conta.class);
+
+				Conta answer = new Conta();
 
 				search.addFilterEqual("numeroConta", numeroConta.getModelObject());
 				List<Conta> listacontas = contaService.search(search);
@@ -98,12 +100,24 @@ public class TransferenciaForm extends HomePage {
 					if (contaDestino.getUsuario().getCpf() == Integer.parseInt(cpf.getValue())) {
 						if (contaParametro.getSenha().equals(senha.getModelObject())) {
 							Double num = valor.getConvertedInput();
-							contaService.transferir(contaParametro, contaDestino, num);
-							TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId());
-							add(transacaoSucesso);
-							transacaoSucesso.setOutputMarkupId(true);
-							modalWindowSucesso.setContent(transacaoSucesso);
-							modalWindowSucesso.show(target);
+
+							ConfirmarTransacao confirmarTransacao = new ConfirmarTransacao(
+									modalWindowConfirmar.getContentId(), answer) {
+
+								private static final long serialVersionUID = 1L;
+
+								public void executarAoConfirmar(AjaxRequestTarget target, Conta conta) {
+									if (conta.isAnswer()) {
+										contaService.transferir(contaParametro, contaDestino, num);
+									}
+									modalWindowConfirmar.close(target);
+								}
+
+							};
+							confirmarTransacao.setOutputMarkupId(true);
+							modalWindowConfirmar.setContent(confirmarTransacao);
+							modalWindowConfirmar.show(target);
+
 						} else {
 							alertFeedback.error("Senha Incorreta");
 							System.out.println("Senha Incorreta");

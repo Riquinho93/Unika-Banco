@@ -22,7 +22,6 @@ public class SaqueForm extends HomePage {
 	private static final long serialVersionUID = 1L;
 
 	private Saque saque = new Saque();
-	private ModalWindow modalWindowSucesso;
 
 	@SpringBean(name = "contaService")
 	private ContaService contaService;
@@ -41,13 +40,6 @@ public class SaqueForm extends HomePage {
 		senha.setOutputMarkupId(true);
 		valor.setOutputMarkupId(true);
 
-		modalWindowSucesso = new ModalWindow("modalWindowSucesso");
-		// Tamanho
-		modalWindowSucesso.setInitialHeight(300);
-		modalWindowSucesso.setInitialWidth(600);
-		modalWindowSucesso.setOutputMarkupId(true);
-		add(modalWindowSucesso);
-
 		AjaxButton ajaxButton = new AjaxButton("salvar") {
 
 			private static final long serialVersionUID = 1L;
@@ -55,19 +47,19 @@ public class SaqueForm extends HomePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				if(valor.getModelObject() > 0) {
+				if(valor.getModelObject() > 10) {
+					if(senha.getModelObject().equals(conta.getSenha())) {
 					double valorConta = valor.getConvertedInput();
 					String senhaConta = senha.getConvertedInput();
 					contaService.saque(conta, valorConta, senhaConta);
-					TransacaoSucesso transacaoSucesso = new TransacaoSucesso(modalWindowSucesso.getContentId());
+					target.appendJavaScript("sucessSaque();");
 					target.add(senha, valor);
-					transacaoSucesso.setOutputMarkupId(true);
-					add(transacaoSucesso);
-					modalWindowSucesso.setContent(transacaoSucesso);
-					modalWindowSucesso.show(target);
 					saque = new Saque();
+					}else {
+						target.appendJavaScript("senhaIncorreta();");
+					}
 				}else {
-					System.out.println("Digite um valor maior do que 0");
+					target.appendJavaScript("valorInvalido();");
 				}
 				form.clearInput();
 				form.modelChanged();

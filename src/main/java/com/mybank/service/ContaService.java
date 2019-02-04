@@ -55,7 +55,7 @@ public class ContaService implements IContaService {
 		return contaDao.alterar(id);
 	}
 
-	public void depositar(Integer numeroConta, double valor) {
+	public List<Conta> depositar(Integer numeroConta, double valor) {
 
 		Search search = new Search(Conta.class);
 		search.addFilterEqual("numeroConta", numeroConta);
@@ -70,6 +70,7 @@ public class ContaService implements IContaService {
 		} else {
 			System.out.println("Conta não Existe!!!");
 		}
+		return lista;
 
 	}
 

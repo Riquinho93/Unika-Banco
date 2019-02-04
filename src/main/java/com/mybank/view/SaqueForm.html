@@ -1,6 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="UTF-8">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+</head>
 <body>
 	<wicket:extend>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script type="text/javascript">
+			function sucessSaque() {
+				swal("Saque realizado com sucesso!", "!", "success");
+			}
+			function senhaIncorreta() {
+				swal("Senha Incorreta!", "!", "error");
+			}
+			function valorInvalido() {
+				swal("O valor deve ser acima de R$ 10,00!", "!", "info");
+			}
+		</script>
 		<div class="container" style="background-color: white">
 			<div class="card">
 				<h5 class="card-header">Realizar Saque</h5>
@@ -20,7 +37,6 @@
 					</form>
 				</div>
 			</div>
-				<div wicket:id="modalWindowSucesso"></div>
 		</div>
 	</wicket:extend>
 </body>
